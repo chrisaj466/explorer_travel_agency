@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+   {% load static %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+    <meta name="viewport" content="width=device, initial-scale=1.0">
+    <link rel="stylesheet"  href="{% static 'css/login.css' %}">
+    <link rel="stylesheet"  href="{% static 'css/media.css' %}">
+</head>
+<style>
+    .input-box{
+    margin-top:0 !important;
+    }
+</style>
+<body>
+    <h2>Login</h2>
+    <div class="wrapper">
+    <div class="container main">
+        <div class="row">
+            <div class="col-md-6 right">
+
+             <div class="input-box">
+                <form method="post"  id="form" >
+                {% csrf_token %}
+                 <h1 class="log">USER LOGIN</h1>
+                 <div class="input-field">
+
+                    <input type="text"  name="username" id="username"  placeholder="user name">
+                    <div class="error"></div>
+                 </div>
+                 <div class="input-field">
+
+                    <input type="password" name="password" id="password"  placeholder="user name">
+                    <div id="strengthResult" class="error"></div>
+                 </div>
+                 <div class="change-pass">
+                    <a class="change" href="{% url 'forgot' %}">FORGOT PASSWORD <span >?</span></a>
+                    <a class="register" href="{% url 'register' %}">REGISTER <span >?</span></a>
+                 </div>
+
+                 <div class="input-field">
+
+                        <button type="submit" class="submit"  >Login</button>
+                 </div>
+
+                </form>
+             </div>
+            </div>
+        </div>
+    </div>
+</div>
+    {% if error %}
+        <p>{{ error }}</p>
+    {% endif %}
+</body>
+</html>

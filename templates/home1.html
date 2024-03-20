@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form method="post">
+  {% csrf_token %}
+  <table>
+    <tr>
+      <th>{{ID}}</th>
+      <th>{{USERNAME}}</th>
+      <th>{{PASSWORD}}</th>
+      <th>{{EMAIL}}</th>
+       <th>{{PHONE_NUMBER}}</th>
+       <th>{{STATUS}}</th>
+        <th>{{UPDATE}}</th>
+    </tr>
+    {% for user in users %}
+    <tr>
+      <td>{{user.User_id}}</td>
+      <td>{{user.User_name}}</td>
+      <td>{{user.Password}}</td>
+      <td>{{user.email}}</td>
+      <td>{{user.Phone_number}}</td>
+      <td>{{user.status}}</td>
+        <td><a href="/update/{{user.User_id}}/">Update</a></td>
+    </tr>
+      {% endfor %}
+  </table>
+
+
+</form>
+</body>
+</html>

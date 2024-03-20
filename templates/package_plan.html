@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+    <meta name="viewport" content="width=device, initial-scale=1.0">
+    <link rel="stylesheet"  href="{% static 'css/packages_plan.css' %}">
+    <link rel="stylesheet"  href="{% static 'css/media.css' %}">
+    <script  src="{% static 'js/packages_plan.js' %}" ></script>
+
+
+<!--    <link rel="stylesheet" href="media.css">-->
+<!--    <link rel="stylesheet" href="goapackage.css">-->
+    <!-- adds the links of bootstrape ,fonts, icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;700&family=Roboto:ital,wght@0,400;0,500;0,700;0,900;1,400&display=swap" rel="stylesheet">
+    <script src='http://kit.fontawesome.com/4c729db828.js' crossorigin="anonymous"></script>
+
+    <title>Adventure explorer</title>
+    <style>
+        .icon-paragraph{
+        margin-top:30px !important;
+        }
+         .body{
+        500vh:
+        }
+          .rating {
+            unicode-bidi: bidi-override;
+            width:25%;
+
+
+        }
+         .detail{
+
+    justify-content: center !important;
+    align-items: center !important;
+
+
+
+    }
+        .rating span {
+            display: inline-block;
+            position: relative;
+            width: 1.1em;
+        }
+        .rating span:before {
+            content: '★';
+            position: absolute;
+            color: gold;
+        }
+         .card {
+    width: 620px;
+    height: 400px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom:50px !important;
+    margin-top:50px !important;
+    margin-left:50px !important;
+
+}
+        .card-body {
+    padding: 20px;
+    height:auto;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+
+}
+          .card-body h6,h5 {
+    margin-bottom: 20px !important;
+}
+.card-body h4{
+font-size:4;
+}
+        .rating1{
+        margin-bottom:0px;
+
+        }
+        .comment1{
+        font-weight:400;
+        }
+    </style>
+</head>
+<body>
+<div class="header">
+    <div class="nav_bar-top">
+        <div class="text-container">
+            <div class="text-content">
+            <p class="para-text"><span class="span_text"><i class="fa-solid fa-envelope"></i></span>example@gmail.com</p>
+            <p class="para-text"><span class="span_text"><i class="fa-solid fa-phone"></i></span>+021-1234 567</p>
+        </div>
+        <div class="social-links">
+            <i class="fa-brands icon-social fa-facebook"></i>
+            <i class="fa-brands icon-social fa-snapchat"></i>
+            <i class="fa-brands icon-social fa-whatsapp"></i>
+            <i class="fa-brands icon-social fa-instagram"></i>
+            <i class="fa-brands icon-social fa-linkedin"></i>
+        </div>
+        <div class="navbar-container">
+            <!-- navbar bootstrap-->
+
+            <nav class="navbar navbar-expand-lg">
+                <div class="container-fluid">
+                  <a class="navbar-brand" href="#">
+                    <h3 class="heading-logo">EXPLOR<span>ER.</span></h3>
+                  </a>
+                  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                  </button>
+                  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                    <ul class="navbar-nav ms-auto">
+                      <li class="nav-item">
+                        <a class="nav-link " aria-current="page" href="home.html">Home</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="destination.html">Destinations</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="packages.html">Packages</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="#">Contact</a>
+                      </li>
+                      <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                          FAQ
+                        </a>
+                        <ul class="dropdown-menu">
+                          <li><a class="dropdown-item" href="#">About us</a></li>
+                          <li><a class="dropdown-item" href="mainlogin.html">Login</a></li>
+                          <li><a class="dropdown-item" href="register.html">Register</a></li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </nav>
+        </div>
+        </div>
+    </div>
+    <!-- nav-bar top finished-->
+    <div class="home-section">
+        <div class="container-fluid gx-0">
+
+        <!-- SLIDER-->
+        <div id="carouselExample" class="carousel slide">
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+
+               <div class='home-content' style="background-image: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url('{% static 'images/srilanka.jpg' %}');">
+                <div class="content-home">
+                    <h3 class="heading-home">Choose Your New</h3>
+                    <h2 class="heading-lg-home">Destination</h2>
+                    <a href="#" class="btn-home">Explore More</a>
+                </div>
+               </div>
+              </div>
+              <div class="carousel-item">
+                <div class="home-content img-2"  style="background-image: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url('{% static 'images/SF_traveltips.jpg' %}');">
+                <div class="content-home">
+                    <h3 class="heading-home">TOURS & TRAVEL </h3>
+                    <h2 class="heading-lg-home"> let's Discover the World Together</h2>
+                    <a href="#" class="btn-home">Explore More</a>
+                </div>
+               </div>
+              </div>
+
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+
+              <span><i class="fa-solid icon-scroll fa-angles-left"></i></span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                <span><i class="fa-solid icon-scroll fa-angles-right"></i></span>
+            </button>
+          </div>
+        </div>
+
+    </div>
+</div>
+<!-- header completed -->
+
+
+<!-- map section -->
+
+
+
+
+
+<!--About us section completed -->
+
+<!-- service section completed -->
+ <section class="packages">
+
+
+                <div class="row">
+                  <div class="content">
+                      <h3> Detailed Itinerary </h3>
+                       {% for x in data2 %}
+                       <div class="route">
+                           <img class="mapicon" src="{% static 'images/icon_loc.svg' %}" alt="mapmarker">
+                           <h4 >Route : {{x.package_name}}</h4>
+                      </div>
+                      <div class="route">
+                        <img  class="mapicon"  src="{% static 'images/ICON_GOA.svg' %}" alt="goa">
+                        <h4>{{ x.total_days }} Days / {{ x.total_days|add:'-1' }} Nights</h4>
+                      </div>
+                      {% endfor %}
+                     {% for x in data %}
+                     <h1 ></h1>
+
+
+
+
+
+
+                     <div class="details">
+                         <h4>{{x.heading}}</h4>
+                        <div class="icon-paragraph">
+                          <i class="fa-solid fa-circle" style="color: #FFD43B;"></i>
+                          <p>{{x.description}}</p>
+                        </div>
+                     </div>
+
+                      {% endfor %}
+               </div>
+                    <form method="POST">
+                        {% csrf_token %}
+                         <input name="hidden_product_id" hidden type="text" value="{{x.user_id}}">
+                        <div class="booking_button">
+<!--                            <a href="#" class="select-btn2"    >Booking</a>-->
+                            <button  class="btn select-btn2 btn-primary "  id="openFormBtn" formaction="/booking" type="submit" name="button1">Booking</button>
+                        </div>
+                    </form>
+                </div>
+     {% for x in data3 %}
+<div class="detail">
+   <div class="card  "   >
+        <div class="card-body  ">
+            <h5 class="card-subtitle mb-2 text-muted">User Name: {{x.user_id.User_name}}</h5>
+            <h5 class="card-subtitle mb-2 text-muted">price: {{x.packages_id.price}} rupees</h5>
+            <h4 class="card-subtitle rating1 text-muted">Ratings</h4>
+
+            <div class="rating">
+                {% for rating in data3 %}
+                    {% for i in "12345"|make_list %}
+                           {% if i <= rating.rating_value %}
+                              <!-- Filled star -->
+
+                                <span>&#9733;</span>
+
+                          {% endif %}
+                   {% endfor %}
+                {% endfor %}<br>
+            </div>
+            <br>
+            <h5 >Comment</h5>
+            <p class="comment1"> {{x.comment}}</p>
+        </div>
+   </div>
+</div>
+{% endfor %}
+              <div id="popupForm" class="popup">
+                <form id="myForm" class="popup-content">
+                  <span id="closeFormBtn">&times;</span>
+                  <div class="detailsform">
+                    <h2 class="popupform">Details</h2>
+
+                    <input type="text" id="name" name="Name" placeholder="name"><br>
+
+                    <input type="text" id="phonenumber" name="phonenumber" placeholder="Phone Number">
+
+                    <input type="number" id="children" name="christo" placeholder=""><br>
+
+                    <input type="date" id="startdate" name="startdate"><br>
+                    <button type="submit" >Submit</button>
+                    <!-- <button type="button" id="closeFormBtn">Close</button> -->
+                  </div>
+                </form>
+              </div>
+
+ </section>
+<!-- packages part finished-->
+ <footer class="footer">
+    <div class="footer-container">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <h3 class="heading-logo footer-logo"> EXPLOR<span>ER.</span></h3>
+                    <p class="footer-para"> lorem ipsum dolor sit amet</p>
+                    <h5 class="heading-sm-footer">FOLLOW US</h5>
+                    <div class="social-links-footer">
+                        <i class="fa-brands icon-social-footer fa-facebook"></i>
+                        <i class="fa-brands icon-social-footer fa-snapchat"></i>
+                        <i class="fa-brands icon-social-footer fa-whatsapp"></i>
+                        <i class="fa-brands icon-social-footer fa-instagram"></i>
+                        <i class="fa-brands icon-social-footer fa-linkedin"></i>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12">
+
+                  <div class="pages-footer">
+                    <h3 class="heading-pages">Pages Links</h3>
+
+                    <!-- navbar copy from top navbar -->
+
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                          <a class="nav-link footer-links " aria-current="page" href="home.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link footer-links" href="destination.html">Destinations</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link footer-links" href="packages.html">Packages</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link footer-links" href="#">Contact</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                          <a class="nav-link footer-links dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            FAQ
+                          </a>
+                          <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">About us</a></li>
+                            <li><a class="dropdown-item" href="mainlogin.html">Login</a></li>
+                            <li><a class="dropdown-item" href="register.html">Register</a></li>
+                          </ul>
+                        </li>
+                      </ul>
+
+                  </div>
+
+                </div>
+
+                <div class="col-lg-4 col-md-6 col-sm-12">
+
+                      <h3 class="heading-pages">Contact Us</h3>
+                      <p class="contact-footer">
+                        <span class="text-contact"> <i class="fa-solid footer-icons fa-location-dot"></i> 123 Street New York </span>
+                        <span class="text-contact"> <i class="fa-solid footer-icons fa-envelope"></i>explorer24@gmail.com </span>
+                        <span class="text-contact"> <i class="fa-solid footer-icons fa-phone"></i> +021-1234 5678 </span>
+                      </p>
+
+                </div>
+
+            </div>
+        </div>
+
+        <div class="container-fluid gx-0">
+            <div class="footer-rights">
+                <p class="right-para">Copyright <span><i class="fa-regular fa-copyright"></i></span> explorer. All Rights Reserved.</p>
+            </div>
+        </div>
+    </div>
+ </footer>
+
+</body>
+<!-- bootstap js script-->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+
+<script src="goapackagedetail.js"></script>
+
+
+</html>
+
+

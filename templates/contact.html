@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% load static %}
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact Form</title>
+      <link rel="stylesheet"  href="{% static 'css/contact.css' %}">
+      <link rel="stylesheet"  href="{% static 'css/media.css' %}">
+      <script  src="{% static 'js/register.js' %}" ></script>
+
+  </head>
+  <body>
+    <div class="container">
+      <span class="big-circle"></span>
+      <div class="form">
+        <div class="contact-info">
+
+          <div class="info">
+            <div class="information">
+              <img src="location.png" class="icon" alt="" />
+              <p>India, RZ-A/96, Road No.6, Street No.9,Mahipalpur
+                Extension ,Delhi, New Delhi 119856</p>
+            </div>
+            <div class="information">
+              <img src="email.png" class="icon" alt="" />
+              <p>explore@travel.com</p>
+            </div>
+            <div class="information">
+              <img src="phone.png" class="icon" alt="" />
+              <p>+91-11-4718 5109</p>
+            </div>
+          </div>
+
+          <div class="social-media">
+
+            <div class="social-icons">
+
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-form">
+          <span class="circle one"></span>
+          <span class="circle two"></span>
+
+          <form action="contact.html" autocomplete="off">
+            <h3 class="title">Contact us</h3>
+            <div class="input-container">
+              <input type="text" name="name" class="input" placeholder="name" />
+
+              <span>Username</span>
+            </div>
+            <div class="input-container">
+              <input type="tel" name="phone" class="input" placeholder="phone" />
+
+              <span>phone</span>
+            </div>
+            <div class="input-container">
+              <input type="email" name="email " class="input" placeholder="email" />
+
+              <span>email</span>
+            </div>
+            <div class="input-container textarea">
+              <textarea name="message" class="input" placeholder="message"></textarea>
+
+              <span>Message</span>
+            </div>
+            <input type="submit" value="Send" class="btn" />
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <script src="app.js"></script>
+
+  </body>
+</html>

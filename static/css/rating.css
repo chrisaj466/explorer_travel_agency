@@ -1,0 +1,29 @@
+ .rating {
+            unicode-bidi: bidi-override;
+            margin-bottom:0;
+
+        }
+        .rating span {
+            display: inline-block;
+            position: relative;
+            width: 1.1em;
+        }
+        .rating span:before {
+            content: '★';
+            position: absolute;
+            color: gold;
+        }
+        .rating1{
+        margin-bottom:0px;
+        }
+        .comment1{
+        font-weight:600;
+        }
+          }
+         .detail{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+
+    }

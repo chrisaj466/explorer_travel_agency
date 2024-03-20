@@ -1,0 +1,228 @@
+*{
+    font-family: 'Poppins', sans-serif;
+}
+.wrapper{
+    background: #ececec;
+    padding: 0 20px 0 20px;
+}
+.main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+.row{
+    width:  900px;
+    height:550px;
+    border-radius: 10px;
+    background: #fff;
+    padding: 0px;
+    box-shadow: 5px 5px 10px 1px rgba(0,0,0,0.2);
+  }
+
+.side-image{
+
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    border-radius: 10px 0 0 10px;
+    position: relative;
+    width:100%;
+    height: 95%;
+    margin-top:10px;
+}
+.image_register{
+    width: 100% !important;
+    height: 100% !important;
+    }
+
+
+.right{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  height: 100%;
+}
+.input-box{
+  width: 100%px;
+  box-sizing: border-box;
+}
+
+.input-box h1{
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 45px;
+    font-style: initial ;
+    color: rgba(236, 84, 13, 0.986);
+    font-size: 16px;
+}
+ .input-field{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    padding: 0 10px 0 10px;
+    font-size: 13px;
+
+}
+
+/* #username{
+    height: 45px;
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    outline: none;
+    margin-bottom: 20px;
+    color: #45474e;
+}
+#password{
+    height: 45px;
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    outline: none;
+    margin-bottom: 20px;
+    color: #45474e;
+}
+#password2{
+    height: 45px;
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    outline: none;
+    margin-bottom: 20px;
+    color: #45474e;
+}
+#phone_number{
+    height: 45px;
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    outline: none;
+    margin-bottom: 20px;
+    color: #45474e;
+}
+#email{
+    height: 45px;
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    outline: none;
+    margin-bottom: 20px;
+    color: #45474e;
+}
+.input-box .input-field label{
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    pointer-events: none;
+    transition: .5s;
+}
+.input-field input:focus ~ label
+   {
+    top: -10px;
+    font-size: 13px;
+  }
+  .input-field input:valid ~ label
+  {
+   top: -10px;
+   font-size: 13px;
+   color: #5d5076;
+ }
+ .input-field .input:focus, .input-field .input:valid{
+    border-bottom: 1px solid #f37e11;
+ }
+ .submit{
+    border: none;
+    outline: none;
+    height: 45px;
+    background: rgba(236, 84, 13, 0.986);
+    border-radius: 5px;
+    transition: .4s;
+    color: white;
+
+
+}
+*/
+#form button:hover{
+    background: white;
+    color: black;
+    transition: .3s ease-in;
+    border: 1px solid rgba(236, 84, 13, 0.986);
+}
+
+
+
+
+
+
+ #form {
+    width: 300px;
+    margin: 0 auto 0 auto;
+    padding: 20px;
+    background-color: whitesmoke;
+    border-radius: 4px;
+    font-size: 12px;
+}
+
+#form h1 {
+    color: orange;
+    text-align: center;
+}
+
+#form button {
+    padding: 10px;
+    margin-top: 10px;
+    width: 100%;
+    color: white;
+    background-color: orange;
+    border: none;
+    border-radius: 4px;
+}
+.input-field {
+    display: flex;
+    flex-direction: column;
+}
+
+.input-field input {
+ border: 2px solid #f0f0f0;
+ border-radius: 4px;
+ display: block;
+ font-size: 12px;
+ padding: 10px;
+ width: 100%;
+}
+
+.input-field input:focus {
+    outline: 0;
+}
+
+.input-field.success input {
+    border-color: #09c372;
+}
+
+.input-field.error input {
+    border-color: #ff3860;
+}
+
+
+.input-field .error {
+    color: #ff3860;
+    font-size: 8px;
+    height: 10px;
+}
+
+@media only screen and (max-width: 768px){
+    .side-image{
+        border-radius: 10px 10px 0 0;
+    }
+    .row{
+        max-width:420px;
+        width: 100%;
+    }
+}

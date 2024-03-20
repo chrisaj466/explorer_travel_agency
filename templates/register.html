@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link rel="stylesheet"  href="{% static 'css/register.css' %}">
+    <link rel="stylesheet"  href="{% static 'css/media.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>chg pass</title>
+     <script  src="{% static 'js/register.js' %}" ></script>
+    <style>
+        .input-field{
+        margin-top:30px;
+       }
+        .submit{
+        background-color:orange;
+        }
+    </style>
+</head>
+<body>
+  <div class="wrapper">
+    <div class="container main">
+        <div class="row">
+            <div class="col-md-6 " >
+
+                <!-------------      image     ------------->
+                <div class="image_register">
+                    <img  class="side-image" src="{% static 'images/login.jpg' %}">
+                </div>
+
+
+
+            </div>
+
+            <div class="col-md-6 right">
+
+             <div class="input-box">
+                <form  method="post" id="form">
+        {% csrf_token %}
+        <div class="input-field">
+           <input type="text" name="username" placeholder="Enter your username">
+        </div>
+        <div class="input-field">
+           <input type="password" name="password" placeholder="Enter your password">
+        </div>
+        <div class="input-field">
+            <input id="password2" name="password2" type="password"  placeholder="Confirm your password">
+        </div>
+        <div class="input-field">
+           <input type="text" name="Phone_number" placeholder="Enter your  Phone_number">
+        </div>
+         <div class="input-field">
+        <input  id="email" type="text" name="email" placeholder="Enter your  email">
+         </div>
+          <div class="input-field">
+               <button type="submit"   class="submit" name="login_button">Register</button>
+          </div>
+
+    </form>
+            </div>
+          </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

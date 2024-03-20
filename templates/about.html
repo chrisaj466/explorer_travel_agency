@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+    <meta name="viewport" content="width=device, initial-scale=1.0">
+
+    <link rel="stylesheet"  href="{% static 'css/about.css' %}">
+    <link rel="stylesheet"  href="{% static 'css/media.css' %}">
+    <!-- adds the links of bootstrape ,fonts, icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;700&family=Roboto:ital,wght@0,400;0,500;0,700;0,900;1,400&display=swap" rel="stylesheet">
+    <script src='http://kit.fontawesome.com/4c729db828.js' crossorigin="anonymous"></script>
+
+    <title>Adventure explorer</title>
+</head>
+<body>
+<div class="header">
+    <div class="nav_bar-top">
+        <div class="text-container">
+            <div class="text-content">
+            <p class="para-text"><span class="span_text"><i class="fa-solid fa-envelope"></i></span>example@gmail.com</p>
+            <p class="para-text"><span class="span_text"><i class="fa-solid fa-phone"></i></span>+021-1234 567</p>
+        </div>
+        <div class="social-links">
+            <i class="fa-brands icon-social fa-facebook"></i>
+            <i class="fa-brands icon-social fa-snapchat"></i>
+            <i class="fa-brands icon-social fa-whatsapp"></i>
+            <i class="fa-brands icon-social fa-instagram"></i>
+            <i class="fa-brands icon-social fa-linkedin"></i>
+        </div>
+        <div class="navbar-container">
+            <!-- navbar bootstrap-->
+
+            <nav class="navbar navbar-expand-lg">
+                <div class="container-fluid">
+                  <a class="navbar-brand" href="#">
+                    <h3 class="heading-logo">EXPLOR<span>ER.</span></h3>
+                  </a>
+                  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                  </button>
+                  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                    <ul class="navbar-nav ms-auto">
+                      <li class="nav-item">
+                        <a class="nav-link " aria-current="page" href="home.html">Home</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="destination.html">Destinations</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="packages.html">Packages</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="#">Contact</a>
+                      </li>
+                      <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                          FAQ
+                        </a>
+                        <ul class="dropdown-menu">
+                          <li><a class="dropdown-item" href="#">About us</a></li>
+                          <li><a class="dropdown-item" href="mainlogin.html">Login</a></li>
+                          <li><a class="dropdown-item" href="register.html">Register</a></li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </nav>
+        </div>
+        </div>
+    </div>
+    <!-- nav-bar top finished-->
+    <div class="home-section">
+        <div class="container-fluid gx-0">
+
+        <!-- SLIDER-->
+        <div id="carouselExample" class="carousel slide">
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+
+               <div class="home-content img-1" style="background-image: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url('{% static 'images/srilanka.jpg' %}');">
+                <div class="content-home">
+                    <h3 class="heading-home">Choose Your New</h3>
+                    <h2 class="heading-lg-home">Destination</h2>
+                    <a href="#" class="btn-home">Explore More</a>
+                </div>
+               </div>
+              </div>
+              <div class="carousel-item">
+                <div class="home-content img-2"  style="background-image: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url('{% static 'images/SF_traveltips.jpg' %}');">
+                <div class="content-home">
+                    <h3 class="heading-home">TOURS & TRAVEL </h3>
+                    <h2 class="heading-lg-home"> let's Discover the World Together</h2>
+                    <a href="#" class="btn-home">Explore More</a>
+                </div>
+               </div>
+              </div>
+
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+
+              <span><i class="fa-solid icon-scroll fa-angles-left"></i></span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                <span><i class="fa-solid icon-scroll fa-angles-right"></i></span>
+            </button>
+          </div>
+        </div>
+
+    </div>
+</div>
+<!-- header completed -->
+<div class="selection">
+    <div class="selection_container">
+        <select class="countries boxes ">
+            <option value="Country0">Countries</option>
+            <option value="Country0">India</option>
+            <option value="Country0">Srilanka</option>
+            <option value="Country0">South africa</option>
+            <option value="Country0">Japan</option>
+        </select>
+        <select class="Destination boxes ">
+            <option value="Country0">Destination</option>
+            <option value="Country0">Destination1</option>
+            <option value="Country0">Destination2</option>
+            <option value="Country0">Destination3</option>
+            <option value="Country0">Destination4</option>
+        </select>
+        <select class="budget boxes ">
+            <option value="Country0">Budget</option>
+            <option value="Country0">10000$</option>
+            <option value="Country0">20000$</option>
+            <option value="Country0">50000$</option>
+            <option value="Country0">100000$</option>
+        </select>
+        <select class="Duration boxes ">
+            <option value="Country0">Duration</option>
+            <option value="Country0">Duration1</option>
+            <option value="Country0">Duration2</option>
+            <option value="Country0">Duration3</option>
+            <option value="Country0">Duration4</option>
+        </select>
+        <a href="#" class="select-btn">Submit</a>
+    </div>
+
+</div>
+<!-- map section -->
+
+
+
+
+
+<!--About us section completed -->
+
+<!-- service section completed -->
+ <section class="packages">
+
+        <div class="container-packages">
+            <div class="container">
+                <div class="row">
+
+                  <div class="content">
+                    <div class="description">
+                      <div class="about">
+                     <h1 >ABOUT</h1>
+                      </div>
+                        <h3>Services Offered</h3><p class="description">Explorers specializes in or ganizing adventure trips, including trekking, hiking, and wildlife safaris. They also offer traditional vacation packages, cruise bookings, and customized travel experiences.</p>
+
+                        <h3>Expertise</h3><p class="description">agency has a team of experienced travel advisors who are well-versed in different destinations and can provide personalized recommendations based on individual preferences.</p>
+
+                        <h3>Online Presence</h3><p class="description">Explorers has a user-friendly website where customers can explore various travel packages, check availability, and make bookings.They may also have a mobile app for convenient access.</p>
+
+                        <h3>Customer Support</h3><p class="description">agency prioritizes excellent customer service, offering a dedicated helpline and email support for inquiries, bookings,and assistance during travels.</p>
+
+                        <h3>Safety Measures</h3><p class="description">prioritize the safety of their customers, providing travel insurance options and adhering to industry safety standards.The agency may also offer pre-trip briefings for certain adventure activities.</p>
+
+                        <h3>Reviews and Testimonials</h3><p class="description">agency showcases positive reviews and testimonials from satisfied customers on their website, highlighting successful and memorable travel experiences.</p>
+
+                    </div>
+
+                </div>
+
+
+
+
+
+
+
+
+
+                </div>
+            </div>
+        </div>
+ </section>
+<!-- packages part finished-->
+ <footer class="footer">
+    <div class="footer-container">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <h3 class="heading-logo footer-logo"> EXPLOR<span>ER.</span></h3>
+                    <p class="footer-para"> lorem ipsum dolor sit amet</p>
+                    <h5 class="heading-sm-footer">FOLLOW US</h5>
+                    <div class="social-links-footer">
+                        <i class="fa-brands icon-social-footer fa-facebook"></i>
+                        <i class="fa-brands icon-social-footer fa-snapchat"></i>
+                        <i class="fa-brands icon-social-footer fa-whatsapp"></i>
+                        <i class="fa-brands icon-social-footer fa-instagram"></i>
+                        <i class="fa-brands icon-social-footer fa-linkedin"></i>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12">
+
+                  <div class="pages-footer">
+                    <h3 class="heading-pages">Pages Links</h3>
+
+                    <!-- navbar copy from top navbar -->
+
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                          <a class="nav-link footer-links " aria-current="page" href="home.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link footer-links" href="destination.html">Destinations</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link footer-links" href="packages.html">Packages</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link footer-links" href="#">Contact</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                          <a class="nav-link footer-links dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            FAQ
+                          </a>
+                          <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">About us</a></li>
+                            <li><a class="dropdown-item" href="mainlogin.html">Login</a></li>
+                            <li><a class="dropdown-item" href="register.html">Register</a></li>
+                          </ul>
+                        </li>
+                      </ul>
+
+                  </div>
+
+                </div>
+
+                <div class="col-lg-4 col-md-6 col-sm-12">
+
+                      <h3 class="heading-pages">Contact Us</h3>
+                      <p class="contact-footer">
+                        <span class="text-contact"> <i class="fa-solid footer-icons fa-location-dot"></i> 123 Street New York </span>
+                        <span class="text-contact"> <i class="fa-solid footer-icons fa-envelope"></i>explorer24@gmail.com </span>
+                        <span class="text-contact"> <i class="fa-solid footer-icons fa-phone"></i> +021-1234 5678 </span>
+                      </p>
+
+                </div>
+
+            </div>
+        </div>
+
+        <div class="container-fluid gx-0">
+            <div class="footer-rights">
+                <p class="right-para">Copyright <span><i class="fa-regular fa-copyright"></i></span> explorer. All Rights Reserved.</p>
+            </div>
+        </div>
+    </div>
+ </footer>
+
+</body>
+<!-- bootstap js script-->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+
+
+
+
+</html>
+
+

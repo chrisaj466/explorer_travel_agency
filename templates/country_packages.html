@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html>
+<head>
+     {% load static %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+    <meta name="viewport" content="width=device, initial-scale=1.0">
+    <link rel="stylesheet"  href="{% static 'css/country_packages.css' %}">
+    <link rel="stylesheet"  href="{% static 'css/media.css' %}">
+
+<!--    <link rel="stylesheet" href="media.css">-->
+<!--    <link rel="stylesheet" href="indianpackages.css">-->
+    <!-- adds the links of bootstrape ,fonts, icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;700&family=Roboto:ital,wght@0,400;0,500;0,700;0,900;1,400&display=swap" rel="stylesheet">
+    <script src='http://kit.fontawesome.com/4c729db828.js' crossorigin="anonymous"></script>
+
+    <title>Adventure explorer</title>
+    <style>
+        .rating{
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+   }
+        .pack_name{
+        background-color:orange;
+        color:white;
+        border: none;
+        outline: none;
+        border-radius: 10px;
+        padding:3px;
+        width:90px;
+        }
+        footer{
+    width: 100%;
+    height: 70vh;
+    background-color: rgb(31, 29, 29);
+    padding: 24px;
+    text-align: left;
+}
+.footer-container{
+    margin-top: 20px;
+    padding: 10px 4px 9px 4px;
+
+
+
+}
+.footer-logo{
+    color: rgba(255, 255, 255, 0.863 );
+    letter-spacing: 2px;
+    font-weight: 800;
+}
+.footer-para{
+    font-size: 14px;
+    line-height: 30px;
+    color: rgba(255, 255, 255, 0.534);
+    margin: 25px 0px;
+}
+.heading-sm-footer{
+    color: rgba(255, 255, 255, 0.863);
+    font-size: 22px;
+    letter-spacing: 4px;
+    font-weight: 700;
+    margin: 18px 0px;
+}
+.social-links-footer{
+    margin: 16px 0px;
+}
+.icon-social-footer{
+    font-size: 21px;
+    padding: 9px;
+    border: 1px solid rgb(13, 196, 13);
+    color: rgb(13, 196, 13);
+    margin: 0px 4px;
+    cursor: pointer;
+    transition: 0.2s ease-in;
+
+}
+.icon-social-footer:hover{
+    background-color: rgb(13, 196, 13);
+    color: white;
+}
+.pages-footer{
+    padding: 6px 18px;
+}
+.heading-pages{
+    color: rgba(255, 255, 255, 0.863);
+    font-size: 25px;
+    letter-spacing: 2px;
+    font-weight: 700;
+    margin-bottom: 18px;
+}
+
+.footer-links{
+    font-size: 15px !important;
+    color: rgba(255, 255, 255, 0.534) !important;
+
+}
+.footer-links:hover{
+    color: white !important;
+}
+.contact-footer{
+    display: flex;
+    flex-direction: column;
+}
+.text-contact{
+    margin: 16px 0px;
+    color: white;
+    font-size: 19px;
+    color: rgba(255, 255, 255, 0.534);
+
+}
+.footer-icons{
+    font-size: 19px;
+    color: rgba(255, 255, 255, 0.863);
+    padding: 0px 9px;
+
+}
+.footer-rights{
+    margin-top: 22px;
+    border-top: 1px solid rgba(255, 255, 255, 0.32);
+    width: 100%;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.right-para{
+    margin: 0px;
+    color: rgba(255, 255, 255, 0.623);
+    font-size: 16px;
+}
+
+    </style>
+</head>
+<body>
+<div class="header">
+    <div class="nav_bar-top">
+        <div class="text-container">
+            <div class="text-content">
+            <p class="para-text"><span class="span_text"><i class="fa-solid fa-envelope"></i></span>example@gmail.com</p>
+            <p class="para-text"><span class="span_text"><i class="fa-solid fa-phone"></i></span>+021-1234 567</p>
+        </div>
+        <div class="social-links">
+            <i class="fa-brands icon-social fa-facebook"></i>
+            <i class="fa-brands icon-social fa-snapchat"></i>
+            <i class="fa-brands icon-social fa-whatsapp"></i>
+            <i class="fa-brands icon-social fa-instagram"></i>
+            <i class="fa-brands icon-social fa-linkedin"></i>
+        </div>
+        <div class="navbar-container">
+            <!-- navbar bootstrap-->
+
+            <nav class="navbar navbar-expand-lg">
+                <div class="container-fluid">
+                  <a class="navbar-brand" href="#">
+                    <h3 class="heading-logo">EXPLOR<span>ER.</span></h3>
+                  </a>
+                  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                  </button>
+                  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                    <ul class="navbar-nav ms-auto">
+                      <li class="nav-item">
+                        <a class="nav-link " aria-current="page" href="#">Home</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="#">Destinations</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="#">Packages</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="#">Contact</a>
+                      </li>
+                      <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                          FAQ
+                        </a>
+                        <ul class="dropdown-menu">
+                          <li><a class="dropdown-item" href="#">About us</a></li>
+                          <li><a class="dropdown-item" href="mainlogin.html">Login</a></li>
+                          <li><a class="dropdown-item" href="register.html">Register</a></li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </nav>
+        </div>
+        </div>
+    </div>
+    <!-- nav-bar top finished-->
+    <div class="home-section">
+        <div class="container-fluid gx-0">
+
+        <!-- SLIDER-->
+        <div id="carouselExample" class="carousel slide">
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+
+               <div class="home-content img-1" style="background-image: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url('{% static 'images/srilanka.jpg' %}');">
+                <div class="content-home">
+                    <h3 class="heading-home">Choose Your New</h3>
+                    <h2 class="heading-lg-home">Destination</h2>
+
+                </div>
+               </div>
+              </div>
+              <div class="carousel-item">
+                <div class="home-content img-2" style="background-image: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url('{% static 'images/SF_traveltips.jpg' %}');">
+                <div class="content-home">
+                    <h3 class="heading-home">TOURS & TRAVEL </h3>
+                    <h2 class="heading-lg-home"> let's Discover the World Together</h2>
+
+                </div>
+               </div>
+              </div>
+
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+
+              <span><i class="fa-solid icon-scroll fa-angles-left"></i></span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                <span><i class="fa-solid icon-scroll fa-angles-right"></i></span>
+            </button>
+          </div>
+        </div>
+
+    </div>
+</div>
+<!-- header completed -->
+
+<!-- map section -->
+
+
+
+
+
+<!--About us section completed -->
+
+<!-- service section completed -->
+ <section class="packages">
+    {% for x in data2 %}
+    <h2 class="heading_sm">About {{x.nation_name}}</h2>
+    <p class="para-about-details">{{x.nation_description}}</p>
+     {% endfor %}
+        <div class="container-packages">
+        <div class="details ">
+            <div class="container">
+                   <div class="row">
+
+                       {% for x in data %}
+                        <div class="content-packages text-dark  m-5" style="width: 20rem;">
+                         <img style="width: 100%;" src="{{x.package_image.url}}" class="card-img-top" alt="...">
+                         <div class="card-body">
+                              <div class="content-package-container">
+
+                                <div class="details-package">
+                                    <form method="post">
+                                        {% csrf_token %}
+                                        <input name="packages_id" hidden type="text" value="{{x.packages_id}}">
+                                        <button formaction="/package_plan" class="pack_name">  {{x.package_name}} </button>
+                                    </form>
+
+                                    <p class="detail-text" style="font-size:12px;"> <span class="icon-detail"><i class="fa-solid fa-calendar-days"></i></span>{{x.start_date}}<br>{{x.end_date}} </p>
+                                    <p class="detail-text" style="font-size:12px;"> <span class="icon-detail"><i class="fa-solid fa-users"></i></span>5 Persons</p>
+                                </div>
+
+                              <p class="heading-content-package">{{x.description}}</p>
+
+                              <hr>
+                              <div class="rating">
+                                <p  style="font-size:12px; margin:0; color: rgb(13, 196, 13);"><span class="stars"><i class="fa-solid fa-star"></i>4.8</span></p>
+                                <h4  style="font-size:12px; margin:0; color: rgb(13, 196, 13);"> <i class="fa-solid fa-indian-rupee-sign"></i>{{x.price}}</h4>
+                              </div>
+                            </div>
+                         </div>
+                        </div>
+                       {% endfor %}
+
+                   </div>
+            </div>
+        </div>
+    </div>
+
+ </section>
+<!-- packages part finished-->
+ <footer class="footer">
+    <div class="footer-container">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <h3 class="heading-logo footer-logo"> EXPLOR<span>ER.</span></h3>
+                    <p class="footer-para"> lorem ipsum dolor sit amet</p>
+                    <h5 class="heading-sm-footer">FOLLOW US</h5>
+                    <div class="social-links-footer">
+                        <i class="fa-brands icon-social-footer fa-facebook"></i>
+                        <i class="fa-brands icon-social-footer fa-snapchat"></i>
+                        <i class="fa-brands icon-social-footer fa-whatsapp"></i>
+                        <i class="fa-brands icon-social-footer fa-instagram"></i>
+                        <i class="fa-brands icon-social-footer fa-linkedin"></i>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12">
+
+                  <div class="pages-footer">
+                    <h3 class="heading-pages">Pages Links</h3>
+
+                    <!-- navbar copy from top navbar -->
+
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                          <a class="nav-link footer-links " aria-current="page" href="home.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link footer-links" href="destination.html">Destinations</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link footer-links" href="packages.html">Packages</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link footer-links" href="#">Contact</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                          <a class="nav-link footer-links dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            FAQ
+                          </a>
+                          <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">About us</a></li>
+                            <li><a class="dropdown-item" href="mainlogin.html">Login</a></li>
+                            <li><a class="dropdown-item" href="register.html">Register</a></li>
+                          </ul>
+                        </li>
+                      </ul>
+
+                  </div>
+
+                </div>
+
+                <div class="col-lg-4 col-md-6 col-sm-12">
+
+                      <h3 class="heading-pages">Contact Us</h3>
+                      <p class="contact-footer">
+                        <span class="text-contact"> <i class="fa-solid footer-icons fa-location-dot"></i> 123 Street New York </span>
+                        <span class="text-contact"> <i class="fa-solid footer-icons fa-envelope"></i>explorer24@gmail.com </span>
+                        <span class="text-contact"> <i class="fa-solid footer-icons fa-phone"></i> +021-1234 5678 </span>
+                      </p>
+
+                </div>
+
+            </div>
+        </div>
+
+        <div class="container-fluid gx-0">
+            <div class="footer-rights">
+                <p class="right-para">Copyright <span><i class="fa-regular fa-copyright"></i></span> explorer. All Rights Reserved.</p>
+            </div>
+        </div>
+    </div>
+ </footer>
+</body>
+<!-- bootstap js script-->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+
+
+
+
+</html>
