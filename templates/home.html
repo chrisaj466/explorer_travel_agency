@@ -78,6 +78,72 @@
     color:black;
     margin-bottom:10px;
     }
+   .selection {
+    background-color: #f2f2f2;
+    padding: 10px;
+}
+
+.search {
+    display: flex;
+    align-items: center;
+}
+
+.form_div form {
+    display: flex;
+}
+
+.search-input, .search-button, .form-select {
+    margin-right: 10px;
+    display: inline-block;
+}
+
+.form-select {
+    margin-bottom: 10px;
+}
+.selection {
+    background-color: #f2f2f2;
+    padding: 10px;
+}
+
+.search {
+    display: flex;
+    align-items: center;
+}
+
+.form_div form {
+    display: flex;
+}
+
+.search-input, .search-button, .form-select {
+    margin-right: 10px;
+    height: 40%;
+}
+
+.search-input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+
+}
+
+.search-button {
+    padding: 8px 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.form-select {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: white;
+    cursor: pointer;
+    width:70%;
+}
+
 </style>
     <title>Adventure explorer</title>
 </head>
@@ -130,6 +196,7 @@
                           <li><a class="dropdown-item" href="{% url 'login' %}">Login</a></li>
                           <li><a class="dropdown-item" href="{% url 'register' %}">Register</a></li>
                             <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
+                            <li><a class="dropdown-item" href="{% url 'user_profile' %}">profile</a></li>
                         </ul>
                       </li>
                     </ul>
@@ -180,39 +247,30 @@
     </div>
 </div>
 <!-- header completed -->
-<div class="selection">
-    <div class="selection_container">
-        <select class="countries boxes ">
-            <option value="Country0">Countries</option>
-            <option value="Country0">India</option>
-            <option value="Country0">Srilanka</option>
-            <option value="Country0">South africa</option>
-            <option value="Country0">Japan</option>
-        </select>
-        <select class="Destination boxes ">
-            <option value="Country0">Destination</option>
-            <option value="Country0">Destination1</option>
-            <option value="Country0">Destination2</option>
-            <option value="Country0">Destination3</option>
-            <option value="Country0">Destination4</option>
-        </select>
-        <select class="budget boxes ">
-            <option value="Country0">Budget</option>
-            <option value="Country0">10000$</option>
-            <option value="Country0">20000$</option>
-            <option value="Country0">50000$</option>
-            <option value="Country0">100000$</option>
-        </select>
-        <select class="Duration boxes ">
-            <option value="Country0">Duration</option>
-            <option value="Country0">Duration1</option>
-            <option value="Country0">Duration2</option>
-            <option value="Country0">Duration3</option>
-            <option value="Country0">Duration4</option>
-        </select>
-        <a href="#" class="select-btn">Submit</a>
-    </div>
 
+<div class="selection">
+     <div class="selection_container">
+       <div class="search">
+        <div class="form_div">
+          <form class="form" method="POST" action="{% url 'search_page' %}">
+            {% csrf_token %}
+            <input type="text" name="search" placeholder="search" class="search-input" value="{{search_data}}">
+            <input type="submit" class="search-button" formaction="/search_page">
+            <select name="category-select" class="form-select  mb-3" onchange="this.form.submit()">
+                <option value="">Category</option>
+                {% for x in category %}
+                <option value="{{x.nation_name}}" {% if x.nation_name == category_data %} selected {% endif %}>{{x.nation_name}}</option>
+                {% endfor %}
+            </select>
+            <select class="form-select" name="sort-select" style="margin-left:10px;" onchange="this.form.submit()">
+                <option>Price</option>
+                <option value="small" {% if sort_data ==  "small" %} selected {% endif %}>price:low to high </option>
+                <option value="high" {% if sort_data ==  "high" %} selected {% endif %}>price:high to low</option>
+            </select>
+          </form>
+        </div>
+       </div>
+     </div>
 </div>
 <!-- about section -->
 <section class="about">

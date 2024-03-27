@@ -16,13 +16,13 @@
 // closeFormBtn.onclick = function() {
 //     popupForm.style.display = "none";
 // }
-document.addEventListener('DOMContentLoaded', function() {
-  var popupForm = document.getElementById("popupForm");
-  popupForm.style.display = "none";
-document.getElementById("openFormBtn").addEventListener("click", function() {
-    document.getElementById("popupForm").style.display = "flex"; // Show the form
-  });
-
-  document.getElementById("closeFormBtn").addEventListener("click", function() {
-    document.getElementById("popupForm").style.display = "none"; // Hide the form
-  })});
+//document.addEventListener('DOMContentLoaded', function() {
+//  var popupForm = document.getElementById("popupForm");
+//  popupForm.style.display = "none";
+//document.getElementById("openFormBtn").addEventListener("click", function() {
+//    document.getElementById("popupForm").style.display = "flex"; // Show the form
+//  });
+//
+//  document.getElementById("closeFormBtn").addEventListener("click", function() {
+//    document.getElementById("popupForm").style.display = "none"; // Hide the form
+//  })});

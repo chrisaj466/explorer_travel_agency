@@ -20,7 +20,7 @@ class UserModel(models.Model):
 class UserImageModel(models.Model):
     image_id = models.AutoField(primary_key=True)
     images = models.ImageField(upload_to='')
-    user_id = models.ForeignKey(UserModel, on_delete=models.CASCADE)
+    user = models.ForeignKey(UserModel, on_delete=models.CASCADE)
 
     class Meta:
         db_table = 'user_image'
@@ -35,23 +35,25 @@ class PaymentTypeModel(models.Model):
 
 
 class UserPaymentModel(models.Model):
-    payment_id = models.IntegerField(primary_key=True)
-    user_id = models.ForeignKey(UserModel, on_delete=models.CASCADE)
-    payment_type_id = models.ForeignKey(PaymentTypeModel, on_delete=models.CASCADE)
+    payment_id = models.AutoField(primary_key=True)
+    user = models.ForeignKey(UserModel, on_delete=models.CASCADE)
+    payment_type = models.ForeignKey(PaymentTypeModel, on_delete=models.CASCADE)
     provider = models.CharField(max_length=255)
     account_number = models.CharField(max_length=255)
     expiry_date = models.DateField()
-
+    package_date=models.DateTimeField(auto_now_add=True)
     class Meta:
         db_table = 'user_payment'
 
 
 class BookingListModel(models.Model):
-    booking_id = models.IntegerField(primary_key=True)
+    booking_id = models.AutoField(primary_key=True)
     user = models.ForeignKey(UserModel, on_delete=models.CASCADE)
     packages = models.ForeignKey(PackagesModel, on_delete=models.CASCADE)
     payment = models.ForeignKey(UserPaymentModel, on_delete=models.CASCADE)
     order_status = models.CharField(max_length=255,default='Active')
+    start_date = models.DateField(null=True)
+    end_date = models.DateField(null=True)
     order_quantity = models.IntegerField()
 
     class Meta:

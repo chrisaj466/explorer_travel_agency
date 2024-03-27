@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+    <meta name="viewport" content="width=device, initial-scale=1.0">
+
+    <link rel="stylesheet"  href="{% static 'css/user_profile.css' %}">
+    <link rel="stylesheet"  href="{% static 'css/media.css' %}">
+    <!-- adds the links of bootstrape ,fonts, icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;700&family=Roboto:ital,wght@0,400;0,500;0,700;0,900;1,400&display=swap" rel="stylesheet">
+    <script src='http://kit.fontawesome.com/4c729db828.js' crossorigin="anonymous"></script>
+
+    <title>Adventure explorer</title>
+</head>
+<body>
+<div class="header">
+    <div class="nav_bar-top">
+        <div class="text-container">
+            <div class="text-content">
+            <p class="para-text"><span class="span_text"><i class="fa-solid fa-envelope"></i></span>example@gmail.com</p>
+            <p class="para-text"><span class="span_text"><i class="fa-solid fa-phone"></i></span>+021-1234 567</p>
+        </div>
+        <div class="social-links">
+            <i class="fa-brands icon-social fa-facebook"></i>
+            <i class="fa-brands icon-social fa-snapchat"></i>
+            <i class="fa-brands icon-social fa-whatsapp"></i>
+            <i class="fa-brands icon-social fa-instagram"></i>
+            <i class="fa-brands icon-social fa-linkedin"></i>
+        </div>
+    </div>
+</div>
+<header>
+    <h1>My Profile</h1>
+    <nav>
+        <ul>
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'destination' %}">Destinations</a></li>
+            <li><a href="{% url 'packages' %}">Packages</a></li>
+        </ul>
+    </nav>
+</header>
+<div class="container">
+<div class="options-section">
+    <button id="user-profile-btn"> Profile</button>
+    <button id="booking-btn"> My Booking</button>
+    <button id="logout-btn">Logout</button>
+    <button id="edit-profile-btn">Edit Profile</button>
+</div>
+<div class="info-section">
+    <!-- User profile info -->
+    <div id="user-profile-info" class="info-content">
+        <div class="user-info-container">
+            {% for x in user %}
+           <div class="user-image">
+              <img src="{{x.images.url}}" alt="">
+           </div>
+           <!-- Display user profile info here -->
+           <div class="info-user">
+              <h2>{{x.user.User_name}}</h2>
+              <p>Email: {{x.user.email}}</p>
+              <p>Phone Number : {{x.user.Phone_number}}</p>
+           </div>
+            {% endfor %}
+           <!-- Add more user profile info as needed -->
+        </div>
+    </div>
+    <!-- Booking info -->
+    <div id="booking-info" class="info-content">
+        <!-- Display booking info here -->
+        <h2>Booking Info</h2>
+        <!-- Add booking info content here -->
+    </div>
+    <!-- Edit profile form -->
+    <div id="edit-profile-form" class="info-content">
+        <h2>Edit Profile</h2>
+        <form id="edit-profile-form1" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="form-column">
+        <label for="new-name">User Name:</label>
+        <input type="text" id="new-name" name="new-name" class="form-control" placeholder="User name" required>
+        <label for="new-password">Password:</label>
+        <input type="password" id="new-password" name="new-password" class="form-control" placeholder="Password" required>
+    </div>
+    <div class="form-column">
+        <label for="new-phone-number">Phone Number:</label>
+        <input type="tel" id="new-phone-number" name="new-phone-number" class="form-control" placeholder="Phone number" required>
+        <label for="new-email">Email:</label>
+        <input type="email" id="new-email" name="new-email" class="form-control" placeholder="Email address" required>
+    </div>
+
+      <button type="submit" id="save-profile-btn" formaction="/profile_update" class="btn btn-primary">Save Changes</button>
+</form>
+
+
+    </div>
+
+    <!-- Logout section -->
+    <div id="logout-info" class="info-content">
+        <h2>Logout</h2>
+        <!-- Display logout message and button here -->
+        <p>Are you sure you want to logout ?</p>
+        <button type="button" formaction="/logout" id="confirm-logout-btn" class="logout">Logout</button>
+    </div>
+</div>
+
+</div>
+
+
+<!-- packages part finished-->
+ <footer class="footer">
+    <div class="footer-container">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <h3 class="heading-logo footer-logo">EXPLOR<span>ER.</span></h3>
+                    <p class="footer-para"> lorem ipsum dolor sit amet</p>
+                    <h5 class="heading-sm-footer">FOLLOW US</h5>
+                    <div class="social-links-footer">
+                        <i class="fa-brands icon-social-footer fa-facebook"></i>
+                        <i class="fa-brands icon-social-footer fa-snapchat"></i>
+                        <i class="fa-brands icon-social-footer fa-whatsapp"></i>
+                        <i class="fa-brands icon-social-footer fa-instagram"></i>
+                        <i class="fa-brands icon-social-footer fa-linkedin"></i>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12">
+
+                  <div class="pages-footer">
+                    <h3 class="heading-pages">Pages Links</h3>
+
+                    <!-- navbar copy from top navbar -->
+
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                          <a class="nav-link footer-links " aria-current="page" href="#">Home</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link footer-links" href="#">Destinations</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link footer-links" href="#">Packages</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link footer-links" href="#">Contact</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                          <a class="nav-link footer-links dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            FAQ
+                          </a>
+                          <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">About us</a></li>
+                            <li><a class="dropdown-item" href="mainlogin.html">Login</a></li>
+                            <li><a class="dropdown-item" href="register.html">Register</a></li>
+                          </ul>
+                        </li>
+                      </ul>
+
+                  </div>
+
+                </div>
+
+                <div class="col-lg-4 col-md-6 col-sm-12">
+
+                      <h3 class="heading-pages">Contact Us</h3>
+                      <p class="contact-footer">
+                        <span class="text-contact"> <i class="fa-solid footer-icons fa-location-dot"></i> 123 Street New York </span>
+                        <span class="text-contact"> <i class="fa-solid footer-icons fa-envelope"></i>explorer24@gmail.com </span>
+                        <span class="text-contact"> <i class="fa-solid footer-icons fa-phone"></i> +021-1234 5678 </span>
+                      </p>
+
+                </div>
+
+            </div>
+        </div>
+
+        <div class="container-fluid gx-0">
+            <div class="footer-rights">
+                <p class="right-para">Copyright <span><i class="fa-regular fa-copyright"></i></span> adventure explorer. All Rights Reserved.</p>
+            </div>
+        </div>
+    </div>
+ </footer>
+ <script>
+
+
+    document.addEventListener('DOMContentLoaded', function() {
+        // Get all buttons
+        const userProfileBtn = document.getElementById('user-profile-btn');
+        const bookingBtn = document.getElementById('booking-btn');
+        const logoutBtn = document.getElementById('logout-btn');
+        const editProfileBtn = document.getElementById('edit-profile-btn');
+
+        // Get all info content sections
+        const userProfileInfo = document.getElementById('user-profile-info');
+        const bookingInfo = document.getElementById('booking-info');
+        const editProfileForm = document.getElementById('edit-profile-form');
+        const logoutInfo = document.getElementById('logout-info');
+
+        // Show user profile info content by default
+        showInfoContent(userProfileInfo);
+
+        // Add event listeners to buttons
+        userProfileBtn.addEventListener('click', function() {
+            showInfoContent(userProfileInfo);
+        });
+        bookingBtn.addEventListener('click', function() {
+            showInfoContent(bookingInfo);
+        });
+        editProfileBtn.addEventListener('click', function() {
+            showInfoContent(editProfileForm);
+
+            document.getElementById('save-profile-btn').addEventListener('click', function() {
+                window.location.href = '/profile_update';
+
+            });
+
+        });
+        logoutBtn.addEventListener('click', function() {
+            showInfoContent(logoutInfo);
+            document.getElementById('confirm-logout-btn').addEventListener('click', function() {
+                window.location.href = '/logout';
+            });
+        });
+
+        // Function to show info content and hide others
+        function showInfoContent(infoContent) {
+            // Hide all info content
+            const allInfoContent = document.querySelectorAll('.info-content');
+            allInfoContent.forEach(function(content) {
+                content.classList.remove('active');
+            });
+            // Show the selected info content
+            infoContent.classList.add('active');
+        }
+    });
+    const buttons = document.querySelectorAll('.options-section button');
+
+// Add event listener to each button
+buttons.forEach(function(button) {
+    button.addEventListener('click', function() {
+        // Remove active class from all buttons
+        buttons.forEach(function(btn) {
+            btn.classList.remove('active');
+        });
+        // Add active class to the clicked button
+        button.classList.add('active');
+    });
+});
+
+ </script>
+</body>
+<!-- bootstap js script-->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+
+
+
+
+</html>

@@ -62,6 +62,11 @@
     margin-left:50px !important;
 
 }
+.rating_value{
+   margin-top:50px !important;
+   margin-left:50px !important;
+}
+
         .card-body {
     padding: 20px;
     height:auto;
@@ -83,6 +88,13 @@ font-size:4;
         }
         .comment1{
         font-weight:400;
+        }
+        .rating_value{
+        display:flex;
+        }
+        .avg_rating{
+            display:flex;
+            padding-top:3px;
         }
     </style>
 </head>
@@ -115,13 +127,13 @@ font-size:4;
                   <div class="collapse navbar-collapse" id="navbarNavDropdown">
                     <ul class="navbar-nav ms-auto">
                       <li class="nav-item">
-                        <a class="nav-link " aria-current="page" href="home.html">Home</a>
+                        <a class="nav-link " aria-current="page" href="{% url 'home' %}">Home</a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link" href="destination.html">Destinations</a>
+                        <a class="nav-link" href="{% url 'destination' %}">Destinations</a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link" href="packages.html">Packages</a>
+                        <a class="nav-link" href="{% url 'packages' %}">Packages</a>
                       </li>
                       <li class="nav-item">
                         <a class="nav-link" href="#">Contact</a>
@@ -189,7 +201,16 @@ font-size:4;
 <!-- map section -->
 
 
+<div class="rating_value">
+    <h4 >Ratings : </h4>
 
+           <div class="avg_rating">
+              {% if average_rating %}
+               <span class="stars"><i class="fa-solid star fa-star"></i></span>
+               <p style="font-size: 16px; margin: 2; color: green;">{{ average_rating }}</p>
+              {% endif %}
+           </div>
+</div>
 
 
 <!--About us section completed -->
@@ -242,47 +263,29 @@ font-size:4;
 <div class="detail">
    <div class="card  "   >
         <div class="card-body  ">
-            <h5 class="card-subtitle mb-2 text-muted">User Name: {{x.user_id.User_name}}</h5>
-            <h5 class="card-subtitle mb-2 text-muted">price: {{x.packages_id.price}} rupees</h5>
-            <h4 class="card-subtitle rating1 text-muted">Ratings</h4>
+            <h5 class="card-subtitle mb-2 text-muted">{{x.user_id.User_name}}</h5>
+<!--            <h4 class="card-subtitle rating1 text-muted">Ratings</h4>-->
 
-            <div class="rating">
-                {% for rating in data3 %}
-                    {% for i in "12345"|make_list %}
-                           {% if i <= rating.rating_value %}
-                              <!-- Filled star -->
+<!--            <div class="rating">-->
+<!--                {% for rating in data3 %}-->
+<!--                    {% for i in "12345"|make_list %}-->
+<!--                           {% if i <= rating.rating_value %}-->
+<!--                              &lt;!&ndash; Filled star &ndash;&gt;-->
 
-                                <span>&#9733;</span>
+<!--                                <span>&#9733;</span>-->
 
-                          {% endif %}
-                   {% endfor %}
-                {% endfor %}<br>
-            </div>
+<!--                          {% endif %}-->
+<!--                   {% endfor %}-->
+<!--                {% endfor %}<br>-->
+<!--            </div>-->
             <br>
-            <h5 >Comment</h5>
+            <h5 >Review</h5>
             <p class="comment1"> {{x.comment}}</p>
         </div>
    </div>
 </div>
 {% endfor %}
-              <div id="popupForm" class="popup">
-                <form id="myForm" class="popup-content">
-                  <span id="closeFormBtn">&times;</span>
-                  <div class="detailsform">
-                    <h2 class="popupform">Details</h2>
 
-                    <input type="text" id="name" name="Name" placeholder="name"><br>
-
-                    <input type="text" id="phonenumber" name="phonenumber" placeholder="Phone Number">
-
-                    <input type="number" id="children" name="christo" placeholder=""><br>
-
-                    <input type="date" id="startdate" name="startdate"><br>
-                    <button type="submit" >Submit</button>
-                    <!-- <button type="button" id="closeFormBtn">Close</button> -->
-                  </div>
-                </form>
-              </div>
 
  </section>
 <!-- packages part finished-->
