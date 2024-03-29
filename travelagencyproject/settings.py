@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'userapp','adminapp',
+
 ]
 
 MIDDLEWARE = [
@@ -130,3 +131,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+RAZORPAY_KEY_ID = 'rzp_test_1fobC03iYb0HUi'
+RAZORPAY_KEY_SECRET_KEY = 'gWuvQyKHybJBvnIwjiPNtq9q'
+SECURE_CROSS_ORIGIN_OPENER_POLICY= "same-origin-allow-popups"

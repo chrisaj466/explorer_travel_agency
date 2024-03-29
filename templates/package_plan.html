@@ -253,9 +253,31 @@ font-size:4;
                     <form method="POST">
                         {% csrf_token %}
                          <input name="hidden_product_id" hidden type="text" value="{{x.user_id}}">
+                         <div class="mb-3">
+                             <label for="exampleFormControlInput1" class="form-label">start date</label>
+                             <select name="start_date" id="exampleFormControlInput1">
+                                <option value="">select date</option>
+                               {% for x in package_date %}
+                                <option value="{{x.date_id}}">{{x.start_date}}</option>
+                               {% endfor %}
+                             </select>
+                         </div>
+                         <div class="mb-3">
+                             <label for="exampleFormControlInput2" class="form-label">end date</label>
+                             <select name="end_date" id="exampleFormControlInput2">
+                               <option value="">select date</option>
+                               {% for x in package_date %}
+                                <option value="{{x.date_id}}">{{x.end_date}}</option>
+                               {% endfor %}
+                             </select>
+                         </div>
                         <div class="booking_button">
+                            {% for x in data2 %}
 <!--                            <a href="#" class="select-btn2"    >Booking</a>-->
-                            <button  class="btn select-btn2 btn-primary "  id="openFormBtn" formaction="/booking" type="submit" name="button1">Booking</button>
+                            <input name="packages_id" hidden type="text" value="{{x.packages_id}}">
+
+                            <button  class="btn select-btn2 btn-primary "  id="openFormBtn" formaction="/initiate_payment" type="submit" name="button1">Booking</button>
+                            {% endfor %}
                         </div>
                     </form>
                 </div>

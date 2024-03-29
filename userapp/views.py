@@ -1,10 +1,10 @@
 from datetime import date, datetime
-
+from django.http import HttpResponse
 from django.contrib import messages
 from django.contrib.auth.models import User
 
 
-
+from travelagencyproject.settings import RAZORPAY_KEY_ID,RAZORPAY_KEY_SECRET_KEY
 import mysql
 from django.db.models import Q, Sum, Count
 
@@ -13,7 +13,7 @@ from django.shortcuts import render, redirect,HttpResponse, get_object_or_404
 from adminapp.models import PackageDateModel
 from .models import PackagesModel, NationModel, NationImageModel, PackagePageModel, ReviewModel, TravelTipsModel, \
     PackagePlanModel, UserModel, UserImageModel, PaymentTypeModel, UserPaymentModel
-
+import razorpay
 
 # Create your views here.
 def home(request):
@@ -155,7 +155,9 @@ def country_packages(request):
    return redirect('/packages')
 
 def package_plan(request):
-    if request.method == 'POST':
+    package_date = PackageDateModel.objects.filter(package=request.session.get('package_id'))
+    if  request.session.get('user'):
+     if request.method == 'POST':
         id=request.POST.get('packages_id')
         request.session['package_id'] = id
         data = PackagePlanModel.objects.filter(package_id=id).order_by('oder')
@@ -169,9 +171,9 @@ def package_plan(request):
         print(int(total_rating_count))
         average_rating=total_rating_sum / total_rating_count
         print(average_rating)
-        return render(request, 'package_plan.html', {'data': data,'data2': data2,'data3': data3,'average_rating': average_rating})
-    return redirect('/country_packages')
-
+        return render(request, 'package_plan.html', {'data': data,'data2': data2,'data3': data3,'average_rating': average_rating,'package_date':package_date})
+     return redirect('/country_packages')
+    return redirect('/login')
 def traveltips(request):
     DATA = NationImageModel.objects.all()
     return render(request, 'Traveltips.html', {"data": DATA})
@@ -184,49 +186,49 @@ def country_traveltips(request):
     return render(request, 'country_traveltip.html', {'data': data, 'data2': data2})
 
 
-def booking(request):
-    payment_provider=PaymentTypeModel.objects.all()
-    if request.session.get('user'):
-        print('log in')
-        print(request.session['user'])
-        return render(request, 'booking.html',{'payment_provider': payment_provider})
-
-    return redirect('/login')
-def userpayment(request):
-    package_date = PackageDateModel.objects.filter(package=request.session.get('package_id'))
-    if request.method=='POST':
-        category_id=request.POST.get('category')
-        provider=request.POST.get('provider')
-        account_number=request.POST.get('account_number')
-        expiry_date = request.POST.get('expiry_date')
-
-        user=request.session.get('user')
-        user_info=UserModel.objects.get(User_name=user)
-        id=user_info.User_id
-        print(id)
-        obj=UserPaymentModel()
-        obj.provider=provider
-        obj.account_number=account_number
-        obj.expiry_date=expiry_date
-        obj.user_id=id
-        users=UserModel.objects.get(User_id=id)
-        print(users.User_name)
-        obj.payment_type=PaymentTypeModel.objects.get(type_id=request.POST.get('category'))
-        obj.save()
-        date_time=UserPaymentModel.objects.get()
-        return render(request, 'booking_list.html',{'package_date': package_date})
-    return render(request,'booking.html')
-def booking_list(request):
-    if request.method == 'POST':
-        start_date = request.POST.get('start_date')
-        end_date = request.POST.get('end_date')
-        user=request.session.get('user')
-        package=request.session.get('package_id')
-        dat_time=request.POST.get('dat_time')
-        payment=UserPaymentModel.objects.get(user=user, package=package)
-        print(payment)
-        return redirect('/package_plan')
-    return render(request, 'booking_list.html')
+# def booking(request):
+#     payment_provider=PaymentTypeModel.objects.all()
+#     if request.session.get('user'):
+#         print('log in')
+#         print(request.session['user'])
+#         return render(request, 'initiate_payment.html',{'payment_provider': payment_provider})
+#
+#     return redirect('/login')
+# def userpayment(request):
+#     package_date = PackageDateModel.objects.filter(package=request.session.get('package_id'))
+#     if request.method=='POST':
+#         category_id=request.POST.get('category')
+#         provider=request.POST.get('provider')
+#         account_number=request.POST.get('account_number')
+#         expiry_date = request.POST.get('expiry_date')
+#
+#         user=request.session.get('user')
+#         user_info=UserModel.objects.get(User_name=user)
+#         id=user_info.User_id
+#         print(id)
+#         obj=UserPaymentModel()
+#         obj.provider=provider
+#         obj.account_number=account_number
+#         obj.expiry_date=expiry_date
+#         obj.user_id=id
+#         users=UserModel.objects.get(User_id=id)
+#         print(users.User_name)
+#         obj.payment_type=PaymentTypeModel.objects.get(type_id=request.POST.get('category'))
+#         obj.save()
+#         date_time=UserPaymentModel.objects.get()
+#         return render(request, 'booking_list.html',{'package_date': package_date})
+#     return render(request,'booking.html')
+# def booking_list(request):
+#     if request.method == 'POST':
+#         start_date = request.POST.get('start_date')
+#         end_date = request.POST.get('end_date')
+#         user=request.session.get('user')
+#         package=request.session.get('package_id')
+#         dat_time=request.POST.get('dat_time')
+#         payment=UserPaymentModel.objects.get(user=user, package=package)
+#         print(payment)
+#         return redirect('/package_plan')
+#     return render(request, 'booking_list.html')
 
 
 def login(request):
@@ -265,4 +267,39 @@ def register(request):
         obj1.save()
         return redirect('/')
     return render(request, 'register.html')
-#
+
+
+client =razorpay.Client(auth=("rzp_test_1fobC03iYb0HUi", "gWuvQyKHybJBvnIwjiPNtq9q"))
+
+def initiate_payment(request):
+    if request.session.get('user'):
+     if request.method == 'POST':
+        payment_option = request.POST.get('payment_option')  # Get selected payment option
+        # Use Razorpay API to create payment order with selected payment option
+        id = request.POST.get('packages_id')
+        print(id)
+        data2 = PackagesModel.objects.filter(packages_id=id)
+        client = razorpay.Client(auth=('rzp_test_1fobC03iYb0HUi', 'gWuvQyKHybJBvnIwjiPNtq9q'))
+        amount = 50000  # Razorpay expects amount in paise
+        payment_order = client.order.create({"amount": amount, "currency": "INR", "payment_capture": "1"})
+              # Pass selected payment option
+        payment_order_id = payment_order['id']
+        print(payment_order_id)
+        return render(request, 'payment.html', {'api_key':RAZORPAY_KEY_ID,'order_id':payment_order_id,'data':data2})
+     return render(request, "payment.html")
+    return redirect('/login')
+
+
+def payment_success(request):
+    return render(request, "payment_succ.html")
+def payment_pro(request):
+    return render(request, "payment_pro.html")
+
+def payment_failure(request):
+    return render(request, "payment_fail.html")
+
+def payment(request):
+    return render(request, "payment.html")
+def razorpay_webhook(request):
+    # Handle Razorpay webhook notification
+    return HttpResponse(status=200)

@@ -138,36 +138,45 @@
 <section>
 <div class="container">
     <div class="booking_container">
-      <form method="post">
-          {% csrf_token %}
-          <div class="mb-3">
-             <label for="exampleFormControlInput" class="form-label">Payment type</label>
-             <select name="category">
-             <option value="">select an option</option>
-            {% for x in payment_provider %}
-                <option value="{{x.type_id}}">{{x.payment_type}}</option>
-            {% endfor %}
-            </select>
-          </div>
-          <div class="mb-3">
-             <label for="exampleFormControlInput" class="form-label">Provider</label>
-             <input type="text" name="provider" class="form-control" id="exampleFormControlInput" placeholder="Provider">
-          </div>
+      <button type="submit" id="rzp-button1" class="btn btn-outline-success btn-block">Pay</button>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+var options = {
+    "key": "{{api_key}}", // Enter the Key ID generated from the Dashboard
+    "name": "explorer", //your business name
+    "description": "Test Transaction",
+    "image": "https://example.com/your_logo",
+    "order_id": "{{order_id}}", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+    "handler": function (response){
+        alert(response.razorpay_payment_id);
+        alert(response.razorpay_order_id);
+        alert(response.razorpay_signature)
+    },
+    "prefill": { //We recommend using the prefill parameter to auto-fill customer's contact information, especially their phone number
+        "name": "Gaurav Kumar", //your customer's name
+        "email": "gaurav.kumar@example.com",
+        "contact": "9000090000"  //Provide the customer's phone number for better conversion rates
+    },
 
-          <div class="mb-3">
-                 <label for="exampleFormControlInput" class="form-label">account-number</label>
-                 <input type="text" name="account_number" class="form-control" id="exampleFormControlInput3" placeholder="account-number">
-          </div>
-          <div class="mb-3">
-                  <label for="exampleFormControlInput" class="form-label">expiry-date</label>
-                  <input type="date" name="expiry_date" class="form-control" id="exampleFormControlInput4" placeholder="expiry-date">
-          </div>
-
-
-          <div class="mb-3">
-            <button type="submit" class="btn btn-primary" formaction="userpayment">Submit</button>
-          </div>
-      </form>
+    "theme": {
+        "color": "#3399cc"
+    }
+};
+var rzp1 = new Razorpay(options);
+rzp1.on('payment.failed', function (response){
+        alert(response.error.code);
+        alert(response.error.description);
+        alert(response.error.source);
+        alert(response.error.step);
+        alert(response.error.reason);
+        alert(response.error.metadata.order_id);
+        alert(response.error.metadata.payment_id);
+});
+document.getElementById('rzp-button1').onclick = function(e){
+    rzp1.open();
+    e.preventDefault();
+}
+</script>
     </div>
 </div>
 

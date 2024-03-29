@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Initiate Payment</title>
+</head>
+<body>
+    <h1>Initiate Payment</h1>
+    <form action="{% url 'initiate_payment' %}" method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+             <label for="exampleFormControlInput" class="form-label">Payment type</label>
+             <select name="payment_option">
+                <option value="card">Credit/Debit Card</option>
+                <option value="netbanking">Net Banking</option>
+        <!-- Add more payment options as needed -->
+             </select>
+        </div>
+        <label for="amount">Amount:</label>
+        <input type="number" id="amount" name="amount" required>
+        <button type="submit">Pay Now</button>
+    </form>
+</body>
+</html>

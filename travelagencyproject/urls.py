@@ -15,7 +15,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from userapp import views as user_views
 from adminapp import views as admin_views
 
@@ -25,6 +25,9 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',user_views.home,name='home'),
+
+    #payment
+
 
     # packages model
     path('Package_admin', admin_views.user_list),
@@ -50,18 +53,25 @@ urlpatterns = [
     path('search_page',user_views.search,name='search_page'),
 
     #booking
-    path('booking',user_views.booking,name='booking'),
+    # path('booking',user_views.booking,name='booking'),
 
     #userpayment
-    path('userpayment',user_views.userpayment,name='userpayment'),
+    # path('userpayment',user_views.userpayment,name='userpayment'),
 
     #booking_list
-    path('booking_list',user_views.booking_list,name='booking_list'),
+    # path('booking_list',user_views.booking_list,name='booking_list'),
+
+    #payment
+    path('initiate_payment', user_views.initiate_payment, name='initiate_payment'),
+    path('payment', user_views.payment, name='payment'),
+    path('payment_success', user_views.payment_success, name='payment_success'),
+    path('payment_failure', user_views.payment_failure, name='payment_failure'),
+
 
     path('user_profile',user_views.user_profile,name='user_profile'),
     path('destination', user_views.destination,name='destination'),
     path('packages', user_views.packages,name='packages'),
-    path('booking', user_views.booking,name='booking'),
+    # path('booking', user_views.booking,name='booking'),
     path('login', user_views.login,name='login'),
     path('logout', user_views.logout, name='logout'),
     path('profile_update', user_views.profile_update,name='profile_update'),
