@@ -104,7 +104,10 @@
     background-color: #f2f2f2;
     padding: 10px;
 }
-
+.user{
+margin-bottom: 0px;
+margin-top:10px;
+}
 .search {
     display: flex;
     align-items: center;
@@ -199,6 +202,12 @@
                             <li><a class="dropdown-item" href="{% url 'user_profile' %}">profile</a></li>
                         </ul>
                       </li>
+                        <li>
+                            {% if name %}
+                            <h6 class="user">{{name}}</h6>
+
+                            {% endif %}
+                        </li>
                     </ul>
                   </div>
                 </div>

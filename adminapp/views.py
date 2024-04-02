@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.shortcuts import render, redirect,HttpResponse, get_object_or_404
-from .form import UserModelForm, Packagedateform, packageplanform, traveltipsform
+from .form import UserModelForm, Packagedateform, packageplanform, traveltipsform, nationform, NationImageform
 from .models import *
 # Create your views here.
 def user_list(request):
@@ -251,3 +251,127 @@ def update_tips_view(request, tips_id):
     else:
         form = traveltipsform(instance=user)
     return render(request, 'update_tips.html', {'form': form})
+def Nation_home(request):
+    """
+    Retrieves all user objects and renders them in the home.html template.
+
+    Parameters:
+    - request: HttpRequest object.
+
+    Returns:
+    - HttpResponse object rendering the home.html template with users' data.
+    """
+    nation = NationModel.objects.all()
+    return render(request, 'nation_home.html', {'users': nation})
+def nation_registration(request):
+    """
+    Handles user registration, validating and saving form data.
+
+    If the request method is GET, renders an empty registration form.
+    If the request method is POST, validates the submitted form data.
+    If the form is valid, saves the data and redirects to the home page.
+
+    Parameters:
+    - request: HttpRequest object.
+
+    Returns:
+    - HttpResponse object rendering the reg_validation.html template with the registration form.
+    - Redirects to the home page on successful registration.
+    """
+    if request.method == 'POST':
+        form_obj = nationform(request.POST)
+        print(request.POST)
+        if form_obj.is_valid():
+            form_obj.save()
+            print('form submit')
+            return redirect('/nation')
+    else:
+        form_obj = nationform()
+    return render(request, 'nation_registration.html', {'form': form_obj})
+def update_nation_view(request, nation_id):
+    """
+    Handles updating user information based on user_id.
+
+    If the request method is GET, renders a form pre-populated with user's existing data.
+    If the request method is POST, validates the submitted form data.
+    If the form is valid, updates the user's information and returns a success message.
+
+    Parameters:
+    - request: HttpRequest object.
+    - user_id: Integer specifying the user's ID.
+
+    Returns:
+    - HttpResponse object rendering the update_user.html template with the form.
+    """
+    user =NationModel.objects.get(nation_id=nation_id)
+    if request.method == 'POST':
+        form = nationform(request.POST, instance=user)
+        print(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponse("plan data updated...................")
+    else:
+        form = nationform(instance=user)
+    return render(request, 'update_tips.html', {'form': form})
+def Nationimage_home(request):
+    """
+    Retrieves all user objects and renders them in the home.html template.
+
+    Parameters:
+    - request: HttpRequest object.
+
+    Returns:
+    - HttpResponse object rendering the home.html template with users' data.
+    """
+    nationimage = NationImageModel.objects.all()
+    return render(request, 'nationimage_home.html', {'users': nationimage})
+def nationimage_registration(request):
+    """
+    Handles user registration, validating and saving form data.
+
+    If the request method is GET, renders an empty registration form.
+    If the request method is POST, validates the submitted form data.
+    If the form is valid, saves the data and redirects to the home page.
+
+    Parameters:
+    - request: HttpRequest object.
+
+    Returns:
+    - HttpResponse object rendering the reg_validation.html template with the registration form.
+    - Redirects to the home page on successful registration.
+    """
+    if request.method == 'POST':
+        form_obj = NationImageform(request.POST,request.FILES)
+        print(request.POST)
+        if form_obj.is_valid():
+            form_obj.save()
+            print('form submit')
+            return redirect('/nation_image')
+    else:
+        form_obj = NationImageform()
+    return render(request, 'nationimage_registration.html', {'form': form_obj})
+def update_nationimage_view(request, nation_image_id):
+    """
+    Handles updating user information based on user_id.
+
+    If the request method is GET, renders a form pre-populated with user's existing data.
+    If the request method is POST, validates the submitted form data.
+    If the form is valid, updates the user's information and returns a success message.
+
+    Parameters:
+    - request: HttpRequest object.
+    - user_id: Integer specifying the user's ID.
+
+    Returns:
+    - HttpResponse object rendering the update_user.html template with the form.
+    """
+    user = NationImageModel.objects.get(nation_image_id=nation_image_id)
+    if request.method == 'POST':
+        form = NationImageform(request.POST, instance=user)
+        print(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponse("user data updated...................")
+    else:
+        form = NationImageform(instance=user)
+    return render(request, 'update_user.html', {'form': form})

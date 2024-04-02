@@ -8,7 +8,7 @@ Attributes:
     UserModelForm: A subclass of forms.ModelForm representing the form for UserModel model.
 """
 from django import forms
-from .models import PackagesModel, PackageDateModel, PackagePlanModel, TravelTipsModel
+from .models import PackagesModel, PackageDateModel, PackagePlanModel, TravelTipsModel, NationModel, NationImageModel
 
 
 class UserModelForm(forms.ModelForm):
@@ -38,11 +38,11 @@ class UserModelForm(forms.ModelForm):
 class Packagedateform(forms.ModelForm):
     class Meta:
         model = PackageDateModel
-        fields =['date_id','start_date','end_date','package']
+        fields =['date_id','start_date','count','package']
         widgets = {
             'date_id': forms.NumberInput(attrs={'class': 'form-control'}),
            'start_date': forms.DateInput(attrs={'class': 'form-control'}),
-            'end_date': forms.DateInput(attrs={'class': 'form-control'}),
+            'count': forms.NumberInput(attrs={'class': 'form-control'}),
             'package': forms.Select(attrs={'class': 'form-control'}),  # Foreign key dropdown
         }
 class packageplanform(forms.ModelForm):
@@ -71,3 +71,26 @@ class traveltipsform(forms.ModelForm):
         'public_transport': forms.TextInput(attrs={'class': 'form-control'}),
        'shopping': forms.TextInput(attrs={'class': 'form-control'}),
     }
+class nationform(forms.ModelForm):
+    class Meta:
+     model = NationModel
+     fields = ['nation_id', 'nation_name', 'nation_description']
+     widgets = {
+        'nation_id': forms.NumberInput(attrs={'class': 'form-control'}),
+        'nation_name': forms.TextInput(attrs={'class': 'form-control'}),
+        'nation_description': forms.Textarea(attrs={'class': 'form-control'}),
+
+    }
+
+class NationImageform(forms.ModelForm):
+         class Meta:
+             model = NationImageModel
+             fields = ['nation_image_id', 'nation_image', 'nation_id', 'travel_tip_main_image', 'package_main_image']
+             widgets = {
+                 'nation_image_id': forms.NumberInput(attrs={'class': 'form-control'}),
+                 'nation_id': forms.Select(attrs={'class': 'form-control'}),
+                 'nation_image': forms.FileInput(attrs={'class': 'form-control'}),
+                 'travel_tip_main_image': forms.FileInput(attrs={'class': 'form-control'}),
+                 'package_main_image': forms.FileInput(attrs={'class': 'form-control'}),
+
+             }

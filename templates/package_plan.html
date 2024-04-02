@@ -255,7 +255,7 @@ font-size:4;
                          <input name="hidden_product_id" hidden type="text" value="{{x.user_id}}">
                          <div class="mb-3">
                              <label for="exampleFormControlInput1" class="form-label">start date</label>
-                             <select name="start_date" id="exampleFormControlInput1">
+                             <select name="start_date" id="exampleFormControlInput1" >
                                 <option value="">select date</option>
                                {% for x in package_date %}
                                 <option value="{{x.date_id}}">{{x.start_date}}</option>
@@ -263,13 +263,8 @@ font-size:4;
                              </select>
                          </div>
                          <div class="mb-3">
-                             <label for="exampleFormControlInput2" class="form-label">end date</label>
-                             <select name="end_date" id="exampleFormControlInput2">
-                               <option value="">select date</option>
-                               {% for x in package_date %}
-                                <option value="{{x.date_id}}">{{x.end_date}}</option>
-                               {% endfor %}
-                             </select>
+                            <label for="exampleFormControlInput2" class="form-label">members</label>
+                            <input name="members" type="number" id="exampleFormControlInput2" required placeholder="number of peoples">
                          </div>
                         <div class="booking_button">
                             {% for x in data2 %}
@@ -279,13 +274,16 @@ font-size:4;
                             <button  class="btn select-btn2 btn-primary "  id="openFormBtn" formaction="/initiate_payment" type="submit" name="button1">Booking</button>
                             {% endfor %}
                         </div>
+                        {% if count <= 0 %}
+                          <p class="text-danger">No available dates for booking, select a new date for booking</p>
+                        {% endif %}
                     </form>
                 </div>
      {% for x in data3 %}
 <div class="detail">
    <div class="card  "   >
         <div class="card-body  ">
-            <h5 class="card-subtitle mb-2 text-muted">{{x.user_id.User_name}}</h5>
+            <h5 class="card-subtitle mb-2 text-muted">{{x.user.User_name}}</h5>
 <!--            <h4 class="card-subtitle rating1 text-muted">Ratings</h4>-->
 
 <!--            <div class="rating">-->

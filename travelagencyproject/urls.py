@@ -26,8 +26,15 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('',user_views.home,name='home'),
 
-    #payment
+    #nation
+    path('nation',admin_views.Nation_home),
+    path('nation_registration', admin_views.nation_registration),
+    path('nation_update/<int:nation_id>/',admin_views.update_nation_view),
 
+    #nation image
+    path('nation_image',admin_views.Nationimage_home),
+    path('nation_image_registration', admin_views.nationimage_registration),
+    path('nation_image_update/<int:nation_image_id>/',admin_views.update_nationimage_view),
 
     # packages model
     path('Package_admin', admin_views.user_list),
@@ -52,20 +59,16 @@ urlpatterns = [
     # search option
     path('search_page',user_views.search,name='search_page'),
 
-    #booking
-    # path('booking',user_views.booking,name='booking'),
 
-    #userpayment
-    # path('userpayment',user_views.userpayment,name='userpayment'),
-
-    #booking_list
-    # path('booking_list',user_views.booking_list,name='booking_list'),
 
     #payment
     path('initiate_payment', user_views.initiate_payment, name='initiate_payment'),
     path('payment', user_views.payment, name='payment'),
-    path('payment_success', user_views.payment_success, name='payment_success'),
+    path('payment_success/', user_views.payment_success, name='payment_success'),
     path('payment_failure', user_views.payment_failure, name='payment_failure'),
+
+    #review
+    path('review', user_views.review, name='review'),
 
 
     path('user_profile',user_views.user_profile,name='user_profile'),

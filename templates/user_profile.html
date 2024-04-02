@@ -16,6 +16,22 @@
     <script src='http://kit.fontawesome.com/4c729db828.js' crossorigin="anonymous"></script>
 
     <title>Adventure explorer</title>
+    <style>
+        th, td {
+
+  border-radius: 15px;
+  background-color: #96D4D4;
+  border-style: outset;
+
+}
+        table, th, td {
+  border: 1px solid white;
+  border-collapse: collapse;
+}
+        th, td {
+  padding: 10px;
+}
+    </style>
 </head>
 <body>
 <div class="header">
@@ -73,30 +89,52 @@
     <div id="booking-info" class="info-content">
         <!-- Display booking info here -->
         <h2>Booking Info</h2>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>user</th>
+                <th>payment id</th>
+                <th>order id</th>
+                <th>package</th>
+                <th>start date</th>
+                <th>end date</th>
+
+            </tr>
+            {% for x in booking_data %}
+            <tr>
+                <td>{{x.id}}</td>
+                <td>{{x.user}}</td>
+                <td>{{x.payment_id}}</td>
+                <td>{{x.order_id}}</td>
+                <td>{{x.package}}</td>
+                <td>{{x.start_date}}</td>
+                <td>{{x.end_date}}</td>
+            </tr>
+            {% endfor %}
+        </table>
         <!-- Add booking info content here -->
     </div>
     <!-- Edit profile form -->
     <div id="edit-profile-form" class="info-content">
         <h2>Edit Profile</h2>
-        <form id="edit-profile-form1" method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    <div class="form-column">
-        <label for="new-name">User Name:</label>
-        <input type="text" id="new-name" name="new-name" class="form-control" placeholder="User name" required>
-        <label for="new-password">Password:</label>
-        <input type="password" id="new-password" name="new-password" class="form-control" placeholder="Password" required>
-    </div>
-    <div class="form-column">
-        <label for="new-phone-number">Phone Number:</label>
-        <input type="tel" id="new-phone-number" name="new-phone-number" class="form-control" placeholder="Phone number" required>
-        <label for="new-email">Email:</label>
-        <input type="email" id="new-email" name="new-email" class="form-control" placeholder="Email address" required>
-    </div>
+        <form id="edit-profile-form1" method="post" >
+            {% csrf_token %}
 
-      <button type="submit" id="save-profile-btn" formaction="/profile_update" class="btn btn-primary">Save Changes</button>
-</form>
+         <div class="form-column">
+            <label for="new-name">User Name:</label>
+            <input type="text" id="new-name" name="new-name" class="form-control" value="{{x.User_name}}" required>
+            <label for="new-password">Password:</label>
+           <input type="password" id="new-password" name="new-password" class="form-control" value="{{x.Password}}" required>
+         </div>
+         <div class="form-column">
+            <label for="new-phone-number">Phone Number:</label>
+            <input type="tel" id="new-phone-number" name="new-phone-number" class="form-control" value="{{x.Phone_number}}" required>
+            <label for="new-email">Email:</label>
+            <input type="email" id="new-email" name="new-email" class="form-control" placeholder="{{x.email}}" required>
+         </div>
 
-
+          <button type="submit" id="save-profile-btn"  class="btn btn-primary">Save Changes</button>
+        </form>
     </div>
 
     <!-- Logout section -->

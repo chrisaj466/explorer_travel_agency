@@ -44,7 +44,7 @@ class PackagesModel(models.Model):
 class PackageDateModel(models.Model):
     date_id=models.IntegerField(primary_key=True)
     start_date = models.DateField()
-    end_date = models.DateField()
+    count = models.IntegerField(default=10)
     package = models.ForeignKey(PackagesModel, on_delete=models.CASCADE)
 
     class Meta:
