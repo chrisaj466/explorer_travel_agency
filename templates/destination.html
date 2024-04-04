@@ -211,28 +211,46 @@
  <section class="packages">
     <h2 class="heading_sm">DESTINATIONS</h2>
 
-        <div class="container-packages">
-            <div class="container">
-                <div class="row">
+<!--        <div class="container-packages">-->
+<!--            <div class="container">-->
+<!--                <div class="row">-->
 
-                    <div class="icon-container">
-                      <img src="{% static 'images/worldmap.png' %}"  class="image-package"  alt="Workplace"  usemap="#workmap" width="400" height="379">
+<!--                    <div class="icon-container">-->
+<!--                      <img src="{% static 'images/worldmap.png' %}"  class="image-package"  alt="Workplace"  usemap="#workmap" width="400" height="379">-->
 
-                      <map name="workmap">
+<!--                      <map name="workmap">-->
 
-                        <area shape="circle" coords="590,450,25" alt="Cup of coffee" href="/countries_contents/{{3}}/">
-                        <area shape="circle" coords="510,190,20" alt="Cup of coffee" href="/countries_contents/{{4}}/">
-                        <area shape="circle" coords="740,300,15" alt="Cup of coffee" href="/countries_contents/{{1}}/">
-                        <area shape="circle" coords="760,335,10" alt="Cup of coffee" href="/countries_contents/{{2}}/">
-                      </map>
-
-
-                    </div>
+<!--                        <area shape="circle"  coords="590,450,25" alt="Cup of coffee" href="/countries_contents/{{3}}/">-->
+<!--                        <area shape="circle" coords="510,190,20" alt="Cup of coffee" href="/countries_contents/{{4}}/">-->
+<!--                        <area shape="circle" coords="740,300,15" alt="Cup of coffee" href="/countries_contents/{{1}}/">-->
+<!--                        <area shape="circle" coords="760,335,10" alt="Cup of coffee" href="/countries_contents/{{2}}/">-->
+<!--                      </map>-->
 
 
-                </div>
+<!--                    </div>-->
+
+
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<div class="container-packages">
+    <div class="container">
+        <div class="row">
+            <div class="icon-container">
+                <form method="post">
+                    {% csrf_token %}
+                <img src="{% static 'images/worldmap.png' %}" class="image-package" alt="Workplace" usemap="#workmap" width="400" height="379">
+                <map name="workmap">
+                    <area shape="circle" coords="590,450,25" alt="Cup of coffee" data-nation="3">
+                    <area shape="circle" coords="510,190,20" alt="Cup of coffee" data-nation="4">
+                    <area shape="circle" coords="740,300,15" alt="Cup of coffee" data-nation="1">
+                    <area shape="circle" coords="760,335,10" alt="Cup of coffee" data-nation="2">
+                </map>
+              </form>
             </div>
         </div>
+    </div>
+</div>
 
     <h2 class="heading_sm  cu" style="margin-top:50px;">COUNTRIES</h2>
     <div class="container-packages">
@@ -353,15 +371,83 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
 
 
-<script>
-  // const areas = document.querySelectorAll('map[name="workmap"] area');
 
-  // areas.forEach(area => {
-  //     area.addEventListener('mouseenter', () => {
-  //         const coords = area.getAttribute('coords');
-  //         alert(`Coordinates: ${coords}`);
-  //     });
-  // });
+<!--<script>-->
+<!--   document.addEventListener('DOMContentLoaded', function() {-->
+<!--    var areas = document.querySelectorAll('area');-->
+<!--    areas.forEach(function(area) {-->
+<!--        area.addEventListener('click', function(event) {-->
+<!--            var coords = area.getAttribute('coords');-->
+<!--            var nation = area.dataset.nation;-->
+
+<!--            // Redirect to the corresponding page-->
+<!--            var url = `http://127.0.0.1:8000/countries_contents/?coords=${coords}`;-->
+<!--            window.location.href = /countries_contents/{{coords}};-->
+<!--        });-->
+<!--    });-->
+<!--});-->
+
+<!--</script>-->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+    var areas = document.querySelectorAll('area');
+    areas.forEach(function(area) {
+        area.addEventListener('click', function(event) {
+            event.preventDefault(); // Prevent default link action
+
+            var coords = area.getAttribute('coords');
+            var nation = area.dataset.nation;
+
+            // Get the CSRF token from the cookie
+            var csrftoken = getCookie('csrftoken');
+
+            // Create a form element
+            var form = document.createElement('form');
+            form.setAttribute('method', 'POST');
+            form.setAttribute('action', 'countries_contents/');
+
+            // Create a hidden input field for coordinates
+            var inputCoords = document.createElement('input');
+            inputCoords.setAttribute('type', 'hidden');
+            inputCoords.setAttribute('name', 'coords');
+            inputCoords.setAttribute('value', coords);
+
+            // Create a hidden input field for CSRF token
+            var inputCSRF = document.createElement('input');
+            inputCSRF.setAttribute('type', 'hidden');
+            inputCSRF.setAttribute('name', 'csrfmiddlewaretoken');
+            inputCSRF.setAttribute('value', csrftoken);
+
+            // Append the input fields to the form
+            form.appendChild(inputCoords);
+            form.appendChild(inputCSRF);
+
+            // Append the form to the document body
+            document.body.appendChild(form);
+
+            // Submit the form
+            form.submit();
+        });
+    });
+});
+
+// Function to get CSRF cookie value
+function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+
 </script>
 
 </html>

@@ -13,7 +13,6 @@ class NationModel(models.Model):
 
 
 
-
 class NationImageModel(models.Model):
     nation_image_id = models.IntegerField(primary_key=True)
     nation_image = models.ImageField(upload_to='nation/')

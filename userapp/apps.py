@@ -5,7 +5,8 @@ class ExplorerConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
     name = 'userapp'
     def ready(self):
-        from .models import UserModel,UserImageModel,ReviewModel
+        from .models import UserModel,UserImageModel,ReviewModel,MapArea
         admin.site.register(UserModel)
         admin.site.register(UserImageModel)
         admin.site.register(ReviewModel)
+        admin.site.register(MapArea)

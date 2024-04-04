@@ -1,5 +1,5 @@
 from datetime import date, datetime, timedelta
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.contrib import messages
 from django.contrib.auth.models import User
 
@@ -11,7 +11,7 @@ from django.shortcuts import render, redirect, HttpResponse, get_object_or_404
 
 from adminapp.models import PackageDateModel
 from .models import PackagesModel, NationModel, NationImageModel, PackagePageModel, ReviewModel, TravelTipsModel, \
-    PackagePlanModel, UserModel, UserImageModel, Payment
+    PackagePlanModel, UserModel, UserImageModel, Payment, MapArea
 import razorpay
 
 
@@ -158,7 +158,11 @@ def countries_contents(request):
     data = NationImageModel.objects.filter(nation_image_id=id)
     print(data.values)
     return render(request, 'countries_contents.html', {'data': data})
-
+# def countries_contents_map(request, id):
+#     # id = request.POST.get('nation_image_id')
+#     data = NationImageModel.objects.filter(nation_image_id=id)
+#     print(data.values)
+#     return render(request, 'countries_contents.html', {'data': data})
 
 def country_packages(request):
     if request.method == 'POST':
@@ -437,7 +441,30 @@ def payment_success(request):
                    'payment_signature': razorpay_signature, 'start_date': start_date, 'end_date': end_date,
                    'user': user, 'package': package,'members': members})
 
-
+def cancel(request, id):
+    data=Payment.objects.get(id=id)
+    members=data.members
+    date_id=data.start_date
+    data2 = PackageDateModel.objects.get(start_date=date_id)
+    date_mem=data2.count
+    total_mem=date_mem+members
+    mem_obj=PackageDateModel.objects.get(start_date=date_id)
+    mem_obj.count=total_mem
+    mem_obj.save()
+    data.delete()
+    return redirect('/user_profile')
+def get_nation(request):
+    if request.method == 'POST':
+        coords=request.POST.get('coords')
+        try:
+            map_area = MapArea.objects.get(coordinates=coords)
+            id=map_area.nation_id
+            # nation_id=NationModel.objects.get(nation_id=id)
+            # print(nation_id)
+            data = NationImageModel.objects.filter(nation_image_id=id)
+            return render(request, 'countries_contents.html', {'data': data})
+        except MapArea.DoesNotExist:
+            return JsonResponse({'error': 'Area not found'}, status=404)
 def payment_pro(request):
     return render(request, "payment_pro.html")
 

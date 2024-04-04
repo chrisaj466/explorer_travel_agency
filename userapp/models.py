@@ -55,7 +55,15 @@ class Payment(models.Model):
     members = models.IntegerField(null=True)
     class Meta:
         db_table = 'payment'
+class MapArea(models.Model):
+    coordinates = models.CharField(max_length=50)
+    nation_id = models.IntegerField() # Assuming nation is represented by an integer ID
 
+    def __str__(self):
+        return f"Coordinates: {self.coordinates}, Nation: {self.nation_id}"
+
+    class Meta:
+        db_table = 'area_table'
 # class BookingListModel(models.Model):
 #     booking_id = models.AutoField(primary_key=True)
 #     user = models.ForeignKey(UserModel, on_delete=models.CASCADE)

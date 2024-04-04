@@ -70,6 +70,8 @@ urlpatterns = [
     #review
     path('review', user_views.review, name='review'),
 
+    #cancel
+    path('cancel/<int:id>/',user_views.cancel),
 
     path('user_profile',user_views.user_profile,name='user_profile'),
     path('destination', user_views.destination,name='destination'),
@@ -85,6 +87,7 @@ urlpatterns = [
     path('about', user_views.about, name='about'),
     path('Traveltips', user_views.traveltips,name='traveltips'),
     path('countries_contents', user_views.countries_contents,name='countries_contents'),
+    path('countries_contents/', user_views.get_nation),
     path('country_packages',user_views.country_packages,name='country_packages'),
     path('package_plan', user_views.package_plan,name='package_plan'),
     path('country_traveltip', user_views.country_traveltips, name='country_traveltip'),
