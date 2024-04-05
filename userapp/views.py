@@ -23,7 +23,6 @@ def home(request):
     # nation_names = [obj.nation_name for obj in nations]
     # print(nation_names)
 
-
     if request.session.get('user'):
         user = request.session.get('user')
         name_data = UserModel.objects.get(User_name=user)
@@ -35,8 +34,8 @@ def home(request):
             nation = request.session.get('nation')
             data = PackagesModel.objects.filter(nation_id=nation)
             data2 = NationModel.objects.filter(nation_id=nation)
-            return render(request, 'home.html', {"DATA": data, 'data2': data2, "category": nations,'name':name})
-        return render(request, 'home.html', {"DATA": data, 'data2': data2, "category": nations,'name':name})
+            return render(request, 'home.html', {"DATA": data, 'data2': data2, "category": nations, 'name': name})
+        return render(request, 'home.html', {"DATA": data, 'data2': data2, "category": nations, 'name': name})
     return render(request, 'home.html', {"DATA": data, 'data2': data2, "category": nations})
 
 
@@ -84,7 +83,8 @@ def user_profile(request):
         user_data = UserModel.objects.filter(User_name=user)
         user_login = UserImageModel.objects.filter(user=user_login_id)
         booking_data = Payment.objects.filter(user=user)
-        return render(request, 'user_profile.html', {"user": user_login,'booking_data': booking_data,'user_data':user_data})
+        return render(request, 'user_profile.html',
+                      {"user": user_login, 'booking_data': booking_data, 'user_data': user_data})
     return redirect('/login')
 
 
@@ -142,7 +142,8 @@ def profile_update(request):
         print('updated successfully')
         profile_obj.save()
         return redirect('/login')
-    return render(request, 'user_profile.html',{"user": user_login,'booking_data': booking_data})
+    return render(request, 'user_profile.html', {"user": user_login, 'booking_data': booking_data})
+
 
 def about(request):
     return render(request, 'about.html')
@@ -158,6 +159,8 @@ def countries_contents(request):
     data = NationImageModel.objects.filter(nation_image_id=id)
     print(data.values)
     return render(request, 'countries_contents.html', {'data': data})
+
+
 # def countries_contents_map(request, id):
 #     # id = request.POST.get('nation_image_id')
 #     data = NationImageModel.objects.filter(nation_image_id=id)
@@ -189,10 +192,14 @@ def package_plan(request):
             data3 = ReviewModel.objects.filter(packages=id)
             total_rating_sum = data3.aggregate(total_sum=Sum('rating_value'))['total_sum']
             total_rating_count = data3.aggregate(total_count=Count('rating_value'))['total_count']
-            average_rating = round((total_rating_sum / total_rating_count),1)
-            print(average_rating)
+            if total_rating_sum and total_rating_count:
+                average_rating = round((total_rating_sum / total_rating_count), 1)
+                print(average_rating)
+                return render(request, 'package_plan.html',
+                              {'data': data, 'data2': data2, 'data3': data3, 'average_rating': average_rating,
+                               'package_date': package_date})
             return render(request, 'package_plan.html',
-                          {'data': data, 'data2': data2, 'data3': data3, 'average_rating': average_rating,
+                          {'data': data, 'data2': data2, 'data3': data3,
                            'package_date': package_date})
         return redirect('/country_packages')
     return redirect('/login')
@@ -349,41 +356,44 @@ def initiate_payment(request):
             print(average_rating)
             members = int(request.POST.get('members'))
             updated_count = count - members
-            if updated_count >0:
-               # Use Razorpay API to create payment order with selected payment option
-               id = request.POST.get('packages_id')
-               print(id)
-               user = request.session.get('user')
-               # date1 = PackageDateModel.objects.get(date_id=request.POST.get('start_date'))
-               start_date = date1.start_date
-               count = date1.count
-               members = int(request.POST.get('members'))
-               updated_count =count-members
-               date_id=date1.date_id
-               obj1=PackageDateModel.objects.get(date_id=date_id)
-               obj1.count=updated_count
-               obj1.save()
-               number_to_add = 5
-               end_date = start_date + timedelta(days=number_to_add)
-               data2 = PackagesModel.objects.filter(packages_id=id)
-               price = PackagesModel.objects.get(packages_id=id)
-               price_amount = price.price
-               package = price.package_name
-               client = razorpay.Client(auth=('rzp_test_1fobC03iYb0HUi', 'gWuvQyKHybJBvnIwjiPNtq9q'))
-               amount = (price_amount) * 100
-               print(amount)  # Razorpay expects amount in paise
-               payment_order = client.order.create({"amount": amount, "currency": "INR", "payment_capture": "1"})
-               # Pass selected payment option
-               payment_order_id = payment_order['id']
-               print(payment_order_id)
-               return render(request, 'payment.html',
-                          {'api_key': RAZORPAY_KEY_ID, 'order_id': payment_order_id, 'data': data2,
-                           'start_date': start_date, 'end_date': end_date, 'user': user, 'package': package,'members':members})
+            if updated_count > 0:
+                # Use Razorpay API to create payment order with selected payment option
+                id = request.POST.get('packages_id')
+                print(id)
+                user = request.session.get('user')
+                # date1 = PackageDateModel.objects.get(date_id=request.POST.get('start_date'))
+                start_date = date1.start_date
+                count = date1.count
+                members = int(request.POST.get('members'))
+                updated_count = count - members
+                date_id = date1.date_id
+                obj1 = PackageDateModel.objects.get(date_id=date_id)
+                obj1.count = updated_count
+                obj1.save()
+                days=PackagesModel.objects.get(packages_id=id)
+                number_to_add = days.total_days
+                end_date = start_date + timedelta(days=number_to_add)
+                data2 = PackagesModel.objects.filter(packages_id=id)
+                price = PackagesModel.objects.get(packages_id=id)
+                price_amount = price.price
+                package = price.package_name
+                client = razorpay.Client(auth=('rzp_test_1fobC03iYb0HUi', 'gWuvQyKHybJBvnIwjiPNtq9q'))
+                amount = (price_amount) * 100
+                print(amount)  # Razorpay expects amount in paise
+                payment_order = client.order.create({"amount": amount, "currency": "INR", "payment_capture": "1"})
+                # Pass selected payment option
+                payment_order_id = payment_order['id']
+                print(payment_order_id)
+                return render(request, 'payment.html',
+                              {'api_key': RAZORPAY_KEY_ID, 'order_id': payment_order_id, 'data': data2,
+                               'start_date': start_date, 'end_date': end_date, 'user': user, 'package': package,
+                               'members': members})
             return render(request, 'package_plan.html',
                           {'data': data, 'data2': data2, 'data3': data3, 'average_rating': average_rating,
-                           'package_date': package_date,'count': updated_count})
+                           'package_date': package_date, 'count': updated_count})
         return render(request, "payment.html")
     return redirect('/login')
+
 
 def review(request):
     if request.method == 'POST':
@@ -419,52 +429,57 @@ def payment_success(request):
     package = request.GET.get('package')
     package_data = PackagesModel.objects.filter(package_name=package)
     print(package_data)
-    date_obj = datetime.strptime(start_date, "%B %d, %Y")
+    date_obj = datetime.strptime(start_date, '%b. %d, %Y')
     end_date = request.GET.get('end_date')
-    date_obj2 = datetime.strptime(end_date, "%B %d, %Y")
+    date_obj2 = datetime.strptime(end_date, '%b. %d, %Y')
     members = request.GET.get('members')
-    print(razorpay_payment_id)
-    print(razorpay_order_id)
-    print(razorpay_signature)
-    print(user)
-    print(package)
-    print(members)
+    # print(razorpay_payment_id)
+    # print(razorpay_order_id)
+    # print(razorpay_signature)
+    # print(user)
+    # print(package)
+    # print(members)
     payment = Payment.objects.create(
         payment_id=razorpay_payment_id,
         order_id=razorpay_order_id,
         signature=razorpay_signature,
-        start_date=date_obj, end_date=date_obj2, user=user, package=package,members=members
+        start_date=date_obj, end_date=date_obj2, user=user, package=package, members=members
     )
 
     return render(request, "payment_succ.html",
                   {'payment_id': razorpay_payment_id, 'data': package_data, 'order_id': razorpay_order_id,
-                   'payment_signature': razorpay_signature, 'start_date': start_date, 'end_date': end_date,
-                   'user': user, 'package': package,'members': members})
+                   'payment_signature': razorpay_signature, 'start_date': date_obj, 'end_date': date_obj2,
+                   'user': user, 'package': package, 'members': members})
+
 
 def cancel(request, id):
-    data=Payment.objects.get(id=id)
-    members=data.members
-    date_id=data.start_date
+    data = Payment.objects.get(id=id)
+    members = data.members
+    date_id = data.start_date
     data2 = PackageDateModel.objects.get(start_date=date_id)
-    date_mem=data2.count
-    total_mem=date_mem+members
-    mem_obj=PackageDateModel.objects.get(start_date=date_id)
-    mem_obj.count=total_mem
+    date_mem = data2.count
+    total_mem = date_mem + members
+    mem_obj = PackageDateModel.objects.get(start_date=date_id)
+    mem_obj.count = total_mem
     mem_obj.save()
     data.delete()
     return redirect('/user_profile')
+
+
 def get_nation(request):
     if request.method == 'POST':
-        coords=request.POST.get('coords')
+        coords = request.POST.get('coords')
         try:
             map_area = MapArea.objects.get(coordinates=coords)
-            id=map_area.nation_id
+            id = map_area.nation_id
             # nation_id=NationModel.objects.get(nation_id=id)
             # print(nation_id)
             data = NationImageModel.objects.filter(nation_image_id=id)
             return render(request, 'countries_contents.html', {'data': data})
         except MapArea.DoesNotExist:
             return JsonResponse({'error': 'Area not found'}, status=404)
+
+
 def payment_pro(request):
     return render(request, "payment_pro.html")
 
