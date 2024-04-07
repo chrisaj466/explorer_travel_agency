@@ -26,33 +26,37 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('',user_views.home,name='home'),
 
+    #admin home
+    path('admin_home',admin_views.admin_home,name='admin_home'),
+
+
     #nation
-    path('nation',admin_views.Nation_home),
+    path('nation',admin_views.Nation_home,name='nation'),
     path('nation_registration', admin_views.nation_registration),
     path('nation_update/<int:nation_id>/',admin_views.update_nation_view),
 
     #nation image
-    path('nation_image',admin_views.Nationimage_home),
+    path('nation_image',admin_views.Nationimage_home,name='nation_image'),
     path('nation_image_registration', admin_views.nationimage_registration),
     path('nation_image_update/<int:nation_image_id>/',admin_views.update_nationimage_view),
 
     # packages model
-    path('Package_admin', admin_views.user_list),
+    path('Package_admin', admin_views.user_list,name='Package_admin'),
     path('registration', admin_views.registration),
     path('update/<int:packages_id>/',admin_views.update_packages_view),
 
     # packages dates model
-    path('packages_dates', admin_views.packagedate_home),
+    path('packages_dates', admin_views.packagedate_home,name='packages_dates'),
     path('date_registration', admin_views.date_registration),
     path('date_update/<int:date_id>/',admin_views.update_date_view),
 
     #packages plan model
-    path('PackagePlan_home', admin_views.PackagePlan_home),
+    path('PackagePlan_home', admin_views.PackagePlan_home,name='PackagePlan_home'),
     path('plan_registration', admin_views.plan_registration),
     path('plan_update/<int:plan_id>/', admin_views.update_plan_view),
 
     #traveltips model
-    path('traveltips_home', admin_views.traveltips_home),
+    path('traveltips_home', admin_views.traveltips_home,name='traveltips_home'),
     path('tips_registration', admin_views.tips_registration),
     path('tips_update/<int:tips_id>/', admin_views.update_tips_view),
 

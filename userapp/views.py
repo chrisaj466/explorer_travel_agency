@@ -262,18 +262,52 @@ def country_traveltips(request):
 #     return render(request, 'booking_list.html')
 
 
+# def login(request):
+#     if request.method == "POST":
+#         username = request.POST.get('username')
+#         password = request.POST.get('password')
+#         user = UserModel.objects.filter(User_name=username, Password=password)
+#         print(user.values())
+#         if user:
+#             print('login into the page is successful')
+#             request.session['user'] = username
+#             return redirect('/')
+#     return render(request, 'login.html')
+# def login(request):
+#     if request.method == "POST":
+#         username = request.POST.get('username')
+#         password = request.POST.get('password')
+#         user = UserModel.objects.filter(User_name=username, Password=password).first()  # Use first() to get a single user object or None
+#         if user:
+#             print('Login successful')
+#             request.session['user'] = username
+#             return redirect('/')
+#         else:
+#             print('Login failed: Invalid credentials')
+#             messages.error(request, 'Invalid username or password. Please try again.')  # Add a message for failed login
+#     return render(request, 'login.html')
+
 def login(request):
+
+
     if request.method == "POST":
         username = request.POST.get('username')
         password = request.POST.get('password')
-        user = UserModel.objects.filter(User_name=username, Password=password)
-        print(user.values())
+        user = UserModel.objects.filter(User_name=username, Password=password).first()
         if user:
-            print('login into the page is successful')
+            print('Login successful')
             request.session['user'] = username
             return redirect('/')
-    return render(request, 'login.html')
+        else:
+            print('Login failed: Invalid credentials')
+            if not username:
+                username_error = 'Username is required.'
+                return render(request, 'login.html',{'username_error': username_error})
+            if not password:
+                password_error = 'Password is required.'
 
+                return render(request, 'login.html', {'password_error': password_error})
+    return render(request, 'login.html')
 
 def logout(request):
     del request.session['user']
@@ -428,7 +462,7 @@ def payment_success(request):
     user = request.GET.get('user')
     package = request.GET.get('package')
     package_data = PackagesModel.objects.filter(package_name=package)
-    print(package_data)
+    # print(package_data)
     date_obj = datetime.strptime(start_date, '%b. %d, %Y')
     end_date = request.GET.get('end_date')
     date_obj2 = datetime.strptime(end_date, '%b. %d, %Y')

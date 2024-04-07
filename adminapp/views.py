@@ -14,7 +14,7 @@ def user_list(request):
     - HttpResponse object rendering the home.html template with users' data.
     """
     packages = PackagesModel.objects.all()
-    return render(request, 'home1.html', {'users': packages})
+    return render(request, 'admin_package_home.html', {'users': packages})
 def registration(request):
     """
     Handles user registration, validating and saving form data.
@@ -39,7 +39,7 @@ def registration(request):
             return redirect('/Package_admin')
     else:
         form_obj = UserModelForm()
-    return render(request, 'reg_validation.html', {'form': form_obj})
+    return render(request, 'admin_package_regis.html', {'form': form_obj})
 def update_packages_view(request, packages_id):
     """
     Handles updating user information based on user_id.
@@ -64,7 +64,7 @@ def update_packages_view(request, packages_id):
             return HttpResponse("user data updated...................")
     else:
         form = UserModelForm(instance=user)
-    return render(request, 'update_user.html', {'form': form})
+    return render(request, 'admin_package_update.html', {'form': form})
 def packagedate_home(request):
     """
     Retrieves all user objects and renders them in the home.html template.
@@ -76,7 +76,7 @@ def packagedate_home(request):
     - HttpResponse object rendering the home.html template with users' data.
     """
     packages = PackageDateModel.objects.all()
-    return render(request, 'packagedatehome.html', {'users': packages})
+    return render(request, 'admin_packdate_home.html', {'users': packages})
 def date_registration(request):
     """
     Handles user registration, validating and saving form data.
@@ -101,7 +101,7 @@ def date_registration(request):
             return redirect('/packages_dates')
     else:
         form_obj = Packagedateform()
-    return render(request, 'date_registration.html', {'form': form_obj})
+    return render(request, 'admin_package_regis.html', {'form': form_obj})
 def update_date_view(request, date_id):
     """
     Handles updating user information based on user_id.
@@ -126,7 +126,7 @@ def update_date_view(request, date_id):
             return HttpResponse("package date  updated...................")
     else:
         form = Packagedateform(instance=user)
-    return render(request, 'date_update.html', {'form': form})
+    return render(request, 'admin_package_update.html', {'form': form})
 def PackagePlan_home(request):
     """
     Retrieves all user objects and renders them in the home.html template.
@@ -138,7 +138,7 @@ def PackagePlan_home(request):
     - HttpResponse object rendering the home.html template with users' data.
     """
     packages = PackagePlanModel.objects.all()
-    return render(request, 'package_plan_home.html', {'users': packages})
+    return render(request, 'admin_packageplan_home.html', {'users': packages})
 def plan_registration(request):
     """
     Handles user registration, validating and saving form data.
@@ -163,7 +163,7 @@ def plan_registration(request):
             return redirect('/PackagePlan_home')
     else:
         form_obj = packageplanform()
-    return render(request, 'date_registration.html', {'form': form_obj})
+    return render(request, 'admin_package_regis.html', {'form': form_obj})
 def update_plan_view(request, plan_id):
     """
     Handles updating user information based on user_id.
@@ -188,7 +188,7 @@ def update_plan_view(request, plan_id):
             return HttpResponse("plan data updated...................")
     else:
         form = packageplanform(instance=user)
-    return render(request, 'update_plan.html', {'form': form})
+    return render(request, 'admin_package_update.html', {'form': form})
 def traveltips_home(request):
     """
     Retrieves all user objects and renders them in the home.html template.
@@ -200,7 +200,7 @@ def traveltips_home(request):
     - HttpResponse object rendering the home.html template with users' data.
     """
     tips = TravelTipsModel.objects.all()
-    return render(request, 'traveltips_home.html', {'users': tips})
+    return render(request, 'admin_traveltips_home.html', {'users': tips})
 def tips_registration(request):
     """
     Handles user registration, validating and saving form data.
@@ -225,7 +225,7 @@ def tips_registration(request):
             return redirect('/traveltips_home')
     else:
         form_obj = traveltipsform()
-    return render(request, 'tips_registration.html', {'form': form_obj})
+    return render(request, 'admin_package_regis.html', {'form': form_obj})
 def update_tips_view(request, tips_id):
     """
     Handles updating user information based on user_id.
@@ -250,7 +250,7 @@ def update_tips_view(request, tips_id):
             return HttpResponse("plan data updated...................")
     else:
         form = traveltipsform(instance=user)
-    return render(request, 'update_tips.html', {'form': form})
+    return render(request, 'admin_package_update.html', {'form': form})
 def Nation_home(request):
     """
     Retrieves all user objects and renders them in the home.html template.
@@ -262,7 +262,7 @@ def Nation_home(request):
     - HttpResponse object rendering the home.html template with users' data.
     """
     nation = NationModel.objects.all()
-    return render(request, 'nation_home.html', {'users': nation})
+    return render(request, 'admin_nation_home.html', {'users': nation})
 def nation_registration(request):
     """
     Handles user registration, validating and saving form data.
@@ -287,7 +287,7 @@ def nation_registration(request):
             return redirect('/nation')
     else:
         form_obj = nationform()
-    return render(request, 'nation_registration.html', {'form': form_obj})
+    return render(request, 'admin_package_regis.html', {'form': form_obj})
 def update_nation_view(request, nation_id):
     """
     Handles updating user information based on user_id.
@@ -312,7 +312,7 @@ def update_nation_view(request, nation_id):
             return HttpResponse("plan data updated...................")
     else:
         form = nationform(instance=user)
-    return render(request, 'update_tips.html', {'form': form})
+    return render(request, 'admin_package_update.html', {'form': form})
 def Nationimage_home(request):
     """
     Retrieves all user objects and renders them in the home.html template.
@@ -324,7 +324,7 @@ def Nationimage_home(request):
     - HttpResponse object rendering the home.html template with users' data.
     """
     nationimage = NationImageModel.objects.all()
-    return render(request, 'nationimage_home.html', {'users': nationimage})
+    return render(request, 'admin_nationimage_home.html', {'users': nationimage})
 def nationimage_registration(request):
     """
     Handles user registration, validating and saving form data.
@@ -349,7 +349,7 @@ def nationimage_registration(request):
             return redirect('/nation_image')
     else:
         form_obj = NationImageform()
-    return render(request, 'nationimage_registration.html', {'form': form_obj})
+    return render(request, 'admin_package_regis.html', {'form': form_obj})
 def update_nationimage_view(request, nation_image_id):
     """
     Handles updating user information based on user_id.
@@ -374,4 +374,6 @@ def update_nationimage_view(request, nation_image_id):
             return HttpResponse("user data updated...................")
     else:
         form = NationImageform(instance=user)
-    return render(request, 'update_user.html', {'form': form})
+    return render(request, 'admin_package_update.html', {'form': form})
+def admin_home(request):
+    return render(request, 'admin_home.html')

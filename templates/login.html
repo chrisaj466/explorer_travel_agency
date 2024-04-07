@@ -7,11 +7,17 @@
     <meta name="viewport" content="width=device, initial-scale=1.0">
     <link rel="stylesheet"  href="{% static 'css/login.css' %}">
     <link rel="stylesheet"  href="{% static 'css/media.css' %}">
+    <script  src="{% static 'js/login.js' %}" ></script>
 </head>
 <style>
     .input-box{
     margin-top:0 !important;
     }
+
+        .error-message {
+            color: red;
+        }
+
 </style>
 <body>
     <h2>Login</h2>
@@ -27,12 +33,12 @@
                  <div class="input-field">
 
                     <input type="text"  name="username" id="username"  placeholder="user name">
-                    <div class="error"></div>
+                     <div class="error-message">{% if username_error %}{{ username_error }}{% endif %}</div>
                  </div>
                  <div class="input-field">
 
                     <input type="password" name="password" id="password"  placeholder="password">
-                    <div id="strengthResult" class="error"></div>
+                     <div class="error-message">{% if password_error %}{{ password_error }}{% endif %}</div>
                  </div>
                  <div class="change-pass">
                     <a class="change" href="{% url 'forgot' %}">FORGOT PASSWORD <span >?</span></a>
@@ -46,12 +52,14 @@
 
                 </form>
              </div>
+
+
+
             </div>
         </div>
     </div>
 </div>
-    {% if error %}
-        <p>{{ error }}</p>
-    {% endif %}
+
 </body>
+
 </html>
