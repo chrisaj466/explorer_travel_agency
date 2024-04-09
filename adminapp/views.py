@@ -1,7 +1,11 @@
 from django.shortcuts import render
 from django.shortcuts import render, redirect,HttpResponse, get_object_or_404
+
+from userapp.models import Payment
 from .form import UserModelForm, Packagedateform, packageplanform, traveltipsform, nationform, NationImageform
 from .models import *
+from django.db.models import Sum
+from django.db.models import Count
 # Create your views here.
 def user_list(request):
     """
@@ -376,4 +380,15 @@ def update_nationimage_view(request, nation_image_id):
         form = NationImageform(instance=user)
     return render(request, 'admin_package_update.html', {'form': form})
 def admin_home(request):
-    return render(request, 'admin_home.html')
+    # payments = Payment.objects.all().order_by('start_date')
+    total_price = Payment.objects.aggregate(total_price=Sum('price'))
+    total_bookings_count = Payment.objects.aggregate(total_bookings_count=Count('id'))
+    # Extract start dates and prices
+    prices = Payment.objects.values_list('price', flat=True)  # Query price data from the Payment model
+    prices_string = ",".join(str(price) for price in prices)
+    # start_dates = [payment.start_date.strftime("%b") for payment in payments]
+    # print(start_dates)
+    context = {
+        'total_price': total_price,'total_bookings_count': total_bookings_count,'prices_string': prices_string
+    }
+    return render(request, 'admin_home.html',context)

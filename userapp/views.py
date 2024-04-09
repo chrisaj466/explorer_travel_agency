@@ -386,7 +386,12 @@ def initiate_payment(request):
             data3 = ReviewModel.objects.filter(packages=id)
             total_rating_sum = data3.aggregate(total_sum=Sum('rating_value'))['total_sum']
             total_rating_count = data3.aggregate(total_count=Count('rating_value'))['total_count']
-            average_rating = round((total_rating_sum / total_rating_count), 1)
+            # average_rating = round((total_rating_sum / total_rating_count), 1)
+            if total_rating_sum is not None and total_rating_count is not None and total_rating_count != 0:
+                average_rating = round((total_rating_sum / total_rating_count), 1)
+                print(average_rating)
+            else:
+                average_rating = None
             print(average_rating)
             members = int(request.POST.get('members'))
             updated_count = count - members
@@ -421,7 +426,7 @@ def initiate_payment(request):
                 return render(request, 'payment.html',
                               {'api_key': RAZORPAY_KEY_ID, 'order_id': payment_order_id, 'data': data2,
                                'start_date': start_date, 'end_date': end_date, 'user': user, 'package': package,
-                               'members': members})
+                               'members': members,'price':price_amount})
             return render(request, 'package_plan.html',
                           {'data': data, 'data2': data2, 'data3': data3, 'average_rating': average_rating,
                            'package_date': package_date, 'count': updated_count})
@@ -458,31 +463,27 @@ def payment_success(request):
     razorpay_payment_id = request.GET.get('razorpay_payment_id')
     razorpay_order_id = request.GET.get('razorpay_order_id')
     razorpay_signature = request.GET.get('razorpay_signature')
-    start_date = request.GET.get('start_date')
+    # start_date = request.GET.get('start_date')
     user = request.GET.get('user')
     package = request.GET.get('package')
     package_data = PackagesModel.objects.filter(package_name=package)
     # print(package_data)
-    date_obj = datetime.strptime(start_date, '%b. %d, %Y')
-    end_date = request.GET.get('end_date')
-    date_obj2 = datetime.strptime(end_date, '%b. %d, %Y')
+    # date_obj = datetime.strptime(start_date, '%b. %d, %Y')
+    # print(date_obj)
+    # end_date = request.GET.get('end_date')
+    # date_obj2 = datetime.strptime(end_date, '%b. %d, %Y')
     members = request.GET.get('members')
-    # print(razorpay_payment_id)
-    # print(razorpay_order_id)
-    # print(razorpay_signature)
-    # print(user)
-    # print(package)
-    # print(members)
+    price = request.GET.get('price')
     payment = Payment.objects.create(
         payment_id=razorpay_payment_id,
         order_id=razorpay_order_id,
         signature=razorpay_signature,
-        start_date=date_obj, end_date=date_obj2, user=user, package=package, members=members
+         user=user, package=package, members=members,price=price
     )
 
     return render(request, "payment_succ.html",
                   {'payment_id': razorpay_payment_id, 'data': package_data, 'order_id': razorpay_order_id,
-                   'payment_signature': razorpay_signature, 'start_date': date_obj, 'end_date': date_obj2,
+                   'payment_signature': razorpay_signature,
                    'user': user, 'package': package, 'members': members})
 
 

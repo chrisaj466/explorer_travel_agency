@@ -174,7 +174,7 @@
 var options = {
     "key": "{{api_key}}", // Enter the Key ID generated from the Dashboard
     "name": "explorer", //your business name
-    "description": "Test Transaction",
+    "description": " Transaction",
     "image": "https://example.com/your_logo",
     "order_id": "{{order_id}}", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
     "handler": function (response){
@@ -186,7 +186,8 @@ var options = {
         var user = "{{user}}";
         var package = "{{package}}";
         var members = "{{members}}";
-       window.location.href = `http://127.0.0.1:8000/payment_success/?razorpay_payment_id=${paymentId}&razorpay_order_id=${orderId}&razorpay_signature=${signature}&start_date=${start_date}&end_date=${end_date}&user=${user}&package=${package}&members=${members}`;
+        var price = "{{price}}";
+       window.location.href = `http://127.0.0.1:8000/payment_success/?razorpay_payment_id=${paymentId}&razorpay_order_id=${orderId}&razorpay_signature=${signature}&start_date=${start_date}&end_date=${end_date}&user=${user}&package=${package}&members=${members}&price=${price}`;
     },
     "prefill": { //We recommend using the prefill parameter to auto-fill customer's contact information, especially their phone number
         "name": "Gaurav Kumar", //your customer's name

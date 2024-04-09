@@ -48,11 +48,10 @@ class Payment(models.Model):
     payment_id = models.CharField(max_length=100)
     order_id = models.CharField(max_length=100)
     signature = models.CharField(max_length=100)
-    start_date=models.DateField(null=True)
-    end_date=models.DateField(null=True)
     user=models.CharField(max_length=255,null=True)
     package=models.CharField(max_length=255,null=True)
     members = models.IntegerField(null=True)
+    price=models.IntegerField(null=True)
     class Meta:
         db_table = 'payment'
 class MapArea(models.Model):
