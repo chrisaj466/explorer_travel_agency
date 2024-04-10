@@ -9,9 +9,9 @@ from django.db.models import Q, Sum, Count
 
 from django.shortcuts import render, redirect, HttpResponse, get_object_or_404
 
-from adminapp.models import PackageDateModel
+from adminapp.models import PackageDateModel,PaymentModel
 from .models import PackagesModel, NationModel, NationImageModel, PackagePageModel, ReviewModel, TravelTipsModel, \
-    PackagePlanModel, UserModel, UserImageModel, Payment, MapArea
+    PackagePlanModel, UserModel, UserImageModel, MapArea, Payment
 import razorpay
 
 
@@ -161,11 +161,11 @@ def countries_contents(request):
     return render(request, 'countries_contents.html', {'data': data})
 
 
-# def countries_contents_map(request, id):
-#     # id = request.POST.get('nation_image_id')
-#     data = NationImageModel.objects.filter(nation_image_id=id)
-#     print(data.values)
-#     return render(request, 'countries_contents.html', {'data': data})
+def countries_contents_map(request, id):
+    # id = request.POST.get('nation_image_id')
+    data = NationImageModel.objects.filter(nation_image_id=id)
+    print(data.values)
+    return render(request, 'countries_contents.html', {'data': data})
 
 def country_packages(request):
     if request.method == 'POST':
@@ -467,14 +467,15 @@ def payment_success(request):
     user = request.GET.get('user')
     package = request.GET.get('package')
     package_data = PackagesModel.objects.filter(package_name=package)
-    # print(package_data)
-    # date_obj = datetime.strptime(start_date, '%b. %d, %Y')
-    # print(date_obj)
-    # end_date = request.GET.get('end_date')
-    # date_obj2 = datetime.strptime(end_date, '%b. %d, %Y')
     members = request.GET.get('members')
     price = request.GET.get('price')
     payment = Payment.objects.create(
+        payment_id=razorpay_payment_id,
+        order_id=razorpay_order_id,
+        signature=razorpay_signature,
+         user=user, package=package, members=members,price=price
+    )
+    payment_home=PaymentModel.objects.create(
         payment_id=razorpay_payment_id,
         order_id=razorpay_order_id,
         signature=razorpay_signature,

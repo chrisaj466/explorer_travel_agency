@@ -26,43 +26,32 @@ class UserImageModel(models.Model):
         db_table = 'user_image'
 
 
-# class PaymentTypeModel(models.Model):
-#     type_id = models.IntegerField(primary_key=True)
-#     payment_type = models.CharField(max_length=255)
-#
-#     class Meta:
-#         db_table = 'payment_type'
 
-
-# class UserPaymentModel(models.Model):
-#     payment_id = models.AutoField(primary_key=True)
-#     user = models.ForeignKey(UserModel, on_delete=models.CASCADE)
-#     payment_type = models.ForeignKey(PaymentTypeModel, on_delete=models.CASCADE)
-#     provider = models.CharField(max_length=255)
-#     account_number = models.CharField(max_length=255)
-#     expiry_date = models.DateField()
-#     package_date=models.DateTimeField(auto_now_add=True,null=True)
-#     class Meta:
-#         db_table = 'user_payment'
 class Payment(models.Model):
     payment_id = models.CharField(max_length=100)
     order_id = models.CharField(max_length=100)
     signature = models.CharField(max_length=100)
-    user=models.CharField(max_length=255,null=True)
-    package=models.CharField(max_length=255,null=True)
+    user = models.CharField(max_length=255, null=True)
+    package = models.CharField(max_length=255, null=True)
     members = models.IntegerField(null=True)
-    price=models.IntegerField(null=True)
+    price = models.IntegerField(null=True)
+    created_at = models.DateTimeField(auto_now_add=True, null=True)
+
     class Meta:
         db_table = 'payment'
+
+
 class MapArea(models.Model):
     coordinates = models.CharField(max_length=50)
-    nation_id = models.IntegerField() # Assuming nation is represented by an integer ID
+    nation_id = models.IntegerField()  # Assuming nation is represented by an integer ID
 
     def __str__(self):
         return f"Coordinates: {self.coordinates}, Nation: {self.nation_id}"
 
     class Meta:
         db_table = 'area_table'
+
+
 # class BookingListModel(models.Model):
 #     booking_id = models.AutoField(primary_key=True)
 #     user = models.ForeignKey(UserModel, on_delete=models.CASCADE)
@@ -83,10 +72,7 @@ class ReviewModel(models.Model):
     packages = models.ForeignKey(PackagesModel, on_delete=models.CASCADE)
     rating_value = models.CharField(max_length=255)
     comment = models.TextField()
-    user_name=models.CharField(max_length=255,null=True)
+    user_name = models.CharField(max_length=255, null=True)
 
     class Meta:
         db_table = 'review'
-
-
-

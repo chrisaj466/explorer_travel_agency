@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.shortcuts import render, redirect,HttpResponse, get_object_or_404
 
 from userapp.models import Payment
+# from userapp.models import Payment
 from .form import UserModelForm, Packagedateform, packageplanform, traveltipsform, nationform, NationImageform
 from .models import *
 from django.db.models import Sum
@@ -379,16 +380,82 @@ def update_nationimage_view(request, nation_image_id):
     else:
         form = NationImageform(instance=user)
     return render(request, 'admin_package_update.html', {'form': form})
+
+
+def Payment_home(request):
+    """
+    Retrieves all user objects and renders them in the home.html template.
+
+    Parameters:
+    - request: HttpRequest object.
+
+    Returns:
+    - HttpResponse object rendering the home.html template with users' data.
+    """
+    Payment = PaymentModel.objects.all()
+    return render(request, 'admin_payment_home.html', {'users': Payment})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# def admin_home(request):
+#
+#     total_price = Payment.objects.aggregate(total_price=Sum('price'))
+#     total_bookings_count = Payment.objects.aggregate(total_bookings_count=Count('id'))
+#     # Extract start dates and prices
+#     prices = Payment.objects.values_list('price', flat=True)  # Query price data from the Payment model
+#     prices_string = ",".join(str(price) for price in prices)
+#
+#     context = {
+#         'total_price': total_price,'total_bookings_count': total_bookings_count,'prices_string': prices_string
+#     }
+#     return render(request, 'admin_home.html',context)
+
+
+
+
 def admin_home(request):
-    # payments = Payment.objects.all().order_by('start_date')
+    # Get total price and count of payments
     total_price = Payment.objects.aggregate(total_price=Sum('price'))
     total_bookings_count = Payment.objects.aggregate(total_bookings_count=Count('id'))
-    # Extract start dates and prices
-    prices = Payment.objects.values_list('price', flat=True)  # Query price data from the Payment model
-    prices_string = ",".join(str(price) for price in prices)
-    # start_dates = [payment.start_date.strftime("%b") for payment in payments]
-    # print(start_dates)
+
+    # Extract created_at dates and prices
+    earnings_data = Payment.objects.values_list('created_at', 'price')  # Query created_at and price data from the Payment model
+
+    # Extract month names and corresponding earnings
+    month_earnings = {}
+    for date, price in earnings_data:
+        month = date.strftime("%b")  # Get abbreviated month name
+        if month not in month_earnings:
+            month_earnings[month] = 0
+        month_earnings[month] += price
+
+    # Create lists for chart labels and data
+    labels = list(month_earnings.keys())
+    earnings = list(month_earnings.values())
+
     context = {
-        'total_price': total_price,'total_bookings_count': total_bookings_count,'prices_string': prices_string
+        'total_price': total_price,
+        'total_bookings_count': total_bookings_count,
+        'labels': labels,
+        'earnings': earnings
     }
-    return render(request, 'admin_home.html',context)
+    return render(request, 'admin_home.html', context)

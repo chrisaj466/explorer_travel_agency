@@ -84,4 +84,14 @@ class TravelTipsModel(models.Model):
 
     class Meta:
         db_table = 'travel_tips'
-
+class PaymentModel(models.Model):
+    payment_id = models.CharField(max_length=100)
+    order_id = models.CharField(max_length=100)
+    signature = models.CharField(max_length=100)
+    user = models.CharField(max_length=255, null=True)
+    package = models.CharField(max_length=255, null=True)
+    members = models.IntegerField(null=True)
+    price = models.IntegerField(null=True)
+    created_at = models.DateTimeField(auto_now_add=True, null=True)
+    class Meta:
+        db_table = 'payment_home'

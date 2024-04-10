@@ -15,7 +15,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path
 from userapp import views as user_views
 from adminapp import views as admin_views
 
@@ -63,7 +63,8 @@ urlpatterns = [
     # search option
     path('search_page',user_views.search,name='search_page'),
 
-
+    #admin payment
+    path('Payment_home', admin_views.Payment_home,name='Payment_home'),
 
     #payment
     path('initiate_payment', user_views.initiate_payment, name='initiate_payment'),
@@ -75,7 +76,7 @@ urlpatterns = [
     path('review', user_views.review, name='review'),
 
     #cancel
-    path('cancel/<int:id>/',user_views.cancel),
+    # path('cancel/<int:id>/',user_views.cancel),
 
     path('user_profile',user_views.user_profile,name='user_profile'),
     path('destination', user_views.destination,name='destination'),

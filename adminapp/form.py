@@ -8,6 +8,8 @@ Attributes:
     UserModelForm: A subclass of forms.ModelForm representing the form for UserModel model.
 """
 from django import forms
+
+
 from .models import PackagesModel, PackageDateModel, PackagePlanModel, TravelTipsModel, NationModel, NationImageModel
 
 
@@ -94,3 +96,18 @@ class NationImageform(forms.ModelForm):
                  'package_main_image': forms.FileInput(attrs={'class': 'form-control'}),
 
              }
+
+# class Paymentform(forms.ModelForm):
+#         class Meta:
+#             model = Payment
+#             fields = ['payment_id', 'order_id', 'signature', 'user','package','members','price']
+#             widgets = {
+#                          'payment_id': forms.TextInput(attrs={'class': 'form-control'}),
+#                          'order_id': forms.TextInput(attrs={'class': 'form-control'}),
+#                          'signature': forms.TextInput(attrs={'class': 'form-control'}),
+#                          'package': forms.Select(attrs={'class': 'form-control'}), # Foreign key dropdown
+#                          'user': forms.TextInput(attrs={'class': 'form-control'}),
+#                          'members': forms.NumberInput(attrs={'class': 'form-control'}),
+#                          'price': forms.NumberInput(attrs={'class': 'form-control'}),
+#
+#                      }
