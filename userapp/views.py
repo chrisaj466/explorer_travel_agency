@@ -7,7 +7,7 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from travelagencyproject.settings import RAZORPAY_KEY_ID, RAZORPAY_KEY_SECRET_KEY
-import mysql
+
 from django.db.models import Q, Sum, Count
 from userapp.form import UserRegistrationForm
 from django.shortcuts import render, redirect, HttpResponse, get_object_or_404
