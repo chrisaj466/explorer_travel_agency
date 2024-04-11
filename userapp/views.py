@@ -1,18 +1,25 @@
 from datetime import date, datetime, timedelta
+from django.core.mail import send_mail
+from django.conf import settings
+from django.contrib.auth import authenticate,logout
 from django.http import HttpResponse, JsonResponse
 from django.contrib import messages
 from django.contrib.auth.models import User
-
+from django.contrib.auth.decorators import login_required
 from travelagencyproject.settings import RAZORPAY_KEY_ID, RAZORPAY_KEY_SECRET_KEY
 import mysql
 from django.db.models import Q, Sum, Count
-
+from userapp.form import UserRegistrationForm
 from django.shortcuts import render, redirect, HttpResponse, get_object_or_404
 
 from adminapp.models import PackageDateModel,PaymentModel
 from .models import PackagesModel, NationModel, NationImageModel, PackagePageModel, ReviewModel, TravelTipsModel, \
     PackagePlanModel, UserModel, UserImageModel, MapArea, Payment
 import razorpay
+
+
+
+
 
 
 # Create your views here.
@@ -217,79 +224,10 @@ def country_traveltips(request):
     return render(request, 'country_traveltip.html', {'data': data, 'data2': data2})
 
 
-# def booking(request):
-#     payment_provider=PaymentTypeModel.objects.all()
-#     if request.session.get('user'):
-#         print('log in')
-#         print(request.session['user'])
-#         return render(request, 'initiate_payment.html',{'payment_provider': payment_provider})
-#
-#     return redirect('/login')
-# def userpayment(request):
-#     package_date = PackageDateModel.objects.filter(package=request.session.get('package_id'))
-#     if request.method=='POST':
-#         category_id=request.POST.get('category')
-#         provider=request.POST.get('provider')
-#         account_number=request.POST.get('account_number')
-#         expiry_date = request.POST.get('expiry_date')
-#
-#         user=request.session.get('user')
-#         user_info=UserModel.objects.get(User_name=user)
-#         id=user_info.User_id
-#         print(id)
-#         obj=UserPaymentModel()
-#         obj.provider=provider
-#         obj.account_number=account_number
-#         obj.expiry_date=expiry_date
-#         obj.user_id=id
-#         users=UserModel.objects.get(User_id=id)
-#         print(users.User_name)
-#         obj.payment_type=PaymentTypeModel.objects.get(type_id=request.POST.get('category'))
-#         obj.save()
-#         date_time=UserPaymentModel.objects.get()
-#         return render(request, 'booking_list.html',{'package_date': package_date})
-#     return render(request,'booking.html')
-# def booking_list(request):
-#     if request.method == 'POST':
-#         start_date = request.POST.get('start_date')
-#         end_date = request.POST.get('end_date')
-#         user=request.session.get('user')
-#         package=request.session.get('package_id')
-#         dat_time=request.POST.get('dat_time')
-#         payment=UserPaymentModel.objects.get(user=user, package=package)
-#         print(payment)
-#         return redirect('/package_plan')
-#     return render(request, 'booking_list.html')
 
 
-# def login(request):
-#     if request.method == "POST":
-#         username = request.POST.get('username')
-#         password = request.POST.get('password')
-#         user = UserModel.objects.filter(User_name=username, Password=password)
-#         print(user.values())
-#         if user:
-#             print('login into the page is successful')
-#             request.session['user'] = username
-#             return redirect('/')
-#     return render(request, 'login.html')
-# def login(request):
-#     if request.method == "POST":
-#         username = request.POST.get('username')
-#         password = request.POST.get('password')
-#         user = UserModel.objects.filter(User_name=username, Password=password).first()  # Use first() to get a single user object or None
-#         if user:
-#             print('Login successful')
-#             request.session['user'] = username
-#             return redirect('/')
-#         else:
-#             print('Login failed: Invalid credentials')
-#             messages.error(request, 'Invalid username or password. Please try again.')  # Add a message for failed login
-#     return render(request, 'login.html')
-
+#important
 def login(request):
-
-
     if request.method == "POST":
         username = request.POST.get('username')
         password = request.POST.get('password')
@@ -309,6 +247,9 @@ def login(request):
                 return render(request, 'login.html', {'password_error': password_error})
     return render(request, 'login.html')
 
+
+
+
 def logout(request):
     del request.session['user']
     if request.session.get('nation'):
@@ -319,22 +260,57 @@ def logout(request):
     return redirect('/')
 
 
+# def register(request):
+#     if request.method == 'POST':
+#         username = request.POST.get('username')
+#         password = request.POST.get('password')
+#         email = request.POST.get('email')
+#         phone_number = request.POST.get('Phone_number')
+#         status = 'active'
+#         obj1 = UserModel()
+#         obj1.User_name = username
+#         obj1.Password = password
+#         obj1.Phone_number = phone_number
+#         obj1.email = email
+#         obj1.status = status
+#         obj1.save()
+#         # subject = "welcome to Explorer"
+#         # message = "Hello " + username + ",\n\nThank you for registering with us."
+#         # send_mail(
+#         #     subject,
+#         #     message,
+#         #     settings.EMAIL_HOST_USER,
+#         #     ['christoaj39@gmail.com'],
+#         #     fail_silently=False
+#         #
+#         # )
+#         return redirect('/')
+#     return render(request, 'register.html')
 def register(request):
+    """
+    Handles user registration, validating and saving form data.
+
+    If the request method is GET, renders an empty registration form.
+    If the request method is POST, validates the submitted form data.
+    If the form is valid, saves the data and redirects to the home page.
+
+    Parameters:
+    - request: HttpRequest object.
+
+    Returns:
+    - HttpResponse object rendering the reg_validation.html template with the registration form.
+    - Redirects to the home page on successful registration.
+    """
     if request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-        email = request.POST.get('email')
-        phone_number = request.POST.get('Phone_number')
-        status = 'active'
-        obj1 = UserModel()
-        obj1.User_name = username
-        obj1.Password = password
-        obj1.Phone_number = phone_number
-        obj1.email = email
-        obj1.status = status
-        obj1.save()
-        return redirect('/')
-    return render(request, 'register.html')
+        form_obj = UserRegistrationForm(request.POST)
+        print(request.POST)
+        if form_obj.is_valid():
+            form_obj.save()
+            print('form submit')
+            return redirect('/')
+    else:
+        form_obj = UserRegistrationForm()
+    return render(request, 'register.html', {'form': form_obj})
 
 
 client = razorpay.Client(auth=("rzp_test_1fobC03iYb0HUi", "gWuvQyKHybJBvnIwjiPNtq9q"))

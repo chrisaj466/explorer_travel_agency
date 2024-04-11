@@ -18,7 +18,7 @@ from django.contrib import admin
 from django.urls import path
 from userapp import views as user_views
 from adminapp import views as admin_views
-
+from django.contrib.auth import views as auth_views
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -96,6 +96,13 @@ urlpatterns = [
     path('country_packages',user_views.country_packages,name='country_packages'),
     path('package_plan', user_views.package_plan,name='package_plan'),
     path('country_traveltip', user_views.country_traveltips, name='country_traveltip'),
+
+    #build in login
+path('reset_password/', auth_views.PasswordResetView.as_view(template_name='forgot_password_django.html'),name='reset_password'),
+path('reset_password_sent/', auth_views.PasswordChangeDoneView.as_view(), name='password_reset_done'),
+path('reset/<uidb64>/<token>/',auth_views.PasswordResetConfirmView.as_view(),name='password_reset_confirm'),
+path('reset_password_complete/', auth_views.PasswordResetCompleteView.as_view(),name='password_reset_complete')
+
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 if settings.DEBUG:

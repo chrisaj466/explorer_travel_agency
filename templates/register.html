@@ -36,28 +36,36 @@
             <div class="col-md-6 right">
 
              <div class="input-box">
-                <form  method="post" id="form">
-        {% csrf_token %}
-        <div class="input-field">
-           <input type="text" name="username" placeholder="Enter your username">
-        </div>
-        <div class="input-field">
-           <input type="password" name="password" placeholder="Enter your password">
-        </div>
-        <div class="input-field">
-            <input id="password2" name="password2" type="password"  placeholder="Confirm your password">
-        </div>
-        <div class="input-field">
-           <input type="text" name="Phone_number" placeholder="Enter your  Phone_number">
-        </div>
-         <div class="input-field">
-        <input  id="email" type="text" name="email" placeholder="Enter your  email">
-         </div>
-          <div class="input-field">
-               <button type="submit"   class="submit" name="login_button">Register</button>
-          </div>
+<!--                <form  method="post" id="form">-->
+<!--        {% csrf_token %}-->
+<!--        <div class="input-field">-->
+<!--           <input type="text" name="username" placeholder="Enter your username">-->
+<!--        </div>-->
+<!--        <div class="input-field">-->
+<!--           <input type="password" name="password" placeholder="Enter your password">-->
+<!--        </div>-->
+<!--        <div class="input-field">-->
+<!--            <input id="password2" name="password2" type="password"  placeholder="Confirm your password">-->
+<!--        </div>-->
+<!--        <div class="input-field">-->
+<!--           <input type="text" name="Phone_number" placeholder="Enter your  Phone_number">-->
+<!--        </div>-->
+<!--         <div class="input-field">-->
+<!--        <input  id="email" type="text" name="email" placeholder="Enter your  email">-->
+<!--         </div>-->
+<!--          <div class="input-field">-->
+<!--               <button type="submit"   class="submit" name="login_button">Register</button>-->
+<!--          </div>-->
 
-    </form>
+<!--    </form>-->
+                 <form method="post">
+                 {% csrf_token %}
+                 {{ form.as_p }}
+                 <button type="submit" style="background-color:orange;color:white;border:None;">Register</button>
+                 </form>
+
+
+
             </div>
           </div>
         </div>
