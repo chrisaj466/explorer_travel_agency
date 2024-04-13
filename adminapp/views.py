@@ -10,30 +10,30 @@ from django.db.models import Count
 # Create your views here.
 def user_list(request):
     """
-    Retrieves all user objects and renders them in the home.html template.
+    Retrieves all package objects and renders them in the admin_package_home.html template.
 
     Parameters:
     - request: HttpRequest object.
 
     Returns:
-    - HttpResponse object rendering the home.html template with users' data.
+    - HttpResponse object rendering the admin_package_home.html template with package data.
     """
     packages = PackagesModel.objects.all()
     return render(request, 'admin_package_home.html', {'users': packages})
 def registration(request):
     """
-    Handles user registration, validating and saving form data.
+    Handles package registration, validating and saving form data.
 
     If the request method is GET, renders an empty registration form.
     If the request method is POST, validates the submitted form data.
-    If the form is valid, saves the data and redirects to the home page.
+    If the form is valid, saves the data and redirects to the admin_package_home page.
 
     Parameters:
     - request: HttpRequest object.
 
     Returns:
     - HttpResponse object rendering the reg_validation.html template with the registration form.
-    - Redirects to the home page on successful registration.
+    - Redirects to the admin_package_home page on successful registration.
     """
     if request.method == 'POST':
         form_obj = UserModelForm(request.POST,request.FILES)
@@ -47,18 +47,18 @@ def registration(request):
     return render(request, 'admin_package_regis.html', {'form': form_obj})
 def update_packages_view(request, packages_id):
     """
-    Handles updating user information based on user_id.
+    Handles updating package information based on packages_id.
 
-    If the request method is GET, renders a form pre-populated with user's existing data.
+    If the request method is GET, renders a form pre-populated with packages existing data.
     If the request method is POST, validates the submitted form data.
-    If the form is valid, updates the user's information and returns a success message.
+    If the form is valid, updates the package information and returns a success message.
 
     Parameters:
     - request: HttpRequest object.
-    - user_id: Integer specifying the user's ID.
+    - packages_id: Integer specifying the packages_id ID.
 
     Returns:
-    - HttpResponse object rendering the update_user.html template with the form.
+    - HttpResponse object rendering the admin_package_update template with the form.
     """
     user = PackagesModel.objects.get(packages_id=packages_id)
     if request.method == 'POST':
@@ -72,30 +72,30 @@ def update_packages_view(request, packages_id):
     return render(request, 'admin_package_update.html', {'form': form})
 def packagedate_home(request):
     """
-    Retrieves all user objects and renders them in the home.html template.
+    Retrieves all package date objects and renders them in the admin_packdate_home.html template.
 
     Parameters:
     - request: HttpRequest object.
 
     Returns:
-    - HttpResponse object rendering the home.html template with users' data.
+    - HttpResponse object rendering the admin_packdate_home.html template with users' data.
     """
     packages = PackageDateModel.objects.all()
     return render(request, 'admin_packdate_home.html', {'users': packages})
 def date_registration(request):
     """
-    Handles user registration, validating and saving form data.
+    Handles package date registration, validating and saving form data.
 
     If the request method is GET, renders an empty registration form.
     If the request method is POST, validates the submitted form data.
-    If the form is valid, saves the data and redirects to the home page.
+    If the form is valid, saves the data and redirects to the admin_packdate_home page.
 
     Parameters:
     - request: HttpRequest object.
 
     Returns:
-    - HttpResponse object rendering the reg_validation.html template with the registration form.
-    - Redirects to the home page on successful registration.
+    - HttpResponse object rendering the admin_package_regis.html template with the registration form.
+    - Redirects to the admin_packdate_home page on successful registration.
     """
     if request.method == 'POST':
         form_obj = Packagedateform(request.POST)
@@ -109,18 +109,18 @@ def date_registration(request):
     return render(request, 'admin_package_regis.html', {'form': form_obj})
 def update_date_view(request, date_id):
     """
-    Handles updating user information based on user_id.
+    Handles updating package date information based on date_id.
 
-    If the request method is GET, renders a form pre-populated with user's existing data.
+    If the request method is GET, renders a form pre-populated with package date existing data.
     If the request method is POST, validates the submitted form data.
     If the form is valid, updates the user's information and returns a success message.
 
     Parameters:
     - request: HttpRequest object.
-    - user_id: Integer specifying the user's ID.
+    - date_id: Integer specifying the date ID.
 
     Returns:
-    - HttpResponse object rendering the update_user.html template with the form.
+    - HttpResponse object rendering the admin_package_update.html template with the form.
     """
     user = PackageDateModel.objects.get(date_id=date_id)
     if request.method == 'POST':
@@ -134,30 +134,30 @@ def update_date_view(request, date_id):
     return render(request, 'admin_package_update.html', {'form': form})
 def PackagePlan_home(request):
     """
-    Retrieves all user objects and renders them in the home.html template.
+    Retrieves all PackagePlan objects and renders them in the admin_packageplan_home.html template.
 
     Parameters:
     - request: HttpRequest object.
 
     Returns:
-    - HttpResponse object rendering the home.html template with users' data.
+    - HttpResponse object rendering the admin_packageplan_home.html template with PackagePlan data.
     """
     packages = PackagePlanModel.objects.all()
     return render(request, 'admin_packageplan_home.html', {'users': packages})
 def plan_registration(request):
     """
-    Handles user registration, validating and saving form data.
+    Handles PackagePlan registration, validating and saving form data.
 
     If the request method is GET, renders an empty registration form.
     If the request method is POST, validates the submitted form data.
-    If the form is valid, saves the data and redirects to the home page.
+    If the form is valid, saves the data and redirects to the admin_packageplan_home page.
 
     Parameters:
     - request: HttpRequest object.
 
     Returns:
-    - HttpResponse object rendering the reg_validation.html template with the registration form.
-    - Redirects to the home page on successful registration.
+    - HttpResponse object rendering the admin_package_regis.html template with the registration form.
+    - Redirects to the admin_packageplan_home page on successful registration.
     """
     if request.method == 'POST':
         form_obj = packageplanform(request.POST)
@@ -171,18 +171,18 @@ def plan_registration(request):
     return render(request, 'admin_package_regis.html', {'form': form_obj})
 def update_plan_view(request, plan_id):
     """
-    Handles updating user information based on user_id.
+    Handles updating plan information based on plan_id.
 
-    If the request method is GET, renders a form pre-populated with user's existing data.
+    If the request method is GET, renders a form pre-populated with plan  existing data.
     If the request method is POST, validates the submitted form data.
-    If the form is valid, updates the user's information and returns a success message.
+    If the form is valid, updates the update_plan information and returns a success message.
 
     Parameters:
     - request: HttpRequest object.
-    - user_id: Integer specifying the user's ID.
+    - plan_id: Integer specifying the plan ID.
 
     Returns:
-    - HttpResponse object rendering the update_user.html template with the form.
+    - HttpResponse object rendering the admin_package_update.html template with the form.
     """
     user =PackagePlanModel.objects.get(plan_id=plan_id)
     if request.method == 'POST':
@@ -196,30 +196,30 @@ def update_plan_view(request, plan_id):
     return render(request, 'admin_package_update.html', {'form': form})
 def traveltips_home(request):
     """
-    Retrieves all user objects and renders them in the home.html template.
+    Retrieves all traveltips objects and renders them in the admin_traveltips_home.html template.
 
     Parameters:
     - request: HttpRequest object.
 
     Returns:
-    - HttpResponse object rendering the home.html template with users' data.
+    - HttpResponse object rendering the admin_traveltips_home.html template with traveltips data.
     """
     tips = TravelTipsModel.objects.all()
     return render(request, 'admin_traveltips_home.html', {'users': tips})
 def tips_registration(request):
     """
-    Handles user registration, validating and saving form data.
+    Handles traveltips registration, validating and saving form data.
 
     If the request method is GET, renders an empty registration form.
     If the request method is POST, validates the submitted form data.
-    If the form is valid, saves the data and redirects to the home page.
+    If the form is valid, saves the data and redirects to the admin_traveltips_home page.
 
     Parameters:
     - request: HttpRequest object.
 
     Returns:
-    - HttpResponse object rendering the reg_validation.html template with the registration form.
-    - Redirects to the home page on successful registration.
+    - HttpResponse object rendering the admin_package_regis.html template with the registration form.
+    - Redirects to the admin_traveltips_home page on successful registration.
     """
     if request.method == 'POST':
         form_obj = traveltipsform(request.POST)
@@ -233,18 +233,18 @@ def tips_registration(request):
     return render(request, 'admin_package_regis.html', {'form': form_obj})
 def update_tips_view(request, tips_id):
     """
-    Handles updating user information based on user_id.
+    Handles updating traveltips information based on  tips_id.
 
-    If the request method is GET, renders a form pre-populated with user's existing data.
+    If the request method is GET, renders a form pre-populated with traveltips existing data.
     If the request method is POST, validates the submitted form data.
     If the form is valid, updates the user's information and returns a success message.
 
     Parameters:
     - request: HttpRequest object.
-    - user_id: Integer specifying the user's ID.
+    -  tips_id: Integer specifying the  tips ID.
 
     Returns:
-    - HttpResponse object rendering the update_user.html template with the form.
+    - HttpResponse object rendering the admin_package_update.htm template with the form.
     """
     user =TravelTipsModel.objects.get(tips_id=tips_id)
     if request.method == 'POST':
@@ -258,19 +258,19 @@ def update_tips_view(request, tips_id):
     return render(request, 'admin_package_update.html', {'form': form})
 def Nation_home(request):
     """
-    Retrieves all user objects and renders them in the home.html template.
+    Retrieves all Nation objects and renders them in the admin_nation_home.html template.
 
     Parameters:
     - request: HttpRequest object.
 
     Returns:
-    - HttpResponse object rendering the home.html template with users' data.
+    - HttpResponse object rendering the admin_nation_home.html template with Nation data.
     """
     nation = NationModel.objects.all()
     return render(request, 'admin_nation_home.html', {'users': nation})
 def nation_registration(request):
     """
-    Handles user registration, validating and saving form data.
+    Handles Nation registration, validating and saving form data.
 
     If the request method is GET, renders an empty registration form.
     If the request method is POST, validates the submitted form data.
@@ -295,18 +295,18 @@ def nation_registration(request):
     return render(request, 'admin_package_regis.html', {'form': form_obj})
 def update_nation_view(request, nation_id):
     """
-    Handles updating user information based on user_id.
+    Handles updating nation information based on nation_id.
 
-    If the request method is GET, renders a form pre-populated with user's existing data.
+    If the request method is GET, renders a form pre-populated with nation existing data.
     If the request method is POST, validates the submitted form data.
-    If the form is valid, updates the user's information and returns a success message.
+    If the form is valid, updates the nation_id information and returns a success message.
 
     Parameters:
     - request: HttpRequest object.
-    - user_id: Integer specifying the user's ID.
+    - nation_id: Integer specifying the nation ID.
 
     Returns:
-    - HttpResponse object rendering the update_user.html template with the form.
+    - HttpResponse object rendering the admin_package_update.html template with the form.
     """
     user =NationModel.objects.get(nation_id=nation_id)
     if request.method == 'POST':
@@ -320,19 +320,19 @@ def update_nation_view(request, nation_id):
     return render(request, 'admin_package_update.html', {'form': form})
 def Nationimage_home(request):
     """
-    Retrieves all user objects and renders them in the home.html template.
+    Retrieves all Nationimage objects and renders them in the admin_nationimage_home.html template.
 
     Parameters:
     - request: HttpRequest object.
 
     Returns:
-    - HttpResponse object rendering the home.html template with users' data.
+    - HttpResponse object rendering the admin_nationimage_home.html template with Nationimage data.
     """
     nationimage = NationImageModel.objects.all()
     return render(request, 'admin_nationimage_home.html', {'users': nationimage})
 def nationimage_registration(request):
     """
-    Handles user registration, validating and saving form data.
+    Handles nationimage registration, validating and saving form data.
 
     If the request method is GET, renders an empty registration form.
     If the request method is POST, validates the submitted form data.
@@ -342,7 +342,7 @@ def nationimage_registration(request):
     - request: HttpRequest object.
 
     Returns:
-    - HttpResponse object rendering the reg_validation.html template with the registration form.
+    - HttpResponse object rendering the admin_package_regis.html template with the registration form.
     - Redirects to the home page on successful registration.
     """
     if request.method == 'POST':
@@ -357,18 +357,18 @@ def nationimage_registration(request):
     return render(request, 'admin_package_regis.html', {'form': form_obj})
 def update_nationimage_view(request, nation_image_id):
     """
-    Handles updating user information based on user_id.
+    Handles updating nationimage information based on  nation_image_id.
 
-    If the request method is GET, renders a form pre-populated with user's existing data.
+    If the request method is GET, renders a form pre-populated with nationimage existing data.
     If the request method is POST, validates the submitted form data.
     If the form is valid, updates the user's information and returns a success message.
 
     Parameters:
     - request: HttpRequest object.
-    - user_id: Integer specifying the user's ID.
+    - nation_image_id: Integer specifying the nation_image ID.
 
     Returns:
-    - HttpResponse object rendering the update_user.html template with the form.
+    - HttpResponse object rendering the admin_package_update.html template with the form.
     """
     user = NationImageModel.objects.get(nation_image_id=nation_image_id)
     if request.method == 'POST':
@@ -384,13 +384,13 @@ def update_nationimage_view(request, nation_image_id):
 
 def Payment_home(request):
     """
-    Retrieves all user objects and renders them in the home.html template.
+    Retrieves all Payment objects and renders them in the admin_payment_home.html template.
 
     Parameters:
     - request: HttpRequest object.
 
     Returns:
-    - HttpResponse object rendering the home.html template with users' data.
+    - HttpResponse object rendering the admin_payment_home.html template with Payment data.
     """
     Payment = PaymentModel.objects.all()
     return render(request, 'admin_payment_home.html', {'users': Payment})
