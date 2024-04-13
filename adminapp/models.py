@@ -93,5 +93,6 @@ class PaymentModel(models.Model):
     members = models.IntegerField(null=True)
     price = models.IntegerField(null=True)
     created_at = models.DateTimeField(auto_now_add=True, null=True)
+    start_date = models.DateField(null=True)
     class Meta:
         db_table = 'payment_home'

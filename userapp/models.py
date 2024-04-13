@@ -35,6 +35,7 @@ class Payment(models.Model):
     package = models.CharField(max_length=255, null=True)
     members = models.IntegerField(null=True)
     price = models.IntegerField(null=True)
+    start_date = models.DateField(null=True)
     created_at = models.DateTimeField(auto_now_add=True, null=True)
 
     class Meta:

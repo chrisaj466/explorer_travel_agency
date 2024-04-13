@@ -15,7 +15,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from userapp import views as user_views
 from adminapp import views as admin_views
 from django.contrib.auth import views as auth_views
@@ -76,7 +76,9 @@ urlpatterns = [
     path('review', user_views.review, name='review'),
 
     #cancel
-    # path('cancel/<int:id>/',user_views.cancel),
+    path('cancel/<int:id>/',user_views.cancel),
+    path('cancel1/<int:id>/', user_views.cancel),
+
 
     path('user_profile',user_views.user_profile,name='user_profile'),
     path('destination', user_views.destination,name='destination'),
@@ -98,10 +100,14 @@ urlpatterns = [
     path('country_traveltip', user_views.country_traveltips, name='country_traveltip'),
 
     #build in login
-path('reset_password/', auth_views.PasswordResetView.as_view(template_name='forgot_password_django.html'),name='reset_password'),
-path('reset_password_sent/', auth_views.PasswordChangeDoneView.as_view(), name='password_reset_done'),
-path('reset/<uidb64>/<token>/',auth_views.PasswordResetConfirmView.as_view(),name='password_reset_confirm'),
-path('reset_password_complete/', auth_views.PasswordResetCompleteView.as_view(),name='password_reset_complete')
+    # path('reset_password/', auth_views.PasswordResetView.as_view(template_name='forgot_password_django.html'),name='reset_password'),
+    # path('reset_password_sent/', auth_views.PasswordChangeDoneView.as_view(), name='password_reset_done'),
+    # path('reset/<uidb64>/<token>/',auth_views.PasswordResetConfirmView.as_view(),name='password_reset_confirm'),
+    # path('reset_password_complete/', auth_views.PasswordResetCompleteView.as_view(),name='password_reset_complete')
+
+    #socialauth
+    path('accounts/', include('allauth.urls')),
+    path('dashboard',user_views.dashboard, name='dashboard'),
 
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 

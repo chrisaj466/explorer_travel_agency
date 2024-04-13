@@ -2,6 +2,7 @@
 <html>
 <head>
    {% load static %}
+    {% load socialaccount %}
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" >
     <meta name="viewport" content="width=device, initial-scale=1.0">
@@ -50,6 +51,7 @@
                         <button type="submit" class="submit"  >Login</button>
                  </div>
 
+                    <a  href="{% url 'account_login' %}">Login by git hub  account</a>
                 </form>
              </div>
 

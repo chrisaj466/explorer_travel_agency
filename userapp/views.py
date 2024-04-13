@@ -357,8 +357,8 @@ def initiate_payment(request):
             data = PackagePlanModel.objects.filter(package_id=id).order_by('oder')
             data2 = PackagesModel.objects.filter(packages_id=id)
             username = request.session['user']
-            print(username)
-            print(package_date)
+            # print(username)
+            # print(package_date)
             data3 = ReviewModel.objects.filter(packages=id)
             total_rating_sum = data3.aggregate(total_sum=Sum('rating_value'))['total_sum']
             total_rating_count = data3.aggregate(total_count=Count('rating_value'))['total_count']
@@ -374,7 +374,7 @@ def initiate_payment(request):
             if updated_count > 0:
                 # Use Razorpay API to create payment order with selected payment option
                 id = request.POST.get('packages_id')
-                print(id)
+                # print(id)
                 user = request.session.get('user')
                 # date1 = PackageDateModel.objects.get(date_id=request.POST.get('start_date'))
                 start_date = date1.start_date
@@ -387,18 +387,20 @@ def initiate_payment(request):
                 obj1.save()
                 days=PackagesModel.objects.get(packages_id=id)
                 number_to_add = days.total_days
+                print(number_to_add)
                 end_date = start_date + timedelta(days=number_to_add)
+                print(end_date)
                 data2 = PackagesModel.objects.filter(packages_id=id)
                 price = PackagesModel.objects.get(packages_id=id)
                 price_amount = price.price
                 package = price.package_name
                 client = razorpay.Client(auth=('rzp_test_1fobC03iYb0HUi', 'gWuvQyKHybJBvnIwjiPNtq9q'))
                 amount = (price_amount) * 100
-                print(amount)  # Razorpay expects amount in paise
+                # print(amount)  # Razorpay expects amount in paise
                 payment_order = client.order.create({"amount": amount, "currency": "INR", "payment_capture": "1"})
                 # Pass selected payment option
                 payment_order_id = payment_order['id']
-                print(payment_order_id)
+                # print(payment_order_id)
                 return render(request, 'payment.html',
                               {'api_key': RAZORPAY_KEY_ID, 'order_id': payment_order_id, 'data': data2,
                                'start_date': start_date, 'end_date': end_date, 'user': user, 'package': package,
@@ -435,48 +437,114 @@ def review(request):
     return render(request, 'review.html')
 
 
+# def payment_success(request):
+#     razorpay_payment_id = request.GET.get('razorpay_payment_id')
+#     razorpay_order_id = request.GET.get('razorpay_order_id')
+#     razorpay_signature = request.GET.get('razorpay_signature')
+#     start_date = request.GET.get('start_date')
+#     try:
+#         formatted_date = datetime.strptime(start_date, "%B %d, %Y").strftime("%Y-%m-%d")
+#     except ValueError:
+#         pass  # If parsing fails, move to the next attempt
+#
+#     # Attempt to parse with abbreviated month name format
+#     try:
+#         formatted_date = datetime.strptime(start_date, "%b. %d, %Y").strftime("%Y-%m-%d")
+#     except ValueError:
+#         print("Unable to parse date with any known format")
+#     user = request.GET.get('user')
+#     package = request.GET.get('package')
+#     package_data = PackagesModel.objects.filter(package_name=package)
+#     members = request.GET.get('members')
+#     price = request.GET.get('price')
+#     payment = Payment.objects.create(
+#         payment_id=razorpay_payment_id,
+#         order_id=razorpay_order_id,
+#         signature=razorpay_signature,
+#          user=user, package=package, members=members,price=price,start_date=formatted_date
+#     )
+#     payment_home=PaymentModel.objects.create(
+#         payment_id=razorpay_payment_id,
+#         order_id=razorpay_order_id,
+#         signature=razorpay_signature,
+#          user=user, package=package, members=members,price=price,start_date=formatted_date
+#     )
+#
+#     return render(request, "payment_succ.html",
+#                   {'payment_id': razorpay_payment_id, 'data': package_data, 'order_id': razorpay_order_id,
+#                    'payment_signature': razorpay_signature,
+#                    'user': user, 'package': package, 'members': members})
 def payment_success(request):
     razorpay_payment_id = request.GET.get('razorpay_payment_id')
     razorpay_order_id = request.GET.get('razorpay_order_id')
     razorpay_signature = request.GET.get('razorpay_signature')
-    # start_date = request.GET.get('start_date')
+    start_date = request.GET.get('start_date')
+
+    try:
+        # Attempt to parse with full month name format
+        formatted_date = datetime.strptime(start_date, "%B %d, %Y").strftime("%Y-%m-%d")
+    except ValueError:
+        try:
+            # Attempt to parse with abbreviated month name format
+            formatted_date = datetime.strptime(start_date, "%b. %d, %Y").strftime("%Y-%m-%d")
+        except ValueError:
+            print("Unable to parse date with any known format")
+            formatted_date = None
+
     user = request.GET.get('user')
     package = request.GET.get('package')
-    package_data = PackagesModel.objects.filter(package_name=package)
     members = request.GET.get('members')
     price = request.GET.get('price')
+
+    # Create Payment object
     payment = Payment.objects.create(
         payment_id=razorpay_payment_id,
         order_id=razorpay_order_id,
         signature=razorpay_signature,
-         user=user, package=package, members=members,price=price
+        user=user, package=package, members=members, price=price, start_date=formatted_date
     )
-    payment_home=PaymentModel.objects.create(
+
+    # Create PaymentModel object
+    payment_home = PaymentModel.objects.create(
         payment_id=razorpay_payment_id,
         order_id=razorpay_order_id,
         signature=razorpay_signature,
-         user=user, package=package, members=members,price=price
+        user=user, package=package, members=members, price=price, start_date=formatted_date
     )
+
+    # Fetch package data
+    package_data = PackagesModel.objects.filter(package_name=package)
 
     return render(request, "payment_succ.html",
                   {'payment_id': razorpay_payment_id, 'data': package_data, 'order_id': razorpay_order_id,
-                   'payment_signature': razorpay_signature,
-                   'user': user, 'package': package, 'members': members})
-
+                   'payment_signature': razorpay_signature, 'user': user, 'package': package,
+                   'members': members})
 
 def cancel(request, id):
     data = Payment.objects.get(id=id)
     members = data.members
-    date_id = data.start_date
-    data2 = PackageDateModel.objects.get(start_date=date_id)
+    start_date = data.start_date
+
+    data2 = PackageDateModel.objects.get(start_date=start_date)
     date_mem = data2.count
     total_mem = date_mem + members
-    mem_obj = PackageDateModel.objects.get(start_date=date_id)
+    mem_obj = PackageDateModel.objects.get(start_date=start_date)
     mem_obj.count = total_mem
     mem_obj.save()
     data.delete()
     return redirect('/user_profile')
-
+def cancel1(request, id):
+    data = Payment.objects.get(id=id)
+    members = data.members
+    start_date = data.start_date
+    data2 = PackageDateModel.objects.get(start_date=start_date)
+    date_mem = data2.count
+    total_mem = date_mem + members
+    mem_obj = PackageDateModel.objects.get(start_date=start_date)
+    mem_obj.count = total_mem
+    mem_obj.save()
+    data.delete()
+    return redirect('/admin_home')
 
 def get_nation(request):
     if request.method == 'POST':
@@ -507,3 +575,5 @@ def payment(request):
 def razorpay_webhook(request):
     # Handle Razorpay webhook notification
     return HttpResponse(status=200)
+def dashboard(request):
+    return render(request, "dashboard.html")
