@@ -77,8 +77,13 @@ urlpatterns = [
 
     #cancel
     path('cancel/<int:id>/',user_views.cancel),
-    path('cancel1/<int:id>/', user_views.cancel),
+    path('cancel1/<int:id>/', user_views.cancel1),
 
+    #contact
+    path('contact', user_views.contact, name='contact'),
+
+    #profile_review
+    path('profile_review/<str:package_name>/', user_views.profile_review, name='profile_review'),
 
     path('user_profile',user_views.user_profile,name='user_profile'),
     path('destination', user_views.destination,name='destination'),

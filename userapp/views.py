@@ -12,9 +12,9 @@ from django.db.models import Q, Sum, Count
 from userapp.form import UserRegistrationForm
 from django.shortcuts import render, redirect, HttpResponse, get_object_or_404
 
-from adminapp.models import PackageDateModel,PaymentModel
+from adminapp.models import PackageDateModel
 from .models import PackagesModel, NationModel, NationImageModel, PackagePageModel, ReviewModel, TravelTipsModel, \
-    PackagePlanModel, UserModel, UserImageModel, MapArea, Payment
+    PackagePlanModel, UserModel, UserImageModel, MapArea, Payment, Contact
 import razorpay
 
 
@@ -96,16 +96,35 @@ def user_profile(request):
 
 
 def contact(request):
-    return render(request, 'contact.html')
-
+    if request.session.get('user'):
+       if request.method == 'POST':
+          name = request.POST.get('name')
+          phone = request.POST.get('phone')
+          email = request.POST.get('email')
+          message = request.POST.get('message')
+          print(email)
+          cont_obj = Contact()
+          cont_obj.name = name
+          cont_obj.phone = phone
+          cont_obj.email = email
+          cont_obj.message = message
+          cont_obj.save()
+          messages.success(request, 'Your message has been sent successfully!')
+          return redirect('/contact')
+       return render(request, 'contact.html')
+    return redirect('/login')
 
 def destination(request):
     DATA = NationImageModel.objects.all()
-    return render(request, 'destination.html', {"data": DATA})
+    user = request.session.get('user')
+    name_data = UserModel.objects.get(User_name=user)
+    name = name_data.User_name
+    return render(request, 'destination.html', {"data": DATA,'name':name})
 
 
 def forgot(request):
     return render(request, 'forgotpassword.html')
+
 
 
 def forgotpassword(request):
@@ -316,35 +335,7 @@ def register(request):
 client = razorpay.Client(auth=("rzp_test_1fobC03iYb0HUi", "gWuvQyKHybJBvnIwjiPNtq9q"))
 
 
-# def initiate_payment(request):
-#     if request.session.get('user'):
-#         if request.method == 'POST':
-#                payment_option = request.POST.get('payment_option')  # Get selected payment option
-#                # Use Razorpay API to create payment order with selected payment option
-#                id = request.POST.get('packages_id')
-#                print(id)
-#                user = request.session.get('user')
-#                date1 = PackageDateModel.objects.get(date_id=request.POST.get('start_date'))
-#                start_date = date1.start_date
-#                date2 = PackageDateModel.objects.get(date_id=request.POST.get('end_date'))
-#                end_date = date2.end_date
-#                data2 = PackagesModel.objects.filter(packages_id=id)
-#                price = PackagesModel.objects.get(packages_id=id)
-#                price_amount = price.price
-#                package = price.package_name
-#                client = razorpay.Client(auth=('rzp_test_1fobC03iYb0HUi', 'gWuvQyKHybJBvnIwjiPNtq9q'))
-#                amount = (price_amount) * 100
-#                print(amount)  # Razorpay expects amount in paise
-#                payment_order = client.order.create({"amount": amount, "currency": "INR", "payment_capture": "1"})
-#                # Pass selected payment option
-#                payment_order_id = payment_order['id']
-#                print(payment_order_id)
-#                return render(request, 'payment.html',
-#                           {'api_key': RAZORPAY_KEY_ID, 'order_id': payment_order_id, 'data': data2,
-#                            'start_date': start_date, 'end_date': end_date, 'user': user, 'package': package})
-#
-#         return render(request, "payment.html")
-#     return redirect('/login')
+
 
 def initiate_payment(request):
     if request.session.get('user'):
@@ -420,13 +411,8 @@ def review(request):
         package = request.session.get('package_id')
         rating = request.POST.get('rating')
         comment = request.POST.get('comment')
-        print(rating)
-        print(comment)
-        print(package)
-        print(user)
-        print(user_id)
         obj = ReviewModel()
-        obj.review = review
+        # obj.review = review
         obj.user_name = user
         obj.packages = PackagesModel.objects.get(packages_id=package)
         obj.user = UserModel.objects.get(User_id=user_id)
@@ -436,44 +422,26 @@ def review(request):
         return redirect('/country_packages')
     return render(request, 'review.html')
 
+def profile_review(request, package_name):
+    if request.method == 'POST':
+        user = request.session.get('user')
+        user_data = UserModel.objects.get(User_name=user)
+        user_id = user_data.User_id
+        packages = PackagesModel.objects.get(package_name=package_name)
+        packages_id = packages.packages_id
+        rating = request.POST.get('rating')
+        comment = request.POST.get('comment')
+        obj = ReviewModel()
+        obj.user_name = user
+        obj.packages = PackagesModel.objects.get(packages_id=packages_id)
+        obj.user = UserModel.objects.get(User_id=user_id)
+        obj.rating_value = rating
+        obj.comment = comment
+        obj.save()
+        return redirect('/user_profile')
+    return render(request, 'review.html')
 
-# def payment_success(request):
-#     razorpay_payment_id = request.GET.get('razorpay_payment_id')
-#     razorpay_order_id = request.GET.get('razorpay_order_id')
-#     razorpay_signature = request.GET.get('razorpay_signature')
-#     start_date = request.GET.get('start_date')
-#     try:
-#         formatted_date = datetime.strptime(start_date, "%B %d, %Y").strftime("%Y-%m-%d")
-#     except ValueError:
-#         pass  # If parsing fails, move to the next attempt
-#
-#     # Attempt to parse with abbreviated month name format
-#     try:
-#         formatted_date = datetime.strptime(start_date, "%b. %d, %Y").strftime("%Y-%m-%d")
-#     except ValueError:
-#         print("Unable to parse date with any known format")
-#     user = request.GET.get('user')
-#     package = request.GET.get('package')
-#     package_data = PackagesModel.objects.filter(package_name=package)
-#     members = request.GET.get('members')
-#     price = request.GET.get('price')
-#     payment = Payment.objects.create(
-#         payment_id=razorpay_payment_id,
-#         order_id=razorpay_order_id,
-#         signature=razorpay_signature,
-#          user=user, package=package, members=members,price=price,start_date=formatted_date
-#     )
-#     payment_home=PaymentModel.objects.create(
-#         payment_id=razorpay_payment_id,
-#         order_id=razorpay_order_id,
-#         signature=razorpay_signature,
-#          user=user, package=package, members=members,price=price,start_date=formatted_date
-#     )
-#
-#     return render(request, "payment_succ.html",
-#                   {'payment_id': razorpay_payment_id, 'data': package_data, 'order_id': razorpay_order_id,
-#                    'payment_signature': razorpay_signature,
-#                    'user': user, 'package': package, 'members': members})
+
 def payment_success(request):
     razorpay_payment_id = request.GET.get('razorpay_payment_id')
     razorpay_order_id = request.GET.get('razorpay_order_id')
@@ -504,13 +472,13 @@ def payment_success(request):
         user=user, package=package, members=members, price=price, start_date=formatted_date
     )
 
-    # Create PaymentModel object
-    payment_home = PaymentModel.objects.create(
-        payment_id=razorpay_payment_id,
-        order_id=razorpay_order_id,
-        signature=razorpay_signature,
-        user=user, package=package, members=members, price=price, start_date=formatted_date
-    )
+    # # Create PaymentModel object
+    # payment_home = PaymentModel.objects.create(
+    #     payment_id=razorpay_payment_id,
+    #     order_id=razorpay_order_id,
+    #     signature=razorpay_signature,
+    #     user=user, package=package, members=members, price=price, start_date=formatted_date
+    # )
 
     # Fetch package data
     package_data = PackagesModel.objects.filter(package_name=package)

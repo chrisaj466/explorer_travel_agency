@@ -65,88 +65,13 @@
     .Hading{
     text-align:left;
     }
-    .pack_name{
-        background-color:orange;
-        color:white;
-        border: none;
-        outline: none;
-        border-radius: 10px;
-        padding:3px;
-        width:90px;
-        margin-bottom:20px;
-        }
-    .email{
-    color:black;
-    margin-bottom:10px;
-    }
-   .selection {
-    background-color: #f2f2f2;
-    padding: 10px;
-}
 
-.search {
-    display: flex;
-    align-items: center;
-}
 
-.form_div form {
-    display: flex;
-}
 
-.search-input, .search-button, .form-select {
-    margin-right: 10px;
-    display: inline-block;
-}
 
-.form-select {
-    margin-bottom: 10px;
-}
-.selection {
-    background-color: #f2f2f2;
-    padding: 10px;
-}
-.user{
-margin-bottom: 0px;
-margin-top:10px;
-}
-.search {
-    display: flex;
-    align-items: center;
-}
 
-.form_div form {
-    display: flex;
-}
 
-.search-input, .search-button, .form-select {
-    margin-right: 10px;
-    height: 40%;
-}
 
-.search-input {
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-
-}
-
-.search-button {
-    padding: 8px 16px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.form-select {
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    background-color: white;
-    cursor: pointer;
-    width:70%;
-}
 
 </style>
     <title>Adventure explorer</title>
@@ -156,8 +81,8 @@ margin-top:10px;
     <div class="nav_bar-top">
         <div class="text-container">
             <div class="text-content">
-            <a href="mailto:explorer@12gmail.com" class="para-text email"><span class="span_text email"><i class="fa-solid fa-envelope"></i></span>explorer@12gmail.com</a>
-            <a  href="tel:+7356379662" class="para-text email"><span class="span_text email"><i class="fa-solid fa-phone"></i></span>7356379662</a>
+            <a href="mailto:explorer@12gmail.com" class="para-text email" style="margin-bottom:5px;color:black;"><span class="span_text email"><i class="fa-solid fa-envelope"></i></span>explorer@12gmail.com</a>
+            <a  href="tel:+7356379662" class="para-text email" style="margin-bottom:5px;color:black;"><span class="span_text email"><i class="fa-solid fa-phone"></i></span>7356379662</a>
         </div>
         <div class="social-links">
             <a href="https://www.facebook.com/christo johnson"> <i  class="fa-brands icon-social fa-facebook"></i></a>
@@ -206,7 +131,7 @@ margin-top:10px;
                       </li>
                         <li>
                             {% if name %}
-                            <h6 class="user">{{name}}</h6>
+                            <h6 class="user" style="margin-top:10px;margin-bottom: 0px;">{{name}}</h6>
 
                             {% endif %}
                         </li>
@@ -259,21 +184,21 @@ margin-top:10px;
 </div>
 <!-- header completed -->
 
-<div class="selection">
+<div class="selection" style="background-color: #f2f2f2; padding: 10px;">
      <div class="selection_container">
-       <div class="search">
+       <div class="search" style="display: flex;align-items: center;">
         <div class="form_div">
-          <form class="form" method="POST" action="{% url 'search_page' %}">
+          <form class="form" style="display: flex;" method="POST" action="{% url 'search_page' %}">
             {% csrf_token %}
-            <input type="text" name="search" placeholder="search" class="search-input" value="{{search_data}}">
-            <input type="submit" class="search-button" formaction="/search_page">
-            <select name="category-select" class="form-select  mb-3" onchange="this.form.submit()">
+            <input type="text" name="search" placeholder="search" style="height: 40%;padding: 8px;border: 1px solid #ccc;border-radius: 4px;margin-right: 10px;" class="search-input" value="{{search_data}}">
+            <input type="submit" class="search-button"  style="height: 40%;margin-right: 10px;cursor: pointer;border-radius: 4px;padding:8px 16px;background-color:#007bff;border: none;color: white;" formaction="/search_page">
+            <select name="category-select" class="form-select countries boxes mb-3" style="height: 40%;padding: 8px;width:70%;cursor: pointer;background-color: white;border-radius: 4px;border: 1px solid #ccc;padding:8px;margin-left:10px;" onchange="this.form.submit()">
                 <option value="">Category</option>
                 {% for x in category %}
                 <option value="{{x.nation_name}}" {% if x.nation_name == category_data %} selected {% endif %}>{{x.nation_name}}</option>
                 {% endfor %}
             </select>
-            <select class="form-select" name="sort-select" style="margin-left:10px;" onchange="this.form.submit()">
+            <select class="form-select budget boxes" name="sort-select" style="height: 40%;width:70%;cursor: pointer;background-color: white;border-radius: 4px;border: 1px solid #ccc;padding:8px;margin-left:10px;" onchange="this.form.submit()">
                 <option>Price</option>
                 <option value="small" {% if sort_data ==  "small" %} selected {% endif %}>price:low to high </option>
                 <option value="high" {% if sort_data ==  "high" %} selected {% endif %}>price:high to low</option>
@@ -371,7 +296,7 @@ margin-top:10px;
                                      <form method="post">
                                         {% csrf_token %}
                                         <input name="packages_id" hidden type="text" value="{{x.packages_id}}">
-                                        <button  formaction="/package_plan" class="pack_name"> {{x.package_name}}  </button>
+                                        <button  formaction="/package_plan" class="pack_name" style="margin-bottom:20px;width:90px;padding:3px;border-radius: 10px;outline: none;border: none;color:white;color:black;"> {{x.package_name}}  </button>
                                      </form>
 
                                 </div>
@@ -436,15 +361,18 @@ margin-top:10px;
                           <a class="nav-link footer-links" href="#">Contact</a>
                         </li>
                         <li class="nav-item dropdown">
-                          <a class="nav-link footer-links dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            FAQ
-                          </a>
-                          <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">About us</a></li>
-                            <li><a class="dropdown-item" href="login.html">Login</a></li>
-                            <li><a class="dropdown-item" href="register.html">Register</a></li>
-                          </ul>
-                        </li>
+                        <a class="nav-link dropdown-toggle" style="color:gray" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                          FAQ
+                        </a>
+                        <ul class="dropdown-menu">
+                          <li><a class="dropdown-item" href="{% url 'about' %}">About us</a></li>
+                          <li><a class="dropdown-item" href="{% url 'login' %}">Login</a></li>
+
+                          <li><a class="dropdown-item" href="{% url 'register' %}">Register</a></li>
+                            <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
+                            <li><a class="dropdown-item" href="{% url 'user_profile' %}">profile</a></li>
+                        </ul>
+                      </li>
                       </ul>
 
                   </div>
@@ -455,9 +383,9 @@ margin-top:10px;
 
                       <h3 class="heading-pages">Contact Us</h3>
                       <p class="contact-footer">
-                        <span class="para-text"> <i class="fa-solid footer-icons fa-location-dot"></i> 123 Street New York </span>
-                        <a href="mailto:explorer@12gmail.com" class="para-text"><span class="span_text"><i class="fa-solid fa-envelope"></i></span>explorer@12gmail.com</a>
-                        <a  href="tel:+7356379662" class="para-text"><span class="span_text"><i class="fa-solid fa-phone"></i></span>7356379662</a>
+                        <span class="para-text" style="color:gray"> <i class="fa-solid footer-icons fa-location-dot" style="color:gray"></i> 123 Street New York </span>
+                        <a href="mailto:explorer@12gmail.com" class="para-text" style="color:gray"><span class="span_text"><i class="fa-solid fa-envelope"></i></span>explorer@12gmail.com</a>
+                        <a  href="tel:+7356379662" class="para-text" style="color:gray"><span class="span_text" style="color:gray"><i class="fa-solid fa-phone" style="color:gray"></i></span>7356379662</a>
                       </p>
 
                 </div>
@@ -467,7 +395,7 @@ margin-top:10px;
 
         <div class="container-fluid gx-0">
             <div class="footer-rights">
-                <p class="right-para">Copyright <span><i class="fa-regular fa-copyright"></i></span> adventure explorer. All Rights Reserved.</p>
+                <p class="right-para">Copyright <span><i class="fa-regular fa-copyright"></i></span>explorer. All Rights Reserved.</p>
             </div>
         </div>
     </div>

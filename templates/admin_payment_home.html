@@ -379,7 +379,7 @@
                 <th>package</th>
                 <th>price</th>
                  <th>cancel</th>
-                <th>update</th>
+
     </tr>
     {% for x in users %}
      <tr>
@@ -390,7 +390,7 @@
                 <td>{{x.package}}</td>
                 <td>{{x.price}}</td>
                 <td><a href="/cancel1/{{x.id}}">cancel</a></td>
-                <td><a href="/payment_update/{{x.id}}/">Update</a></td>
+
             </tr>
 
       {% endfor %}

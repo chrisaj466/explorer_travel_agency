@@ -7,8 +7,7 @@
     <meta name="viewport" content="width=device, initial-scale=1.0">
     <link rel="stylesheet"  href="{% static 'css/packages.css' %}">
     <link rel="stylesheet"  href="{% static 'css/media.css' %}">
-<!--    <link rel="stylesheet" href="media.css">-->
-<!--    <link rel="stylesheet" href="packages.css">-->
+
     <!-- adds the links of bootstrape ,fonts, icons -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -33,15 +32,15 @@
     <div class="nav_bar-top">
         <div class="text-container">
             <div class="text-content">
-            <p class="para-text"><span class="span_text"><i class="fa-solid fa-envelope"></i></span>example@gmail.com</p>
-            <p class="para-text"><span class="span_text"><i class="fa-solid fa-phone"></i></span>+021-1234 567</p>
+            <a href="mailto:explorer@12gmail.com" class="para-text email" style=" text-decoration: none !important;margin-bottom:5px;color:black;"><span class="span_text email"><i class="fa-solid fa-envelope"></i></span>explorer@12gmail.com</a>
+            <a  href="tel:+7356379662" class="para-text email" style=" text-decoration: none !important;margin-bottom:5px;color:black;"><span class="span_text email"><i class="fa-solid fa-phone"></i></span>7356379662</a>
         </div>
         <div class="social-links">
-            <i class="fa-brands icon-social fa-facebook"></i>
-            <i class="fa-brands icon-social fa-snapchat"></i>
-            <i class="fa-brands icon-social fa-whatsapp"></i>
-            <i class="fa-brands icon-social fa-instagram"></i>
-            <i class="fa-brands icon-social fa-linkedin"></i>
+            <a href="https://www.facebook.com/christo johnson"> <i  class="fa-brands icon-social fa-facebook"></i></a>
+            <a href="https://www.snapchat.com/add/christo aj" target="_blank"><i class="fa-brands icon-social fa-snapchat"></i></a>
+            <a href="https://wa.me/7356379662"><i class="fa-brands icon-social fa-whatsapp"></i></a>
+           <a href="https://www.instagram.com/christo AJ/" target="_blank"><i class="fa-brands icon-social fa-instagram"></i></a>
+            <a href="https://www.linkedin.com/in/CHRISTO JOHNSON/" target="_blank"><i class="fa-brands icon-social fa-linkedin"></i></a>
         </div>
         <div class="navbar-container">
             <!-- navbar bootstrap-->
@@ -63,21 +62,30 @@
                         <a class="nav-link" href="{% url 'destination' %}">Destinations</a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link" href="packages.html">Packages</a>
+                        <a class="nav-link" href="{% url 'packages' %}">Packages</a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link" href="#">Contact</a>
+                        <a class="nav-link" href="{% url 'contact' %}">Contact</a>
                       </li>
                       <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                           FAQ
                         </a>
                         <ul class="dropdown-menu">
-                          <li><a class="dropdown-item" href="#">About us</a></li>
-                          <li><a class="dropdown-item" href="#">Login</a></li>
-                          <li><a class="dropdown-item" href="register.html">Register</a></li>
+                          <li><a class="dropdown-item" href="{% url 'about' %}">About us</a></li>
+                          <li><a class="dropdown-item" href="{% url 'login' %}">Login</a></li>
+
+                          <li><a class="dropdown-item" href="{% url 'register' %}">Register</a></li>
+                            <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
+                            <li><a class="dropdown-item" href="{% url 'user_profile' %}">profile</a></li>
                         </ul>
                       </li>
+                        <li>
+                            {% if name %}
+                            <h6 class="user" style="margin-top:10px;margin-bottom: 0px;">{{name}}</h6>
+
+                            {% endif %}
+                        </li>
                     </ul>
                   </div>
                 </div>
@@ -98,7 +106,7 @@
                 <div class="content-home">
                     <h3 class="heading-home">Choose Your New</h3>
                     <h2 class="heading-lg-home">Destination</h2>
-                    <a href="#" class="btn-home">Explore More</a>
+                    <a href="{% url 'destination' %}" class="btn-home">Explore More</a>
                 </div>
                </div>
               </div>
@@ -107,7 +115,7 @@
                 <div class="content-home">
                     <h3 class="heading-home">TOURS & TRAVEL </h3>
                     <h2 class="heading-lg-home"> let's Discover the World Together</h2>
-                    <a href="#" class="btn-home">Explore More</a>
+                    <a href="{% url 'destination' %}"class="btn-home">Explore More</a>
                 </div>
                </div>
               </div>
@@ -126,40 +134,7 @@
     </div>
 </div>
 <!-- header completed -->
-<div class="selection">
-    <div class="selection_container">
-        <select class="countries boxes ">
-            <option value="Country0">Countries</option>
-            <option value="Country0">India</option>
-            <option value="Country0">Srilanka</option>
-            <option value="Country0">South africa</option>
-            <option value="Country0">Japan</option>
-        </select>
-        <select class="Destination boxes ">
-            <option value="Country0">Destination</option>
-            <option value="Country0">Destination1</option>
-            <option value="Country0">Destination2</option>
-            <option value="Country0">Destination3</option>
-            <option value="Country0">Destination4</option>
-        </select>
-        <select class="budget boxes ">
-            <option value="Country0">Budget</option>
-            <option value="Country0">10000$</option>
-            <option value="Country0">20000$</option>
-            <option value="Country0">50000$</option>
-            <option value="Country0">100000$</option>
-        </select>
-        <select class="Duration boxes ">
-            <option value="Country0">Duration</option>
-            <option value="Country0">Duration1</option>
-            <option value="Country0">Duration2</option>
-            <option value="Country0">Duration3</option>
-            <option value="Country0">Duration4</option>
-        </select>
-        <a href="#" class="select-btn">Submit</a>
-    </div>
 
-</div>
 <!-- map section -->
 
 
@@ -202,17 +177,17 @@
     <div class="footer-container">
         <div class="container">
             <div class="row">
-                <div class="col-lg-4 col-md-6 col-sm-12">
-                    <h3 class="heading-logo footer-logo"> EXPLOR<span>ER.</span></h3>
-                    <p class="footer-para"> lorem ipsum dolor sit amet</p>
+                 <div class="col-lg-4 col-md-6 col-sm-12">
+                    <h3 class="heading-logo footer-logo">EXPLOR<span>ER. </span></h3>
+                    <p class="footer-para"> your place to discover the world</p>
                     <h5 class="heading-sm-footer">FOLLOW US</h5>
-                    <div class="social-links-footer">
-                        <i class="fa-brands icon-social-footer fa-facebook"></i>
-                        <i class="fa-brands icon-social-footer fa-snapchat"></i>
-                        <i class="fa-brands icon-social-footer fa-whatsapp"></i>
-                        <i class="fa-brands icon-social-footer fa-instagram"></i>
-                        <i class="fa-brands icon-social-footer fa-linkedin"></i>
-                    </div>
+                    <div class="social-links">
+            <a href="https://www.facebook.com/christo johnson"> <i  class="fa-brands icon-social fa-facebook"></i></a>
+            <a href="https://www.snapchat.com/add/christo aj" target="_blank"><i class="fa-brands icon-social fa-snapchat"></i></a>
+            <a href="https://wa.me/7356379662"><i class="fa-brands icon-social fa-whatsapp"></i></a>
+           <a href="https://www.instagram.com/christo AJ/" target="_blank"><i class="fa-brands icon-social fa-instagram"></i></a>
+            <a href="https://www.linkedin.com/in/CHRISTO JOHNSON/" target="_blank"><i class="fa-brands icon-social fa-linkedin"></i></a>
+        </div>
                 </div>
                 <div class="col-lg-4 col-md-6 col-sm-12">
 
@@ -223,28 +198,32 @@
 
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
-                          <a class="nav-link footer-links " aria-current="page" href="home.html">Home</a>
+                          <a class="nav-link footer-links " aria-current="page" href="#">Home</a>
                         </li>
                         <li class="nav-item">
-                          <a class="nav-link footer-links" href="destination.html">Destinations</a>
+                          <a class="nav-link footer-links" href="#">Destinations</a>
                         </li>
                         <li class="nav-item">
-                          <a class="nav-link footer-links" href="packages.html">Packages</a>
+                          <a class="nav-link footer-links" href="#">Packages</a>
                         </li>
                         <li class="nav-item">
                           <a class="nav-link footer-links" href="#">Contact</a>
                         </li>
                         <li class="nav-item dropdown">
-                          <a class="nav-link footer-links dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            FAQ
-                          </a>
-                          <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">About us</a></li>
-                            <li><a class="dropdown-item" href="mainlogin.html">Login</a></li>
-                            <li><a class="dropdown-item" href="register.html">Register</a></li>
-                          </ul>
-                        </li>
+                        <a class="nav-link dropdown-toggle" style="color:gray" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                          FAQ
+                        </a>
+                        <ul class="dropdown-menu">
+                          <li><a class="dropdown-item" href="{% url 'about' %}">About us</a></li>
+                          <li><a class="dropdown-item" href="{% url 'login' %}">Login</a></li>
+
+                          <li><a class="dropdown-item" href="{% url 'register' %}">Register</a></li>
+                            <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
+                            <li><a class="dropdown-item" href="{% url 'user_profile' %}">profile</a></li>
+                        </ul>
+                      </li>
                       </ul>
+
 
                   </div>
 
@@ -254,9 +233,9 @@
 
                       <h3 class="heading-pages">Contact Us</h3>
                       <p class="contact-footer">
-                        <span class="text-contact"> <i class="fa-solid footer-icons fa-location-dot"></i> 123 Street New York </span>
-                        <span class="text-contact"> <i class="fa-solid footer-icons fa-envelope"></i>explorer24@gmail.com </span>
-                        <span class="text-contact"> <i class="fa-solid footer-icons fa-phone"></i> +021-1234 5678 </span>
+                        <span class="para-text" style="color:gray;margin-bottom:5px;text-decoration: none !important;"> <i class="fa-solid footer-icons fa-location-dot" style="color:gray;"></i> 123 Street New York </span>
+                        <a href="mailto:explorer@12gmail.com" class="para-text" style="color:gray;margin-bottom:5px;text-decoration: none !important;"><span class="span_text"><i class="fa-solid fa-envelope"></i></span>explorer@12gmail.com</a>
+                        <a  href="tel:+7356379662" class="para-text" style="color:gray;margin-bottom:5px;text-decoration: none !important;"><span class="span_text" style="color:gray"><i class="fa-solid fa-phone" style="color:gray"></i></span>7356379662</a>
                       </p>
 
                 </div>

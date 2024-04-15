@@ -77,3 +77,11 @@ class ReviewModel(models.Model):
 
     class Meta:
         db_table = 'review'
+class Contact(models.Model):
+    contact_id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=255)
+    phone = models.CharField(max_length=255)
+    email = models.CharField(max_length=255)
+    message = models.TextField()
+    class Meta:
+        db_table = 'contact'

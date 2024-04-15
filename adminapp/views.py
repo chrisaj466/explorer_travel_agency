@@ -392,45 +392,8 @@ def Payment_home(request):
     Returns:
     - HttpResponse object rendering the admin_payment_home.html template with Payment data.
     """
-    Payment = PaymentModel.objects.all()
-    return render(request, 'admin_payment_home.html', {'users': Payment})
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# def admin_home(request):
-#
-#     total_price = Payment.objects.aggregate(total_price=Sum('price'))
-#     total_bookings_count = Payment.objects.aggregate(total_bookings_count=Count('id'))
-#     # Extract start dates and prices
-#     prices = Payment.objects.values_list('price', flat=True)  # Query price data from the Payment model
-#     prices_string = ",".join(str(price) for price in prices)
-#
-#     context = {
-#         'total_price': total_price,'total_bookings_count': total_bookings_count,'prices_string': prices_string
-#     }
-#     return render(request, 'admin_home.html',context)
-
-
-
+    Payment1 = Payment.objects.all()
+    return render(request, 'admin_payment_home.html', {'users': Payment1})
 
 def admin_home(request):
     # Get total price and count of payments

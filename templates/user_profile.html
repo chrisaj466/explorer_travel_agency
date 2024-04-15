@@ -98,6 +98,7 @@
                 <th>package</th>
                 <th>price</th>
                  <th>cancel</th>
+                <th>Review</th>
             </tr>
             {% for x in booking_data %}
             <tr>
@@ -108,6 +109,7 @@
                 <td>{{x.package}}</td>
                 <td>{{x.price}}</td>
                 <td><a href="/cancel/{{x.id}}">cancel</a></td>
+                <td><a href="/profile_review/{{x.package}}">Review</a></td>
             </tr>
             {% endfor %}
         </table>

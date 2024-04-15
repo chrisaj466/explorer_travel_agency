@@ -44,30 +44,27 @@
           <span class="circle one"></span>
           <span class="circle two"></span>
 
-          <form action="contact.html" autocomplete="off">
-            <h3 class="title">Contact us</h3>
-            <div class="input-container">
-              <input type="text" name="name" class="input" placeholder="name" />
-
-              <span>Username</span>
-            </div>
-            <div class="input-container">
-              <input type="tel" name="phone" class="input" placeholder="phone" />
-
-              <span>phone</span>
-            </div>
-            <div class="input-container">
-              <input type="email" name="email " class="input" placeholder="email" />
-
-              <span>email</span>
-            </div>
-            <div class="input-container textarea">
-              <textarea name="message" class="input" placeholder="message"></textarea>
-
-              <span>Message</span>
-            </div>
-            <input type="submit" value="Send" class="btn" />
-          </form>
+         <form method="post" >
+    {% csrf_token %}
+    <h3 class="title">Contact us</h3>
+    <div class="input-container">
+        <input type="text" name="name" class="input" placeholder="Name" />
+        <span>Name</span>
+    </div>
+    <div class="input-container">
+        <input type="tel" name="phone" class="input" placeholder="Phone" />
+        <span>Phone</span>
+    </div>
+    <div class="input-container">
+        <input type="email" name="email" class="input" placeholder="Email" />
+        <span>Email</span>
+    </div>
+    <div class="input-container textarea">
+        <textarea name="message" class="input" placeholder="Message"></textarea>
+        <span>Message</span>
+    </div>
+    <input type="submit" value="Send" class="btn" />
+</form>
         </div>
       </div>
     </div>

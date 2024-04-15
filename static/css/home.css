@@ -169,7 +169,7 @@ body{
 .select-btn{
     display: inline-block;
     padding: 14px 30px;
-    background-color: rgb(209, 95, 2);
+    background-color: orange;
     text-decoration: none;
     color: white;
     font-size:16px;
@@ -519,9 +519,133 @@ footer{
 
 
 
+    .container-packages{
+    margin-top: 62px;
+}
+      .content-packages{
+    height: auto;
+    background-color: white;
+    transition: 0.3s ease-in;
+    transform: translateY(-8px);
+    padding:0 !important;
 
+}
+    .content-packages:hover{
+    box-shadow: 1px 1px 10px gray;
+}
+    .details{
+    display:flex;
+    text-align:center !important;
+    }
+      .row{
+    justify-content: center;
+    align-items: center;
+}
+    .row{
+    margin-right:0;
+    }
+    .card-body{
+    margin-bottom:25px !important;
+    padding-bottom:0;
+    }
+    .card-img-top{
+    width: 100%;
+    }
+    .heading-content-package{
+    font-size: 13px;
+    }
+     a {
+        text-decoration: none !important;
+    }
+    .para-text{
+    color:white;
+    margin-top:10px;
+    }
+    .Hading{
+    text-align:left;
+    }
+    .pack_name{
+        background-color:orange;
+        color:white;
+        border: none;
+        outline: none;
+        border-radius: 10px;
+        padding:3px;
+        width:90px;
+        margin-bottom:20px;
+        }
+    .email{
+    color:black;
+    margin-bottom:10px;
+    }
+   .selection {
+    background-color: #f2f2f2;
+    padding: 10px;
+}
 
+.search {
+    display: flex;
+    align-items: center;
+}
 
+.form_div form {
+    display: flex;
+}
+
+.search-input, .search-button, .form-select {
+    margin-right: 10px;
+    display: inline-block;
+}
+
+.form-select {
+    margin-bottom: 10px;
+}
+.selection {
+    background-color: #f2f2f2;
+    padding: 10px;
+}
+.user{
+margin-bottom: 0px;
+margin-top:10px;
+}
+.search {
+    display: flex;
+    align-items: center;
+}
+
+.form_div form {
+    display: flex;
+}
+
+.search-input, .search-button, .form-select {
+    margin-right: 10px;
+    height: 40%;
+}
+
+.search-input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+
+}
+
+.search-button {
+    padding: 8px 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.form-select {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: white;
+    cursor: pointer;
+    width:70%;
+}
 
 
 

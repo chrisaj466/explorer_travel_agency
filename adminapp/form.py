@@ -18,11 +18,7 @@ class UserModelForm(forms.ModelForm):
         model = PackagesModel
         fields = ['packages_id','price', 'package_name', 'nation', 'no_of_bookings', 'start_date','end_date','package_image','description','total_days']
 
-        # labels = {
-        #     'price': 'Price',
-        #     'user_password': 'Password',
-        #     'user_email': 'Email',
-        # }
+
 
         widgets = {
             'packages_id': forms.NumberInput(attrs={'class': 'form-control'}),
@@ -53,7 +49,7 @@ class packageplanform(forms.ModelForm):
         fields =['plan_id','oder','no_of_days','heading','description','package']
         widgets = {
             'plan_id': forms.NumberInput(attrs={'class': 'form-control'}),
-           'oder': forms.NumberInput(attrs={'class': 'form-control'}),
+            'oder': forms.NumberInput(attrs={'class': 'form-control'}),
             'no_of_days': forms.NumberInput(attrs={'class': 'form-control'}),
             'heading': forms.TextInput(attrs={'class': 'form-control'}),
             'description': forms.TextInput(attrs={'class': 'form-control'}),
@@ -97,17 +93,3 @@ class NationImageform(forms.ModelForm):
 
              }
 
-# class Paymentform(forms.ModelForm):
-#         class Meta:
-#             model = Payment
-#             fields = ['payment_id', 'order_id', 'signature', 'user','package','members','price']
-#             widgets = {
-#                          'payment_id': forms.TextInput(attrs={'class': 'form-control'}),
-#                          'order_id': forms.TextInput(attrs={'class': 'form-control'}),
-#                          'signature': forms.TextInput(attrs={'class': 'form-control'}),
-#                          'package': forms.Select(attrs={'class': 'form-control'}), # Foreign key dropdown
-#                          'user': forms.TextInput(attrs={'class': 'form-control'}),
-#                          'members': forms.NumberInput(attrs={'class': 'form-control'}),
-#                          'price': forms.NumberInput(attrs={'class': 'form-control'}),
-#
-#                      }
