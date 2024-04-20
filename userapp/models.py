@@ -53,18 +53,7 @@ class MapArea(models.Model):
         db_table = 'area_table'
 
 
-# class BookingListModel(models.Model):
-#     booking_id = models.AutoField(primary_key=True)
-#     user = models.ForeignKey(UserModel, on_delete=models.CASCADE)
-#     packages = models.ForeignKey(PackagesModel, on_delete=models.CASCADE)
-#     payment = models.ForeignKey(UserPaymentModel, on_delete=models.CASCADE)
-#     order_status = models.CharField(max_length=255,default='Active')
-#     start_date = models.DateField(null=True)
-#     end_date = models.DateField(null=True)
-#     order_quantity = models.IntegerField()
-#
-#     class Meta:
-#         db_table = 'booking_list'
+
 
 
 class ReviewModel(models.Model):

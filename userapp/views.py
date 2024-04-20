@@ -1,11 +1,9 @@
 from datetime import date, datetime, timedelta
-from django.core.mail import send_mail
-from django.conf import settings
+
+
 from django.contrib.auth import authenticate,logout
 from django.http import HttpResponse, JsonResponse
 from django.contrib import messages
-from django.contrib.auth.models import User
-from django.contrib.auth.decorators import login_required
 from travelagencyproject.settings import RAZORPAY_KEY_ID, RAZORPAY_KEY_SECRET_KEY
 
 from django.db.models import Q, Sum, Count
@@ -115,13 +113,14 @@ def contact(request):
     return redirect('/login')
 
 def destination(request):
-    DATA = NationImageModel.objects.all()
     user = request.session.get('user')
-    name_data = UserModel.objects.get(User_name=user)
-    name = name_data.User_name
-    return render(request, 'destination.html', {"data": DATA,'name':name})
-
-
+    try:
+        name_data = UserModel.objects.get(User_name=user)
+        name = name_data.User_name
+    except UserModel.DoesNotExist:
+        name = None  # Set name to None if user is not logged in
+    DATA = NationImageModel.objects.all()
+    return render(request, 'destination.html', {"data": DATA, 'name': name})
 def forgot(request):
     return render(request, 'forgotpassword.html')
 
@@ -472,13 +471,7 @@ def payment_success(request):
         user=user, package=package, members=members, price=price, start_date=formatted_date
     )
 
-    # # Create PaymentModel object
-    # payment_home = PaymentModel.objects.create(
-    #     payment_id=razorpay_payment_id,
-    #     order_id=razorpay_order_id,
-    #     signature=razorpay_signature,
-    #     user=user, package=package, members=members, price=price, start_date=formatted_date
-    # )
+
 
     # Fetch package data
     package_data = PackagesModel.objects.filter(package_name=package)
@@ -540,8 +533,12 @@ def payment(request):
     return render(request, "payment.html")
 
 
-def razorpay_webhook(request):
-    # Handle Razorpay webhook notification
-    return HttpResponse(status=200)
+
 def dashboard(request):
+    # Retrieve GitHub username from authenticated user's profile
+    # github_username = request.user.socialaccount_set.filter(provider='github').first().extra_data.get('login')
+    #
+    # # Store GitHub username in the session
+    # request.session['user'] = github_username
+
     return render(request, "dashboard.html")
