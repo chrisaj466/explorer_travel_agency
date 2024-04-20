@@ -278,31 +278,7 @@ def logout(request):
     return redirect('/')
 
 
-# def register(request):
-#     if request.method == 'POST':
-#         username = request.POST.get('username')
-#         password = request.POST.get('password')
-#         email = request.POST.get('email')
-#         phone_number = request.POST.get('Phone_number')
-#         status = 'active'
-#         obj1 = UserModel()
-#         obj1.User_name = username
-#         obj1.Password = password
-#         obj1.Phone_number = phone_number
-#         obj1.email = email
-#         obj1.status = status
-#         obj1.save()
-#         # subject = "welcome to Explorer"
-#         # message = "Hello " + username + ",\n\nThank you for registering with us."
-#         # send_mail(
-#         #     subject,
-#         #     message,
-#         #     settings.EMAIL_HOST_USER,
-#         #     ['christoaj39@gmail.com'],
-#         #     fail_silently=False
-#         #
-#         # )
-#         return redirect('/')
+
 #     return render(request, 'register.html')
 def register(request):
     """
