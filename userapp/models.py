@@ -11,7 +11,7 @@ class UserModel(models.Model):
     Phone_number = models.CharField(max_length=255)
     email = models.CharField(max_length=255)
     date = models.DateField(auto_now_add=True)
-    status = models.CharField(max_length=255)
+    status = models.CharField(max_length=255,default='active')
 
     class Meta:
         db_table = 'user_table'

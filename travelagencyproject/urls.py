@@ -66,6 +66,11 @@ urlpatterns = [
     #admin payment
     path('Payment_home', admin_views.Payment_home,name='Payment_home'),
 
+    #adminuserhome
+    path('userhome', admin_views.User_home, name='userhome'),
+    path('user_update/<int:user_id>/',admin_views.update_user_view),
+
+
     #payment
     path('initiate_payment', user_views.initiate_payment, name='initiate_payment'),
     path('payment', user_views.payment, name='payment'),
@@ -84,6 +89,7 @@ urlpatterns = [
 
     #profile_review
     path('profile_review/<str:package_name>/', user_views.profile_review, name='profile_review'),
+
 
     path('user_profile',user_views.user_profile,name='user_profile'),
     path('destination', user_views.destination,name='destination'),

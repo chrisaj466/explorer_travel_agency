@@ -65,6 +65,21 @@
                 Interface
             </div>
 
+             <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#yourUniqueID"
+        aria-expanded="true" aria-controls="yourUniqueID">
+        <span>USERS</span>
+    </a>
+    <div id="yourUniqueID" class="collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+            <!-- <h6 class="collapse-header">Nation:</h6> -->
+            <a class="collapse-item" href="{% url 'userhome' %}">User List</a>
+<!--            <a class="collapse-item" href="{% url 'nation_image' %}">Nation images</a>-->
+        </div>
+    </div>
+</li>
+
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseTwo"

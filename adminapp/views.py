@@ -1,9 +1,9 @@
 from django.shortcuts import render
 from django.shortcuts import render, redirect,HttpResponse, get_object_or_404
 
-from userapp.models import Payment
+from userapp.models import Payment, UserModel
 # from userapp.models import Payment
-from .form import UserModelForm, Packagedateform, packageplanform, traveltipsform, nationform, NationImageform
+from .form import UserModelForm, Packagedateform, packageplanform, traveltipsform, nationform, NationImageform, Userform
 from .models import *
 from django.db.models import Sum
 from django.db.models import Count
@@ -422,3 +422,40 @@ def admin_home(request):
         'earnings': earnings
     }
     return render(request, 'admin_home.html', context)
+def User_home(request):
+    """
+    Retrieves all user objects and renders them in the user_home.html template.
+
+    Parameters:
+    - request: HttpRequest object.
+
+    Returns:
+    - HttpResponse object rendering the user_home.html template with user data.
+    """
+    users = UserModel.objects.all()
+    return render(request, 'admin_user_home.html', {'users': users})
+def update_user_view(request, user_id):
+    """
+    Handles updating user information based on  User_id.
+
+    If the request method is GET, renders a form pre-populated with user existing data.
+    If the request method is POST, validates the submitted form data.
+    If the form is valid, updates the user's information and returns a success message.
+
+    Parameters:
+    - request: HttpRequest object.
+    - User_id: Integer specifying the user ID.
+
+    Returns:
+    - HttpResponse object rendering the admin_package_update.html template with the form.
+    """
+    user = UserModel.objects.get(User_id=user_id)
+    if request.method == 'POST':
+        form = Userform(request.POST, instance=user)
+        print(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponse("user data updated...................")
+    else:
+        form = Userform(instance=user)
+    return render(request, 'admin_package_update.html', {'form': form})
