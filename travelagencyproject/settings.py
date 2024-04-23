@@ -109,28 +109,28 @@ WSGI_APPLICATION = 'travelagencyproject.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'explorer_agency',
-        'USER': 'root',
-        'PASSWORD': 'ajka46699@',
-        'HOST': 'localhost',
-        'PORT': '3306',
-    }
-}
-
+#
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.mysql',
 #         'NAME': 'explorer_agency',
 #         'USER': 'root',
 #         'PASSWORD': 'ajka46699',
-#         'HOST': 'database-1.cjieogk8c9pi.eu-north-1.rds.amazonaws.com',
+#         'HOST': 'localhost',
 #         'PORT': '3306',
 #     }
 # }
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'explorer_agency',
+        'USER': 'root',
+        'PASSWORD': 'ajka46699',
+        'HOST': 'database-1.cfy2o2ws42xi.us-east-1.rds.amazonaws.com',
+        'PORT': '3306',
+    }
+}
 
 
 # Password validation
